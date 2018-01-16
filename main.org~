@@ -1,0 +1,141 @@
+* Notes about [[https://asc.llnl.gov/CORAL-benchmarks/][CORAL]] benchmark codes : 
+| Benchmark   | reference |Lines of code | parallelism  | Lang | Notes     | on MPI | on SMPI |
+|-------------+-----------+--------------+--------------+------+-----------+--------+---------|
+| [[https://asc.llnl.gov/CORAL-benchmarks/Throughput/amg20130624.tgz][amg2013]] | [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/AMG2013_Summary_v2.3.pdf][ref]] | 75,000 | MPI-OPENMP | C | Work with some adjustments | YES | NO |
+| [[https://asc.llnl.gov/CORAL-benchmarks/Skeleton/HACC_IO.tar.gz][HACCIO]] | [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/HACC_IO_Summary_v1.0.pdf][ref]] | 2,000 | MPI | C++ | work but shows warrnings | YES | |
+| [[https://asc.llnl.gov/CORAL-benchmarks/Datacentric/KMI_HASH_CORAL.tar.gz][KMI_HASH]] | [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/KMI_Summary_v1.1.pdf][ref]] | / | MPI | C | work but shows warnings | YES | | 
+
+* Notes about [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/][trinity-nersc]] benchmark codes : 
+| Benchmark   | reference |Lines of code | parallelism  | Lang | Notes     | on MPI | on SMPI | about SMPI test |
+|-------------+---------------+--------------+----------+------+-----------+--------+---------+-----------------|
+| [[http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/Jan9/smb1.0-1.tar][SMB]] | [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/smb/][ref]] | unknown | MPI | C | work well | YES | YES | slow |
+| [[http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/June28/psnap-1.2June28.tar][psnap]] | [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/psnap/][ref]] | unknown | MPI | C | work well | YES | YES | slow |
+| [[http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/Jan9/ziatest.tar][ziatest]] | [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/ziatest/][ref]] | unknown | MPI | C | work well | YES 3 args are requested | NO | it's required by MPI-2, this is currently not supported by SMPI |
+| [[http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/Mar29/mdtest-1.8.4.tar][mdtest]] | [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/mdtest/][ref]] | unknown | MPI | C | work well | YES | No | deadlock |
+| [[http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/July5/mpimemu-1.0-rc6July5.tar][mpimemu]] | [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/mpimemu/][ref]] | unknown | MPI | C | work well ./configure && make | YES | | |
+| [[http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/July12/osu-micro-benchmarks-3.8-July12.tar][OMB_MPI Tests]] | [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/omb-mpi-tests/][ref]] | unknown | MPI | C | MPI work | YES | | |
+
+* Notes about [[https://mantevo.org/download/][mantevo]] benchmark codes : 
+| Benchmark   | reference |Lines of code | parallelism  | Lang | Notes     | on MPI | on SMPI |
+|-------------+-----------+--------------+--------------+------+-----------+--------+---------|
+| [[http://mantevo.org/downloads/miniXyce_1.0.html][MiniXcye]] | NONE | unknown | MPI | C++ | Work but shows warnings | YES | |
+| [[http://mantevo.org/downloads/miniSMAC2D_2.0.html][MiniSMAC2D]] | NONE | unknown | MPI, OPENMP | FORTRAN | Some adjustment should be done to get build the code, although the code show errors and warnings | YES but the localization of input file should be changed | |
+
+
+* SMPI Benchmark 
+** [[http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/June28/psnap-1.2June28.tar][psnap]]
+
+#+BEGIN_SRC sh
+     mkdir psnap
+     cd psnap/
+     wget "http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/June28/psnap-1.2June28.tar"
+     tar -xvf psnap-1.2June28.tar 
+     rm -rf psnap-1.2June28.tar
+     cp -f ../src/psnap/* ./
+     make 
+#+END_SRC
+smpirun -np 4 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./psnap
+
+#+RESULTS:
+| COPYING         |         |    |    |    |       |
+| Makefile        |         |    |    |    |       |
+| psnap-1.2.c     |         |    |    |    |       |
+| README.LANL     |         |    |    |    |       |
+| README.TrNERSC8 |         |    |    |    |       |
+| make:           | 'psnap' | is | up | to | date. |
+
+** [[http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/Jan9/smb1.0-1.tar][SMB]]
+
+#+BEGIN_SRC sh
+     wget "http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/Jan9/smb1.0-1.tar"
+     tar -xvf *.tar 
+     rm -rf *.tar
+     cp -f src/smb/mpi_overhead/* smb_1.0-1/src/mpi_overhead/
+     cd smb_1.0-1/src/mpi_overhead/
+#+END_SRC
+
+
+#+RESULTS:
+| smb_1.0-1/                                 |
+| smb_1.0-1/GPL.txt                          |
+| smb_1.0-1/LICENSE.txt                      |
+| smb_1.0-1/doc/                             |
+| smb_1.0-1/doc/s-avail.png                  |
+| smb_1.0-1/doc/overhead.html                |
+| smb_1.0-1/doc/method.png                   |
+| smb_1.0-1/doc/msgrate.html                 |
+| smb_1.0-1/doc/index.html                   |
+| smb_1.0-1/doc/publications/                |
+| smb_1.0-1/doc/publications/45.pdf          |
+| smb_1.0-1/doc/publications/05289198.pdf    |
+| smb_1.0-1/doc/r-over.png                   |
+| smb_1.0-1/doc/r-avail.png                  |
+| smb_1.0-1/doc/s-over.png                   |
+| smb_1.0-1/src/                             |
+| smb_1.0-1/src/mpi_overhead/                |
+| smb_1.0-1/src/mpi_overhead/mpi_overhead.c  |
+| smb_1.0-1/src/mpi_overhead/run_script      |
+| smb_1.0-1/src/mpi_overhead/README.runrules |
+| smb_1.0-1/src/mpi_overhead/Makefile        |
+| smb_1.0-1/src/msgrate/                     |
+| smb_1.0-1/src/msgrate/msgrate.c            |
+| smb_1.0-1/src/msgrate/run_script           |
+| smb_1.0-1/src/msgrate/README.runrules      |
+| smb_1.0-1/src/msgrate/Makefile             |
+| smb_1.0-1/src/msgrate/README               |
+** [[https://asc.llnl.gov/CORAL-benchmarks/Throughput/amg20130624.tgz][amg2013]]
+
+#+BEGIN_SRC sh
+     wget "https://asc.llnl.gov/CORAL-benchmarks/Throughput/amg20130624.tgz"
+     tar -xvf *.tgz 
+     rm -rf *.tgz
+     cp -f src/AMG2013/*.txt src/AMG2013/*.xml AMG2013/test/
+     cp -f src/AMG2013/*.include AMG2013/
+     cd AMG2013/
+     make
+     smpirun -np 8 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./amg2013 -pooldist 1 -r 12 12 12
+#+END_SRC
+
+
+#+RESULTS:
+
+** [[https://asc.llnl.gov/CORAL-benchmarks/Skeleton/HACC_IO.tar.gz][HACC_IO]]
+
+#+BEGIN_SRC sh
+     wget "https://asc.llnl.gov/CORAL-benchmarks/Skeleton/HACC_IO.tar.gz"
+     tar -xvf *.tgz 
+     rm -rf *.tgz
+     cp -f src/HACC_IO_KERNEL/* HACC_IO_KERNEL/
+     cd HACC_IO_KERNEL/
+     make
+     smpirun -np 8 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./HACC_IO 
+#+END_SRC
+
+** [[https://asc.llnl.gov/CORAL-benchmarks/Datacentric/KMI_HASH_CORAL.tar.gz][KMI_HASH]]
+
+#+BEGIN_SRC sh
+     wget "https://asc.llnl.gov/CORAL-benchmarks/Datacentric/KMI_HASH_CORAL.tar.gz"
+     tar -xvf *.tgz 
+     rm -rf *.tgz
+     cp -f src/kmi_hash/* kmi_hash/tests/
+     cd kmi_hash/tests/
+     make
+     smpirun -np 8 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./kmi_hash 
+#+END_SRC
+
+** [[http://mantevo.org/downloads/miniSMAC2D_2.0.html][miniSMAC2D]]
+
+#+BEGIN_SRC sh
+     wget "http://mantevo.org/downloads/miniSMAC2D_2.0.html"
+     tar -xvf *.tgz 
+     rm -rf *.tgz
+     mkdir data
+     cd data
+     wget "http://mantevo.org/downloads/Test_case_7kx7k.tar.gz"
+     tar -xvf *.tgz 
+     rm -rf *.tgz
+     cd ..
+     cp -r data/ miniSMAC2D_2.0/
+     cd miniSMAC2D_2.0/
+     make 
+#+END_SRC
