@@ -65,6 +65,9 @@ KMI_HASH evaluate the performance of the architecture integer operations, specif
 
 ** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/smb/][SMB]]
 *** brief description : 
+It include two benchmarks :  
+- The msg_rate test measures the sustained MPI message rate using a communication pattern found in many real applications.
+- The mpi_overhead test uses a post-work-wait method using MPI non-blocking send and receive calls to measure the user level overhead of the respective MPI calls.
 #+BEGIN_SRC sh
      wget "http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/Jan9/smb1.0-1.tar"
      tar -xvf *.tar 
@@ -75,6 +78,7 @@ KMI_HASH evaluate the performance of the architecture integer operations, specif
 
 ** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/psnap/][psnap]]
 *** brief description : 
+PSNAP (PAL System Noise Activity Program) consists of a spin loop that is calibrated to take a given amount of time (typically 1 ms). This loop is repeated for a number of iterations.
 #+BEGIN_SRC sh
      mkdir psnap
      cd psnap
@@ -88,6 +92,8 @@ KMI_HASH evaluate the performance of the architecture integer operations, specif
 
 ** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/ziatest/][ziatest]]
 *** brief description : 
+It executes a new proposed standard benchmark method for MPI startup that is intended to provide a realistic assessment of
+both launch and wireup requirements. Accordingly, it exercises both the launch system of the environment and the interconnect subsystem in a specified pattern.
 #+BEGIN_SRC sh
      mkdir ziatest
      cd ziatest
@@ -100,6 +106,9 @@ KMI_HASH evaluate the performance of the architecture integer operations, specif
 
 ** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/mdtest/][mdtest]]
 *** brief description : 
+mdtest is a program that measures performance of various metadata operations. It uses MPI to coordinate the operations and to collect the results.   
+The code is composed of one C file, mdtest.c. 
+*** Note : 
 it's seems that is work here.
 #+BEGIN_SRC sh
      wget "http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/Mar29/mdtest-1.8.4.tar"
@@ -113,6 +122,8 @@ it's seems that is work here.
 
 ** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/mpimemu/][mpimemu]]
 *** brief description : 
+The code is a simple tool that helps approximate MPI library memory usage as a function of scale.  It takes samples of /proc/meminfo (node level)
+ and /proc/self/status (process level) and outputs the min, max and avg values for a specified period of time.
 #+BEGIN_SRC sh
      wget "http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/July5/mpimemu-1.0-rc6July5.tar"
      tar -xvf *.tar 
@@ -136,7 +147,8 @@ it's seems that is work here.
 
 ** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/omb-mpi-tests/][OMB_MPI]]
 *** brief description : 
-it's seems that is work here.
+The Ohio MicroBenchmark suite is a collection of independent MPI message passing performance microbenchmarks developed and written at The Ohio State University.
+  It includes traditional benchmarks and performance measures such as latency, bandwidth and host overhead and can be used for both traditional and GPU-enhanced nodes.
 #+BEGIN_SRC sh
      wget "http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/July12/osu-micro-benchmarks-3.8-July12.tar"
      tar -xvf *.tar 
@@ -147,8 +159,13 @@ it's seems that is work here.
      ./configure
  #+END_SRC
 
+** miniXyce
+*** brief description 
+This code is a simple linear circuit simulator with a basic parser that performs transient analysis. 
+
 ** [[http://mantevo.org/downloads/miniSMAC2D_2.0.html][miniSMAC2D]]
 *** brief description : 
+The code is incompressible Navier-Stokes flow solver.
 #+BEGIN_SRC sh
      wget "http://mantevo.org/downloads/miniSMAC2D_2.0.html"
      tar -xvf *.tgz 
