@@ -42,6 +42,8 @@ AMG is a parallel algebraic multigrid solver for linear systems arising from pro
      smpirun -np 8 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./amg2013 -pooldist 1 -r 12 12 12
 #+END_SRC
 
+#+RESULTS:
+
 * [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/HACC_IO_Summary_v1.0.pdf][HACC_IO]]
 ** Brief description : 
 The HACC I/O benchmark capture the I/O patterns of the HACC simulation code.
@@ -53,13 +55,15 @@ The HACC I/O benchmark capture the I/O patterns of the HACC simulation code.
      wget "https://asc.llnl.gov/CORAL-benchmarks/Skeleton/HACC_IO.tar.gz"
      tar -xvf *.gz 
      rm -rf *.gz
-     cp -f ../src/HACC_IO_KERNEL/* HACC_IO_KERNEL/
+     cp -f ../src/HACC_IO/* HACC_IO_KERNEL/
      cd HACC_IO_KERNEL/
      make
      smpirun -np 8 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./HACC_IO 
 #+END_SRC
 
-** [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/KMI_Summary_v1.1.pdf][KMI_HASH]]
+#+RESULTS:
+
+* [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/KMI_Summary_v1.1.pdf][KMI_HASH]]
 ** Brief description : 
 KMI_HASH evaluate the performance of the architecture integer operations, specifically for hashing, and for memory-intensive genomics applications. 
 ** Build and run  
@@ -67,21 +71,25 @@ KMI_HASH evaluate the performance of the architecture integer operations, specif
      mkdir Benchmarks
      cd Benchmarks
      wget "https://asc.llnl.gov/CORAL-benchmarks/Datacentric/KMI_HASH_CORAL.tar.gz"
-     tar -xvf *.tgz 
-     rm -rf *.tgz
-     cp -f ../src/kmi_hash/* kmi_hash/tests/
-     cd kmi_hash/tests/
+     tar -xvf *.gz 
+     rm -rf *.gz
+     cp -f ../src/kmi_hash/src/* kmi_hash/src/
+     cp -f ../src/kmi_hash/tests/* kmi_hash/tests/
+     cd kmi_hash/src/
      make
-     smpirun -np 8 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./kmi_hash 
+     cd ../tests/
+     make
+     smpirun -np 2 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./kmi_hash 
 #+END_SRC
+
+#+RESULTS:
 
 * [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/smb/][SMB]]
 ** Brief description : 
 It include two benchmarks :  
 - The msg_rate test measures the sustained MPI message rate using a communication pattern found in many real applications.
 - The mpi_overhead test uses a post-work-wait method using MPI non-blocking send and receive calls to measure the user level overhead of the respective MPI calls.
-** Build and run 
-- mpi_overhead :  
+** Build and run   
 #+BEGIN_SRC sh
      mkdir Benchmarks
      cd Benchmarks
@@ -89,6 +97,7 @@ It include two benchmarks :
      tar -xvf *.tar 
      rm -rf *.tar
 #+END_SRC
+- mpi_overhead :
 #+BEGIN_SRC sh
      cp -f ../src/smb/mpi_overhead/* smb_1.0-1/src/mpi_overhead/
      cd smb_1.0-1/src/mpi_overhead/
@@ -102,6 +111,7 @@ It include two benchmarks :
 ** Brief description : 
 PSNAP (PAL System Noise Activity Program) consists of a spin loop that is calibrated to take a given amount of time (typically 1 ms). This loop is repeated for a number of iterations.
 ** Build and run  
+Deadlock (Runing no stop).
 #+BEGIN_SRC sh
      mkdir Benchmarks
      cd Benchmarks
@@ -110,16 +120,17 @@ PSNAP (PAL System Noise Activity Program) consists of a spin loop that is calibr
      wget "http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/June28/psnap-1.2June28.tar"
      tar -xvf *.tar 
      rm -rf *.tar
-     cp -f ../../src/psnap/* psnap/
+     cp -f ../../src/psnap/* ./
      make
-     smpirun -np 6 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./psnap
+     smpirun -np 4 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 ./psnap
 #+END_SRC
 
 * [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/ziatest/][ziatest]]
 ** Brief description : 
 It executes a new proposed standard benchmark method for MPI startup that is intended to provide a realistic assessment of
 both launch and wireup requirements. Accordingly, it exercises both the launch system of the environment and the interconnect subsystem in a specified pattern.
-** Build and run  
+** Build and run : 
+It's required by MPI-2, this is currently not supported by SMPI.
 #+BEGIN_SRC sh
      mkdir Benchmarks
      cd Benchmarks
@@ -132,13 +143,16 @@ both launch and wireup requirements. Accordingly, it exercises both the launch s
      smpirun -np 8 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./ziaprobe 4 4 2
  #+END_SRC
 
+ #+RESULTS:
+
 * [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/mdtest/][mdtest]]
 ** Brief description : 
 mdtest is a program that measures performance of various metadata operations. It uses MPI to coordinate the operations and to collect the results.   
 The code is composed of one C file, mdtest.c. 
 ** Note : 
 it's seems that is work here.
-** Build and run  
+** Build and run :   
+The execution should done with 2 proc.
 #+BEGIN_SRC sh
      mkdir Benchmarks
      cd Benchmarks
@@ -150,6 +164,47 @@ it's seems that is work here.
      make
      smpirun -np 2 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./mdtest --cfg=smpi/host-speed:100 --cfg=smpi/privatization:yes
  #+END_SRC
+
+ #+RESULTS:
+ | mdtest-1.8.4/                             |                                                      |          |                        |                       |                       |         |      |        |          |         |      |
+ | mdtest-1.8.4/README.TrinityNERSC8         |                                                      |          |                        |                       |                       |         |      |        |          |         |      |
+ | mdtest-1.8.4/RELEASE_LOG                  |                                                      |          |                        |                       |                       |         |      |        |          |         |      |
+ | mdtest-1.8.4/mdtest.c                     |                                                      |          |                        |                       |                       |         |      |        |          |         |      |
+ | mdtest-1.8.4/mdtest_BenchmarkRulesTN8.doc |                                                      |          |                        |                       |                       |         |      |        |          |         |      |
+ | mdtest-1.8.4/scripts/                     |                                                      |          |                        |                       |                       |         |      |        |          |         |      |
+ | mdtest-1.8.4/scripts/env_to_db.tcsh       |                                                      |          |                        |                       |                       |         |      |        |          |         |      |
+ | mdtest-1.8.4/scripts/mdtest_wrapper.py    |                                                      |          |                        |                       |                       |         |      |        |          |         |      |
+ | mdtest-1.8.4/scripts/paramCatch.py        |                                                      |          |                        |                       |                       |         |      |        |          |         |      |
+ | mdtest-1.8.4/scripts/WRAPPER_README       |                                                      |          |                        |                       |                       |         |      |        |          |         |      |
+ | mdtest-1.8.4/scripts/tester.py            |                                                      |          |                        |                       |                       |         |      |        |          |         |      |
+ | mdtest-1.8.4/README.mdtest                |                                                      |          |                        |                       |                       |         |      |        |          |         |      |
+ | mdtest-1.8.4/mdtest.1                     |                                                      |          |                        |                       |                       |         |      |        |          |         |      |
+ | mdtest-1.8.4/COPYRIGHT                    |                                                      |          |                        |                       |                       |         |      |        |          |         |      |
+ | mdtest-1.8.4/Makefile                     |                                                      |          |                        |                       |                       |         |      |        |          |         |      |
+ | smpicc                                    | -Wall                                                | -DLinux  | -D_FILE_OFFSET_BITS=64 | -D_LARGEFILE_SOURCE=1 | -D__USE_LARGEFILE64=1 |      -g | -o   | mdtest | mdtest.c | -lm     |      |
+ | --                                        | started                                              | at       |             01/17/2018 |              15:49:25 |                    -- |         |      |        |          |         |      |
+ |                                           |                                                      |          |                        |                       |                       |         |      |        |          |         |      |
+ | mdtest-1.8.3                              | was                                                  | launched |                   with |                     2 |                 total | task(s) | on   | 1      | nodes    |         |      |
+ | Command                                   | line                                                 | used:    |                      0 |                       |                       |         |      |        |          |         |      |
+ | Path:                                     | /home/boubehziz/Downloads/SMPI-benchmarks/Benchmarks |          |                        |                       |                       |         |      |        |          |         |      |
+ | FS:                                       | 453.7                                                | GiB      |                   Used |                   FS: |                 11.6% | Inodes: | 28.8 | Mi     | Used     | Inodes: | 1.8% |
+ |                                           |                                                      |          |                        |                       |                       |         |      |        |          |         |      |
+ | 2                                         | tasks,                                               | 0        |      files/directories |                       |                       |         |      |        |          |         |      |
+ |                                           |                                                      |          |                        |                       |                       |         |      |        |          |         |      |
+ | SUMMARY:                                  | (of                                                  | 1        |            iterations) |                       |                       |         |      |        |          |         |      |
+ | Operation                                 | Max                                                  | Min      |                   Mean |                   Std |                   Dev |         |      |        |          |         |      |
+ | ---------                                 | ---                                                  | ---      |                   ---- |               ------- |                       |         |      |        |          |         |      |
+ | Directory                                 | creation:                                            | 0.0      |                    0.0 |                   0.0 |                   0.0 |         |      |        |          |         |      |
+ | Directory                                 | stat                                                 | :        |                    0.0 |                   0.0 |                   0.0 |     0.0 |      |        |          |         |      |
+ | Directory                                 | removal                                              | :        |                    0.0 |                   0.0 |                   0.0 |     0.0 |      |        |          |         |      |
+ | File                                      | creation                                             | :        |                    0.0 |                   0.0 |                   0.0 |     0.0 |      |        |          |         |      |
+ | File                                      | stat                                                 | :        |                    0.0 |                   0.0 |                   0.0 |     0.0 |      |        |          |         |      |
+ | File                                      | read                                                 | :        |                    0.0 |                   0.0 |                   0.0 |     0.0 |      |        |          |         |      |
+ | File                                      | removal                                              | :        |                    0.0 |                   0.0 |                   0.0 |     0.0 |      |        |          |         |      |
+ | Tree                                      | creation                                             | :        |                50000.0 |               50000.0 |               50000.0 |     0.0 |      |        |          |         |      |
+ | Tree                                      | removal                                              | :        |                50000.0 |               50000.0 |               50000.0 |     0.0 |      |        |          |         |      |
+ |                                           |                                                      |          |                        |                       |                       |         |      |        |          |         |      |
+ | --                                        | finished                                             | at       |             01/17/2018 |              15:49:25 |                    -- |         |      |        |          |         |      |
 
 * [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/mpimemu/][mpimemu]]
 ** Brief description : 
@@ -168,6 +223,70 @@ The code is a simple tool that helps approximate MPI library memory usage as a f
      ./configure
      cd src/
  #+END_SRC
+
+ #+RESULTS:
+ | mpimemu-1.0-rc6July5/                          |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/configure                 |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/Makefile.in               |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/run_script.96             |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/AUTHORS                   |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/README.QUICKSTART         |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/src/                      |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/src/mmu_list.h            |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/src/mmu_constants.h       |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/src/mmu_util.h            |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/src/mmu_process.h         |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/src/Makefile.in           |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/src/mmu_memory_common.h   |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/src/mmu_mpi.c             |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/src/mpimemu-plot          |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/src/mmu_mpi.h             |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/src/mpimemu.c             |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/src/mmu_args.c            |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/src/mpimemu-mkstats       |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/src/mmu_args.h            |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/src/mmu_memory.c          |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/src/mmu_memory_sample.c   |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/src/Makefile.am           |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/src/mmu_list.c            |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/src/mpimemu-run           |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/src/mmu_memory.h          |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/src/mmu_util.c            |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/src/mmu_process.c         |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/src/mmu_memory_sample.h   |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/src/mmu_conv_macros.h     |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/depcomp                   |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/ChangeLog                 |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/THANKS                    |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/compile                   |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/README                    |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/config.h.in               |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/autogen                   |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/configure.ac              |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/TODO                      |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/COPYRIGHT                 |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/Makefile.am               |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/missing                   |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/README.runrules           |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/run_script.49152          |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/aclocal.m4                |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/util/                     |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/util/env-setup-bash       |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/util/env-setup-xe6-bash   |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/util/env-setup-local-bash |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/util/env-setup-bash.96    |         |           |                |                |                  |            |         |       |
+ | mpimemu-1.0-rc6July5/install-sh                |         |           |                |                |                  |            |         |       |
+ | checking                                       | whether | make      | supports       | nested         | variables...     | yes        |         |       |
+ | checking                                       | for     | a         | BSD-compatible | install...     | /usr/bin/install | -c         |         |       |
+ | checking                                       | whether | build     | environment    | is             | sane...          | yes        |         |       |
+ | checking                                       | for     | a         | thread-safe    | mkdir          | -p...            | /bin/mkdir | -p      |       |
+ | checking                                       | for     | gawk...   | gawk           |                |                  |            |         |       |
+ | checking                                       | whether | make      | sets           | $(MAKE)...     | yes              |            |         |       |
+ | checking                                       | for     | smpicc... | smpicc         |                |                  |            |         |       |
+ | checking                                       | whether | the       | C              | compiler       | works...         | yes        |         |       |
+ | checking                                       | for     | C         | compiler       | default        | output           | file       | name... | a.out |
+ | checking                                       | for     | suffix    | of             | executables... |                  |            |         |       |
+ | checking                                       | whether | we        | are            | cross          | compiling...     |            |         |       |
 
 * MiniXcye
 ** Brief description : 
