@@ -1,0 +1,23 @@
+#!/bin/bash
+# Copyright 2006 Sandia Corporation. Under the terms of Contract 
+# DE-AC04-94AL85000, there is a non-exclusive license for use of this work 
+# by or on behalf of the U.S. Government. Export of this program may require 
+# a license from the United States Government.
+
+#PBS -q regular
+#PBS -V
+#PBS -N msgrate
+#PBS -l mppwidth=192,walltime=1:00:00
+cd $PBS_O_WORKDIR
+
+mpirun=mpicc
+# mpirun=aprun
+
+nodes=8
+cores=24
+let pes=$nodes*$cores
+for msgsize in 8 1024; do
+  echo "Message size is $msgsize"
+  $mpirun -n $pes ./msgrate -n $cores -p 6 -s $msgsize
+done
+
