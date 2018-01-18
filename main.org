@@ -1,3 +1,4 @@
+
 * Notes about [[https://asc.llnl.gov/CORAL-benchmarks/][CORAL]] benchmak codes : 
 | Benchmark   | reference |Lines of code | parallelism  | Lang | Notes     | on MPI | on SMPI | about SMPI test |
 |-------------+-----------+--------------+--------------+------+-----------+--------+---------+-----------------|
@@ -12,23 +13,23 @@
 | SMB - msgrate | [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/smb/][ref]] | unknown | MPI | C | work well | NO | NO | / |
 | [[http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/June28/psnap-1.2June28.tar][psnap]] | [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/psnap/][ref]] | unknown | MPI | C | work well | YES | YES | deadlock |
 | [[http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/Jan9/ziatest.tar][ziatest]] | [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/ziatest/][ref]] | unknown | MPI | C | work well | YES 3 args are requested | NO | it's required by MPI-2, this is currently not supported by SMPI |
-| [[http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/Mar29/mdtest-1.8.4.tar][mdtest]] | [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/mdtest/][ref]] | unknown | MPI | C | work well | YES | NO | deadlock |
+| [[http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/Mar29/mdtest-1.8.4.tar][mdtest]] | [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/mdtest/][ref]] | unknown | MPI | C | work well | YES | YES | / |
 | [[http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/July5/mpimemu-1.0-rc6July5.tar][mpimemu]] | [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/mpimemu/][ref]] | unknown | MPI | C | work well ./configure && make | YES | NO | / |
 | [[http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/July12/osu-micro-benchmarks-3.8-July12.tar][OMB_MPI Tests]] | [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/omb-mpi-tests/][ref]] | unknown | MPI | C | MPI work | YES | NO | / |
 
 * Notes about [[https://mantevo.org/download/][mantevo]] benchmak codes : 
 | Benchmark   | reference |Lines of code | parallelism  | Lang | Notes     | on MPI | on SMPI | about SMPI test |
 |-------------+-----------+--------------+--------------+------+-----------+--------+---------+-----------------|
-| [[http://mantevo.org/downloads/miniXyce_1.0.html][MiniXcye]] | NONE | unknown | MPI | C++ | Work but shows warnings | YES | NO |
+| [[http://mantevo.org/downloads/miniXyce_1.0.html][MiniXcye]] | NONE | unknown | MPI | C++ | Work but shows warnings | YES | NO | / |
 | [[http://mantevo.org/downloads/miniSMAC2D_2.0.html][MiniSMAC2D]] | NONE | unknown | MPI, OPENMP | FORTRAN | Some adjustment should be done to get build the code, although the code show errors and warnings | YES but the localization of input file should be changed | YES | but it got "killing simulation" |
 
-* Working benchmarks :
-
-** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/mdtest/][mdtest]]
-*** Brief description : 
+* Benchmarks in details
+** Working benchmarks :
+*** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/mdtest/][mdtest]]
+**** Brief description : 
 mdtest is a program that measures performance of various metadata operations. It uses MPI to coordinate the operations and to collect the results.   
 The code is composed of one C file, mdtest.c. 
-*** Build and run :   
+**** Build and run :   
 The execution should done with 2 proc.
 #+BEGIN_SRC sh
      mkdir Benchmarks
@@ -42,16 +43,15 @@ The execution should done with 2 proc.
      smpirun -np 2 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./mdtest --cfg=smpi/host-speed:100 --cfg=smpi/privatization:yes
  #+END_SRC
 
-* Runing issues :  
-
-** [[http://mantevo.org/downloads/miniSMAC2D_2.0.html][miniSMAC2D]]
-*** Brief description : 
+** Runing issues :  
+*** [[http://mantevo.org/downloads/miniSMAC2D_2.0.html][miniSMAC2D]]
+**** Brief description : 
 The code is incompressible Navier-Stokes flow solver.
-*** Build and run  
+**** Build and run  
 #+BEGIN_SRC sh
      mkdir Benchmarks
      cd Benchmarks
-     wget "http://mantevo.org/downloads/miniSMAC2D_2.0.html"
+     curl -L0 http://mantevo.org/downloads/miniSMAC2D_2.0.html
      tar -xvf *.tgz 
      rm -rf *.tgz;
      mkdir data;
@@ -62,13 +62,14 @@ The code is incompressible Navier-Stokes flow solver.
      cp -r data/ miniSMAC2D_2.0/
      cd miniSMAC2D_2.0/
      make 
-     smpirun -np 6 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./smac2d_mpi_and_threads_with_AVX
 #+END_SRC
 
-** [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/AMG2013_Summary_v2.3.pdf][AMG2013]]
-*** Brief description : 
+#+RESULTS:
+
+*** [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/AMG2013_Summary_v2.3.pdf][AMG2013]]
+**** Brief description : 
 AMG is a parallel algebraic multigrid solver for linear systems arising from problems on unstructured grids.
-*** Build and run  
+**** Build and run  
    The code has a deadlock or maybe it's not perfectly clean.
 #+BEGIN_SRC sh
      mkdir Benchmarks
@@ -84,10 +85,10 @@ AMG is a parallel algebraic multigrid solver for linear systems arising from pro
      smpirun -np 8 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./amg2013 -pooldist 1 -r 12 12 12
 #+END_SRC
 
-** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/psnap/][psnap]]
-*** Brief description : 
+*** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/psnap/][psnap]]
+**** Brief description : 
 PSNAP (PAL System Noise Activity Program) consists of a spin loop that is calibrated to take a given amount of time (typically 1 ms). This loop is repeated for a number of iterations.
-*** Build and run  
+**** Build and run  
 Deadlock (Runing no stop).
 #+BEGIN_SRC sh
      mkdir Benchmarks
@@ -102,12 +103,12 @@ Deadlock (Runing no stop).
      smpirun -np 4 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 ./psnap
 #+END_SRC
 
-** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/smb/][SMB]]
-*** Brief description : 
+*** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/smb/][SMB]]
+**** Brief description : 
 It include two benchmarks :  
 - The msg_rate test measures the sustained MPI message rate using a communication pattern found in many real applications.
 - The mpi_overhead test uses a post-work-wait method using MPI non-blocking send and receive calls to measure the user level overhead of the respective MPI calls.
-*** Build and run   
+**** Build and run   
 #+BEGIN_SRC sh
      mkdir Benchmarks
      cd Benchmarks
@@ -126,11 +127,11 @@ It include two benchmarks :
      cd smb_1.0-1/src/mpi_overhead/
 #+END_SRC
 
-** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/ziatest/][ziatest]]
-*** Brief description : 
+*** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/ziatest/][ziatest]]
+**** Brief description : 
 It executes a new proposed standard benchmark method for MPI startup that is intended to provide a realistic assessment of
 both launch and wireup requirements. Accordingly, it exercises both the launch system of the environment and the interconnect subsystem in a specified pattern.
-*** Build and run : 
+**** Build and run : 
 It's required by MPI-2, this is currently not supported by SMPI.
 #+BEGIN_SRC sh
      mkdir Benchmarks
@@ -144,29 +145,11 @@ It's required by MPI-2, this is currently not supported by SMPI.
      smpirun -np 8 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./ziaprobe 4 4 2
  #+END_SRC
 
-** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/mpimemu/][mpimemu]]
-*** Brief description : 
-The code is a simple tool that helps approximate MPI library memory usage as a function of scale.  It takes samples of /proc/meminfo (node level)
- and /proc/self/status (process level) and outputs the min, max and avg values for a specified period of time.
-*** Build and run  
-#+BEGIN_SRC sh
-     mkdir Benchmarks
-     cd Benchmarks
-     wget "http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/July5/mpimemu-1.0-rc6July5.tar"
-     tar -xvf *.tar 
-     rm -rf *.tar
-     cp -f ../src/mpimemu/* mpimemu-1.0-rc6July5/
-     cd mpimemu-1.0-rc6July5/
-     source util/env-setup-bash
-     ./configure
-     cd src/
- #+END_SRC
-
-* Building issues :
-** [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/HACC_IO_Summary_v1.0.pdf][HACC_IO]]
-*** Brief description : 
+** Building issues :
+*** [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/HACC_IO_Summary_v1.0.pdf][HACC_IO]]
+**** Brief description : 
 The HACC I/O benchmark capture the I/O patterns of the HACC simulation code.
-*** Build and run  
+**** Build and run  
    Building issue due to using smpicxx instead of mpicxx
 #+BEGIN_SRC sh
      mkdir Benchmarks
@@ -180,10 +163,10 @@ The HACC I/O benchmark capture the I/O patterns of the HACC simulation code.
      smpirun -np 8 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./HACC_IO 
 #+END_SRC
 
-** [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/KMI_Summary_v1.1.pdf][KMI_HASH]]
-*** Brief description : 
+*** [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/KMI_Summary_v1.1.pdf][KMI_HASH]]
+**** Brief description : 
 KMI_HASH evaluate the performance of the architecture integer operations, specifically for hashing, and for memory-intensive genomics applications. 
-*** Build and run  
+**** Build and run  
 #+BEGIN_SRC sh
      mkdir Benchmarks
      cd Benchmarks
@@ -199,12 +182,34 @@ KMI_HASH evaluate the performance of the architecture integer operations, specif
      smpirun -np 2 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./kmi_hash 
 #+END_SRC
 
-* Others
+*** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/mpimemu/][mpimemu]]
+**** Brief description : 
+The code is a simple tool that helps approximate MPI library memory usage as a function of scale.  It takes samples of /proc/meminfo (node level)
+ and /proc/self/status (process level) and outputs the min, max and avg values for a specified period of time.
+**** Build and run  
+The configure 
+#+BEGIN_SRC sh
+     mkdir Benchmarks
+     cd Benchmarks
+     wget "http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/July5/mpimemu-1.0-rc6July5.tar"
+     tar -xvf *.tar 
+     rm -rf *.tar
+     cp -f ../src/mpimemu/configure mpimemu-1.0-rc6July5/
+     cp -f ../src/mpimemu/*.txt ../src/mpimemu/*.xml mpimemu-1.0-rc6July5/src/
+     cd mpimemu-1.0-rc6July5/
+     ./configure
+     make 
+     cd src/
+     mpirun -np 4 ./mpimemu
+ #+END_SRC
 
-** MiniXcye
-*** Brief description 
+ #+RESULTS:
+
+** Others
+*** MiniXcye
+**** Brief description 
 This code is a simple linear circuit simulator with a basic parser that performs transient analysis. 
-*** Build and run  
+**** Build and run  
 #+BEGIN_SRC sh
      mkdir Benchmarks
      cd Benchmarks
@@ -215,11 +220,11 @@ This code is a simple linear circuit simulator with a basic parser that performs
      make
  #+END_SRC
 
-** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/omb-mpi-tests/][OMB_MPI]]
-*** Brief description : 
+*** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/omb-mpi-tests/][OMB_MPI]]
+**** Brief description : 
 The Ohio MicroBenchmark suite is a collection of independent MPI message passing performance microbenchmarks developed and written at The Ohio State University.
   It includes traditional benchmarks and performance measures such as latency, bandwidth and host overhead and can be used for both traditional and GPU-enhanced nodes.
-*** Build and run  
+**** Build and run  
 #+BEGIN_SRC sh
      mkdir Benchmarks
      cd Benchmarks
