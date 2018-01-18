@@ -48,10 +48,12 @@ The execution should done with 2 proc.
 **** Brief description : 
 The code is incompressible Navier-Stokes flow solver.
 **** Build and run  
+Couldn't automated the downloading of the compressed file. 
+The code run but at some level it kills the simulation befor reaching mpi_finalize.
 #+BEGIN_SRC sh
      mkdir Benchmarks
      cd Benchmarks
-     curl -L0 http://mantevo.org/downloads/miniSMAC2D_2.0.html
+     wget "http://mantevo.org/downloads/miniSMAC2D_2.0.html"
      tar -xvf *.tgz 
      rm -rf *.tgz;
      mkdir data;
@@ -63,8 +65,6 @@ The code is incompressible Navier-Stokes flow solver.
      cd miniSMAC2D_2.0/
      make 
 #+END_SRC
-
-#+RESULTS:
 
 *** [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/AMG2013_Summary_v2.3.pdf][AMG2013]]
 **** Brief description : 
@@ -108,7 +108,8 @@ Deadlock (Runing no stop).
 It include two benchmarks :  
 - The msg_rate test measures the sustained MPI message rate using a communication pattern found in many real applications.
 - The mpi_overhead test uses a post-work-wait method using MPI non-blocking send and receive calls to measure the user level overhead of the respective MPI calls.
-**** Build and run   
+**** Build and run  
+Deadlock (Runing no stop). 
 #+BEGIN_SRC sh
      mkdir Benchmarks
      cd Benchmarks
@@ -210,6 +211,7 @@ The configure
 **** Brief description 
 This code is a simple linear circuit simulator with a basic parser that performs transient analysis. 
 **** Build and run  
+Couldn't automated the downloading of the compressed file. 
 #+BEGIN_SRC sh
      mkdir Benchmarks
      cd Benchmarks
