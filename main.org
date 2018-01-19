@@ -18,10 +18,10 @@
 | [[http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/July12/osu-micro-benchmarks-3.8-July12.tar][OMB_MPI Tests]] | [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/omb-mpi-tests/][ref]] | unknown | MPI | C | MPI work | YES | NO | Building issue |
 
 * Notes about [[https://mantevo.org/download/][mantevo]] benchmak codes : 
-| Benchmark   | reference |Lines of code | parallelism  | Lang | Notes     | on MPI | on SMPI | about SMPI test |
-|-------------+-----------+--------------+--------------+------+-----------+--------+---------+-----------------|
-| [[http://mantevo.org/downloads/miniXyce_1.0.html][MiniXcye]] | NONE | unknown | MPI | C++ | Work but shows warnings | YES | NO | runing issue |
-| [[http://mantevo.org/downloads/miniSMAC2D_2.0.html][MiniSMAC2D]] | NONE | unknown | MPI, OPENMP | FORTRAN | Some adjustment should be done to get build the code, although the code show errors and warnings | YES but the localization of input file should be changed | YES | but it got "killing simulation" |
+| Benchmark  | reference | Lines of code | parallelism | Lang    | Notes                                                                                            | on MPI                                                   | on SMPI | about SMPI test                 |
+|------------+-----------+---------------+-------------+---------+--------------------------------------------------------------------------------------------------+----------------------------------------------------------+---------+---------------------------------|
+| [[http://mantevo.org/downloads/miniXyce_1.0.html][MiniXcye]]   | NONE      | unknown       | MPI         | C++     | Work but shows warnings                                                                          | YES                                                      | NO      | runing issue                    |
+| [[http://mantevo.org/downloads/miniSMAC2D_2.0.html][MiniSMAC2D]] | NONE      | unknown       | MPI, OPENMP | FORTRAN | Some adjustment should be done to get build the code, although the code show errors and warnings | YES but the localization of input file should be changed | YES     | but it got "killing simulation" |
 
 * Benchmarks in details
 ** Working benchmarks :
@@ -43,6 +43,8 @@ The execution should done with 2 proc.
      smpirun -np 2 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./mdtest --cfg=smpi/host-speed:100 --cfg=smpi/privatization:yes
  #+END_SRC
 
+ #+RESULTS:
+
 ** Running issues :  
 *** [[http://mantevo.org/downloads/miniSMAC2D_2.0.html][miniSMAC2D]]
 **** Brief description : 
@@ -50,21 +52,37 @@ The code is incompressible Navier-Stokes flow solver.
 **** Build and run  
 Couldn't automated the downloading of the compressed file. 
 The code run but at some level it kills the simulation before reaching mpi_finalize.
-#+BEGIN_SRC sh
-     mkdir Benchmarks
-     cd Benchmarks
-     wget "http://mantevo.org/downloads/miniSMAC2D_2.0.html"
-     tar -xvf *.tgz 
-     rm -rf *.tgz;
-     mkdir data;
-     cd data
-     tar -xvf *.tgz 
-     rm -rf *.tgz
-     cd ..
-     cp -r data/ miniSMAC2D_2.0/
-     cd miniSMAC2D_2.0/
-     make 
+#+BEGIN_SRC shell
+  echo "Clean up the place" 
+  sh -xe
+  rm -rf Benchmarks/miniSMAC2D
+  mkdir -p Benchmarks/miniSMAC2D
+  cd Benchmarks
+  echo "Download the source code and data on need"
+  test -e miniSMAC2D-source.tgz || curl -o miniSMAC2D-source.tgz -Lk http://mantevo.org/downloads/releaseTarballs/miniapps/MiniSMAC2D/miniSMAC2D-2.0.tgz
+  test -r miniSMAC2D-data-7k.tgz || curl -o miniSMAC2D-data-7k.tgz -Lk http://mantevo.org/downloads/Test_case_7kx7k.tar.gz
+  
+  echo "Unpack everything"
+  cd miniSMAC2D
+  tar -xvf ../miniSMAC2D-source.tgz
+  cd miniSMAC2D-2.0
+  mkdir data
+  cd data 
+  tar -xvf ../../../miniSMAC2D-data-7k.tgz
+  cd ../..
+
+  echo "Install the modified sources"
+  cp ../../src/miniSMAC2D-2.0/* miniSMAC2D-2.0
+
+  echo "Compile it"
+  cd miniSMAC2D-2.0/
+  make 
+
+  echo "Run it"
+  set +e # back to non-paranoid mode
 #+END_SRC
+
+#+RESULTS:
 
 *** [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/AMG2013_Summary_v2.3.pdf][AMG2013]]
 **** Brief description : 
@@ -241,4 +259,20 @@ SMPI building issue.
  #+END_SRC
 
 
+
+* Emacs settings
+# Local Variables:
+# eval:    (org-babel-do-load-languages 'org-babel-load-languages '( (shell . t) (R . t) (perl . t) (ditaa . t) ))
+# eval:    (setq org-confirm-babel-evaluate nil)
+# eval:    (setq org-alphabetical-lists t)
+# eval:    (setq org-src-fontify-natively t)
+# eval:    (add-hook 'org-babel-after-execute-hook 'org-display-inline-images) 
+# eval:    (add-hook 'org-mode-hook 'org-display-inline-images)
+# eval:    (add-hook 'org-mode-hook 'org-babel-result-hide-all)
+# eval:    (setq org-babel-default-header-args:R '((:session . "org-R")))
+# eval:    (setq org-export-babel-evaluate nil)
+# eval:    (setq ispell-local-dictionary "american")
+# eval:    (setq org-export-latex-table-caption-above nil)
+# eval:    (eval (flyspell-mode t))
+# End:
 
