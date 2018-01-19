@@ -43,7 +43,7 @@ The execution should done with 2 proc.
      smpirun -np 2 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./mdtest --cfg=smpi/host-speed:100 --cfg=smpi/privatization:yes
  #+END_SRC
 
-** Runing issues :  
+** Running issues :  
 *** [[http://mantevo.org/downloads/miniSMAC2D_2.0.html][miniSMAC2D]]
 **** Brief description : 
 The code is incompressible Navier-Stokes flow solver.
