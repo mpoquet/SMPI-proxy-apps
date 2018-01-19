@@ -32,6 +32,8 @@ The code is composed of one C file, mdtest.c.
 **** Build and run :   
 The execution should done with 2 proc.
 #+BEGIN_SRC sh
+     echo "Clean up the place" 
+     sh -xe
      mkdir Benchmarks
      cd Benchmarks
      wget "http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/Mar29/mdtest-1.8.4.tar"
@@ -90,6 +92,8 @@ AMG is a parallel algebraic multigrid solver for linear systems arising from pro
 **** Build and run  
    The code has a deadlock or maybe it's not perfectly clean.
 #+BEGIN_SRC sh
+     echo "Clean up the place" 
+     sh -xe
      mkdir Benchmarks
      cd Benchmarks
      wget "https://asc.llnl.gov/CORAL-benchmarks/Throughput/amg20130624.tgz"
@@ -109,6 +113,8 @@ PSNAP (PAL System Noise Activity Program) consists of a spin loop that is calibr
 **** Build and run  
 Deadlock (Runing no stop).
 #+BEGIN_SRC sh
+     echo "Clean up the place" 
+     sh -xe
      mkdir Benchmarks
      cd Benchmarks
      mkdir psnap
@@ -129,6 +135,8 @@ It include two benchmarks :
 **** Build and run  
 Very slow (Runing no stop). 
 #+BEGIN_SRC sh
+     echo "Clean up the place" 
+     sh -xe
      mkdir Benchmarks
      cd Benchmarks
      wget "http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/Jan9/smb1.0-1.tar"
@@ -154,6 +162,8 @@ both launch and wireup requirements. Accordingly, it exercises both the launch s
 To run the code one has to give 3 args as inputs.
 It's required by MPI-2, this is currently not supported by SMPI.
 #+BEGIN_SRC sh
+     echo "Clean up the place" 
+     sh -xe
      mkdir Benchmarks
      cd Benchmarks
      mkdir ziatest
@@ -172,6 +182,8 @@ This code is a simple linear circuit simulator with a basic parser that performs
 Couldn't automated the downloading of the compressed file. 
 Runing issue.
 #+BEGIN_SRC sh
+     echo "Clean up the place" 
+     sh -xe
      mkdir Benchmarks
      cd Benchmarks
      wget "http://mantevo.org/downloads/miniXyce_1.0.html"
@@ -190,6 +202,8 @@ The HACC I/O benchmark capture the I/O patterns of the HACC simulation code.
 **** Build and run  
    Building issue due to using smpicxx instead of mpicxx
 #+BEGIN_SRC sh
+     echo "Clean up the place" 
+     sh -xe
      mkdir Benchmarks
      cd Benchmarks
      wget "https://asc.llnl.gov/CORAL-benchmarks/Skeleton/HACC_IO.tar.gz"
@@ -206,6 +220,8 @@ The HACC I/O benchmark capture the I/O patterns of the HACC simulation code.
 KMI_HASH evaluate the performance of the architecture integer operations, specifically for hashing, and for memory-intensive genomics applications. 
 **** Build and run  
 #+BEGIN_SRC sh
+     echo "Clean up the place" 
+     sh -xe
      mkdir Benchmarks
      cd Benchmarks
      wget "https://asc.llnl.gov/CORAL-benchmarks/Datacentric/KMI_HASH_CORAL.tar.gz"
@@ -227,6 +243,8 @@ The code is a simple tool that helps approximate MPI library memory usage as a f
 **** Build and run  
 Smpi building issue.
 #+BEGIN_SRC sh
+     echo "Clean up the place" 
+     sh -xe
      mkdir Benchmarks
      cd Benchmarks
      wget "http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/July5/mpimemu-1.0-rc6July5.tar"
@@ -248,6 +266,8 @@ The Ohio MicroBenchmark suite is a collection of independent MPI message passing
 **** Build and run  
 SMPI building issue.
 #+BEGIN_SRC sh
+     echo "Clean up the place" 
+     sh -xe
      mkdir Benchmarks
      cd Benchmarks
      wget "http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/July12/osu-micro-benchmarks-3.8-July12.tar"
