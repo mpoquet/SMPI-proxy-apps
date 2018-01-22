@@ -11,7 +11,7 @@ The execution should done with 2 proc.
      sh -xe
      rm -rf Benchmarks/mdtest
      cd Benchmarks
-     echo "Download the source code and data on need"
+     echo "Download the source"
      test -e mdtest-source.tgz || curl -o mdtest-source.tgz -Lk http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/Mar29/mdtest-1.8.4.tar
 
      echo "Unpack the code"
@@ -77,7 +77,7 @@ AMG is a parallel algebraic multigrid solver for linear systems arising from pro
      sh -xe
      rm -rf Benchmarks/mdtest
      cd Benchmarks
-     echo "Download the source code and data on need"
+     echo "Download the source code"
      test -e amg2013-source.tgz || curl -o amg2013-source.tgz -Lk https://asc.llnl.gov/CORAL-benchmarks/Throughput/amg20130624.tgz
 
      echo "Unpack the code"
@@ -104,13 +104,16 @@ Deadlock (Runing no stop).
 #+BEGIN_SRC sh
      echo "Clean up the place" 
      sh -xe
-     mkdir Benchmarks
+     rm -rf Benchmarks/mdtest
      cd Benchmarks
-     mkdir psnap
+     echo "Download the source code"
+     test -e psnap-source.tgz || curl -o psnap-source.tgz -Lk http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/June28/psnap-1.2June28.tar
+
+     echo "Unpack the code"
+     mkdir psnap && tar -xvf psnap-source.tgz -C psnap --strip-components 1
+ 
+     echo "Install the modified sources"
      cd psnap
-     wget "http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/June28/psnap-1.2June28.tar"
-     tar -xvf *.tar 
-     rm -rf *.tar
      cp -f ../../src/psnap/* ./
 
      echo "Compile it"
