@@ -1,5 +1,5 @@
 # Created by Sue Kelly, smkelly@sandia.gov, January 2013
-CC	= gcc
+CC	= smpicc
 MPICC	= smpicc
 all:	ziatest ziaprobe
 ziatest:	ziatest.c

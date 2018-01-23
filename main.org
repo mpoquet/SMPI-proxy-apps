@@ -120,7 +120,7 @@ Deadlock (Runing no stop).
      make
 
      echo "Run it"
-     smpirun -np 4 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 ./psnap
+    #  smpirun -np 4 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 ./psnap
 #+END_SRC
 
 *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/smb/][SMB]]
@@ -129,25 +129,49 @@ It include two benchmarks :
 - The msg_rate test measures the sustained MPI message rate using a communication pattern found in many real applications.
 - The mpi_overhead test uses a post-work-wait method using MPI non-blocking send and receive calls to measure the user level overhead of the respective MPI calls.
 **** Build and run  
-Very slow (Runing no stop). 
+- mpi_overhead : 
+hostfile note found if one use ./run_script.
+Or Very slow (Runing no stop) if one use the standart runing command. 
 #+BEGIN_SRC sh
      echo "Clean up the place" 
      sh -xe
-     mkdir Benchmarks
+     rm -rf Benchmarks/smb
+     mkdir -p Benchmarks
      cd Benchmarks
-     wget "http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/Jan9/smb1.0-1.tar"
-     tar -xvf *.tar 
-     rm -rf *.tar
+     echo "Download the source code"
+     test -e smb-source.tgz || curl -o smb-source.tgz -Lk http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/Jan9/smb1.0-1.tar
+
+     echo "Unpack the code"
+     mkdir smb && tar -xvf smb-source.tgz -C smb --strip-components 1
+
+     echo "Install the modified sources"
+     cp -f ../src/smb/mpi_overhead/* smb/src/mpi_overhead/
+     cd smb/src/mpi_overhead/
+
+     echo "Compile it"
+     make
+
+     echo "Run it"
+     ./run_script 
 #+END_SRC
-- mpi_overhead :
-#+BEGIN_SRC sh
-     cp -f ../src/smb/mpi_overhead/* smb_1.0-1/src/mpi_overhead/
-     cd smb_1.0-1/src/mpi_overhead/
-#+END_SRC
+
 - msg_rate :
+Building issue.
 #+BEGIN_SRC sh
-     cp -f ../src/smb/msgrate/* smb_1.0-1/src/msgrate/
-     cd smb_1.0-1/src/mpi_overhead/
+     echo "Clean up the place" 
+     sh -xe
+     rm -rf Benchmarks/smb
+     mkdir -p Benchmarks
+     cd Benchmarks
+     echo "Download the source code"
+     test -e smb-source.tgz || curl -o smb-source.tgz -Lk http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/Jan9/smb1.0-1.tar
+
+     echo "Unpack the code"
+     mkdir smb && tar -xvf smb-source.tgz -C smb --strip-components 1
+
+     echo "Install the modified sources"
+     cp -f ../src/smb/msgrate/* smb/src/msgrate/
+     cd smb/src/msgrate/
 #+END_SRC
 
 *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/ziatest/][ziatest]]
@@ -160,14 +184,21 @@ It's required by MPI-2, this is currently not supported by SMPI.
 #+BEGIN_SRC sh
      echo "Clean up the place" 
      sh -xe
-     mkdir Benchmarks
+     rm -rf Benchmarks/ziatest
+     mkdir -p Benchmarks/ziatest
      cd Benchmarks
-     mkdir ziatest
+     echo "Download the source code"
+     test -e ziatest-source.tgz || curl -o ziatest-source.tgz -Lk http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/Jan9/ziatest.tar
+
+     echo "Unpack the code"
      cd ziatest
-     wget "http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/Jan9/ziatest.tar"
-     tar -xvf *.tar 
-     rm -rf *.tar
+     tar -xvf ../ziatest-source.tgz
+
+     echo "Install the modified sources"
      cp -f ../../src/ziatest/* ./
+
+     echo "Compile it"
+     make 
 
      echo "Run it"
      smpirun -np 8 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./ziaprobe 4 4 2
