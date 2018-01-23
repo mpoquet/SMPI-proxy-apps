@@ -208,24 +208,29 @@ It's required by MPI-2, this is currently not supported by SMPI.
 **** Brief description 
 This code is a simple linear circuit simulator with a basic parser that performs transient analysis. 
 **** Build and run  
-Couldn't automated the downloading of the compressed file. 
 Runing issue.
 #+BEGIN_SRC sh
      echo "Clean up the place" 
      sh -xe
-     mkdir Benchmarks
+     rm -rf Benchmarks/miniXyce
+     mkdir -p Benchmarks/
      cd Benchmarks
-     wget "http://mantevo.org/downloads/miniXyce_1.0.html"
-     tar -xvf *.tar 
-     rm -rf *.tar 
-     cp -f ../src/miniXyce/* miniXyce_1.0/miniXyce_ref/
-     cd miniXyce_1.0/miniXyce_ref/
+     echo "Download the source code"
+     test -e miniXyce-source.tar.gz || curl -o miniXyce-source.tar.gz -Lk http://mantevo.org/downloads/releaseTarballs/miniapps/MiniXyce/miniXyce_1.0.tar.gz
+          
+     echo "Unpack the code"
+     mkdir miniXyce && tar -xvf miniXyce-source.tar.gz -C miniXyce --strip-components 1
+ 
+     echo "Install the modified sources"
+     cp -f ../src/miniXyce/* miniXyce/miniXyce_ref/
+     cd miniXyce/miniXyce_ref/
 
      echo "Compile it"
-     make -f 
+     make
+     make
 
      echo "Run it"
-     smpirun -np 2 -hostfile ./cluster_hostfile.txt -platform ./miniXyce.x --circuit tests/cir1.net --t_start 1e-6 --pf params.txt
+     smpirun -np 3 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 ./miniXyce.x --circuit tests/cir1.net --t_start 1e-6 --pf params.txt
  #+END_SRC
 
 ** Building issues :
