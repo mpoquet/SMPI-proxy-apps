@@ -46,26 +46,24 @@ The code run but at some level it kills the simulation before reaching mpi_final
   test -r miniSMAC2D-data-7k.tgz || curl -o miniSMAC2D-data-7k.tgz -Lk http://mantevo.org/downloads/Test_case_7kx7k.tar.gz
   
   echo "Unpack everything"
+  tar -xvf miniSMAC2D-source.tgz -C miniSMAC2D --strip-components 1
   cd miniSMAC2D
-  tar -xvf ../miniSMAC2D-source.tgz
-  cd miniSMAC2D-2.0
   mkdir data
   cd data 
-  tar -xvf ../../../miniSMAC2D-data-7k.tgz
-  cd ../..
+  tar -xvf ../../miniSMAC2D-data-7k.tgz
+  cd ..
 
   echo "Install the modified sources"
-  cp ../../src/miniSMAC2D-2.0/* miniSMAC2D-2.0
+  cp ../../src/miniSMAC2D/* ./
 
   echo "Compile it"
-  cd miniSMAC2D-2.0/
   make 
 
   echo "Run it"
-  set +e # back to non-paranoid mode
+  smpirun -np 2 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./smac2d_mpi_and_threads_with_AVX
+  
+#   set +e # back to non-paranoid mode
 #+END_SRC
-
-#+RESULTS:
 
 *** [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/AMG2013_Summary_v2.3.pdf][AMG2013]]
 **** Brief description : 
@@ -242,19 +240,24 @@ The HACC I/O benchmark capture the I/O patterns of the HACC simulation code.
 #+BEGIN_SRC sh
      echo "Clean up the place" 
      sh -xe
-     mkdir Benchmarks
+     rm -rf Benchmarks/HACC_IO
+     mkdir -p Benchmarks/
      cd Benchmarks
-     wget "https://asc.llnl.gov/CORAL-benchmarks/Skeleton/HACC_IO.tar.gz"
-     tar -xvf *.gz 
-     rm -rf *.gz
-     cp -f ../src/HACC_IO/* HACC_IO_KERNEL/
+     echo "Download the source code"
+     test -e HACC_IO-source.tar.gz || curl -o HACC_IO-source.tar.gz -Lk https://asc.llnl.gov/CORAL-benchmarks/Skeleton/HACC_IO.tar.gz
+          
+     echo "Unpack the code"
+     mkdir HACC_IO && tar -xvf HACC_IO-source.tar.gz -C HACC_IO --strip-components 1
+ 
+     echo "Install the modified sources"
+     cp -f ../src/HACC_IO/* HACC_IO/
      cd HACC_IO_KERNEL/
 
      echo "Compile it"
      make
 
      echo "Run it"
-     smpirun -np 8 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./HACC_IO 
+    #  smpirun -np 8 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./HACC_IO 
 #+END_SRC
 
 *** [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/KMI_Summary_v1.1.pdf][KMI_HASH]]
@@ -264,14 +267,19 @@ KMI_HASH evaluate the performance of the architecture integer operations, specif
 #+BEGIN_SRC sh
      echo "Clean up the place" 
      sh -xe
-     mkdir Benchmarks
+     rm -rf Benchmarks/KMI_HASH
+     mkdir -p Benchmarks/
      cd Benchmarks
-     wget "https://asc.llnl.gov/CORAL-benchmarks/Datacentric/KMI_HASH_CORAL.tar.gz"
-     tar -xvf *.gz 
-     rm -rf *.gz
-     cp -f ../src/kmi_hash/src/* kmi_hash/src/
-     cp -f ../src/kmi_hash/tests/* kmi_hash/tests/
-     cd kmi_hash/src/
+     echo "Download the source code"
+     test -e KMI_HASH-source.tar.gz || curl -o KMI_HASH-source.tar.gz -Lk https://asc.llnl.gov/CORAL-benchmarks/Datacentric/KMI_HASH_CORAL.tar.gz
+
+     echo "Unpack the code"
+     mkdir KMI_HASH && tar -xvf KMI_HASH-source.tar.gz -C KMI_HASH --strip-components 1
+ 
+     echo "Install the modified sources"
+     cp -f ../src/kmi_hash/src/* KMI_HASH/src/
+     cp -f ../src/kmi_hash/tests/* KMI_HASH/tests/
+     cd KMI_HASH/src/
 
      echo "Compile it"
      make
@@ -291,13 +299,21 @@ Smpi building issue.
 #+BEGIN_SRC sh
      echo "Clean up the place" 
      sh -xe
-     mkdir Benchmarks
+     rm -rf Benchmarks/mpimemu
+     mkdir -p Benchmarks/
      cd Benchmarks
-     wget "http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/July5/mpimemu-1.0-rc6July5.tar"
-     tar -xvf *.tar 
-     rm -rf *.tar
-     cp -f ../src/mpimemu/configure mpimemu-1.0-rc6July5/
-     cp -f ../src/mpimemu/*.txt ../src/mpimemu/*.xml mpimemu-1.0-rc6July5/src/
+     echo "Download the source code"
+     test -e mpimemu-source.tar.gz || curl -o mpimemu-source.tar.gz -Lk http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/July5/mpimemu-1.0-rc6July5.tar
+
+     echo "Unpack the code"
+     mkdir mpimemu && tar -xvf mpimemu-source.tar.gz -C mpimemu --strip-components 1
+
+     echo "Install the modified sources"
+     cp -f ../src/mpimemu/configure mpimemu/
+     cp -f ../src/mpimemu/*.txt ../src/mpimemu/*.xml mpimemu/src/
+
+
+     echo "Configure it"
      cd mpimemu-1.0-rc6July5/
      ./configure
 
@@ -306,7 +322,6 @@ Smpi building issue.
      cd src/
 
      echo "Run it"
-     mpirun -np 4 ./mpimemu
  #+END_SRC
 
 *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/omb-mpi-tests/][OMB_MPI]]
@@ -318,14 +333,19 @@ SMPI building issue.
 #+BEGIN_SRC sh
      echo "Clean up the place" 
      sh -xe
-     mkdir Benchmarks
+     rm -rf Benchmarks/OMB_MPI
+     mkdir -p Benchmarks/
      cd Benchmarks
-     wget "http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/July12/osu-micro-benchmarks-3.8-July12.tar"
-     tar -xvf *.tar 
-     rm -rf *.tar
-     cp -f ../src/OMB_MPI/configure osu-micro-benchmarks-3.8-July12/
-     cp -f ../src/OMB_MPI/* osu-micro-benchmarks-3.8-July12/mpi/pt2pt
-     cd osu-micro-benchmarks-3.8-July12/
+     echo "Download the source code"
+     test -e OMB_MPI-source.tar.gz || curl -o OMB_MPI-source.tar.gz -Lk http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/July12/osu-micro-benchmarks-3.8-July12.tar
+
+     echo "Unpack the code"
+     mkdir OMB_MPI && tar -xvf OMB_MPI-source.tar.gz -C OMB_MPI --strip-components 1
+
+     echo "Install the modified sources"
+     cp -f ../src/OMB_MPI/configure OMB_MPI/
+     cp -f ../src/OMB_MPI/* OMB_MPI/mpi/pt2pt
+     cd OMB_MPI/
      ./configure
  #+END_SRC
 
