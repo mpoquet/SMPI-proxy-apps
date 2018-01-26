@@ -10,6 +10,7 @@ The execution should done with 2 proc.
      echo "Clean up the place" 
      sh -xe
      rm -rf Benchmarks/mdtest
+     mkdir Benchmarks/
      cd Benchmarks
      echo "Download the source"
      test -e mdtest-source.tgz || curl -o mdtest-source.tgz -Lk http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/Mar29/mdtest-1.8.4.tar
@@ -21,6 +22,8 @@ The execution should done with 2 proc.
      cd mdtest
      cp -f ../../src/mdtest/* ./
 
+     echo "Test if all the MPI used functions are implemented on SMPI"
+     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - SIMGRID_FOLDER/src/smpi/bindings/smpi_mpi.cpp
      echo "Compile it"
      make
 
@@ -56,6 +59,10 @@ The code run but at some level it kills the simulation before reaching mpi_final
   echo "Install the modified sources"
   cp ../../src/miniSMAC2D/* ./
 
+     echo "Test if all the MPI used functions are implemented on SMPI"
+     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - SIMGRID_FOLDER/src/smpi/bindings/smpi_mpi.cpp
+     
+
   echo "Compile it"
   make 
 
@@ -86,6 +93,9 @@ AMG is a parallel algebraic multigrid solver for linear systems arising from pro
      cp -f ../src/AMG2013/*.include AMG2013/
      cd AMG2013/
 
+     echo "Test if all the MPI used functions are implemented on SMPI"
+     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - SIMGRID_FOLDER/src/smpi/bindings/smpi_mpi.cpp
+
      echo "Compile it"
      make
      cd test/
@@ -113,6 +123,9 @@ Deadlock (Runing no stop).
      echo "Install the modified sources"
      cd psnap
      cp -f ../../src/psnap/* ./
+
+     echo "Test if all the MPI used functions are implemented on SMPI"
+     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - SIMGRID_FOLDER/src/smpi/bindings/smpi_mpi.cpp
 
      echo "Compile it"
      make
@@ -146,6 +159,9 @@ Or Very slow (Runing no stop) if one use the standart runing command.
      cp -f ../src/smb/mpi_overhead/* smb/src/mpi_overhead/
      cd smb/src/mpi_overhead/
 
+     echo "Test if all the MPI used functions are implemented on SMPI"
+     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - SIMGRID_FOLDER/src/smpi/bindings/smpi_mpi.cpp
+
      echo "Compile it"
      make
 
@@ -170,6 +186,8 @@ Building issue.
      echo "Install the modified sources"
      cp -f ../src/smb/msgrate/* smb/src/msgrate/
      cd smb/src/msgrate/
+     echo "Test if all the MPI used functions are implemented on SMPI"
+     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - SIMGRID_FOLDER/src/smpi/bindings/smpi_mpi.cpp
 #+END_SRC
 
 *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/ziatest/][ziatest]]
@@ -194,6 +212,9 @@ It's required by MPI-2, this is currently not supported by SMPI.
 
      echo "Install the modified sources"
      cp -f ../../src/ziatest/* ./
+
+     echo "Test if all the MPI used functions are implemented on SMPI"
+     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - SIMGRID_FOLDER/src/smpi/bindings/smpi_mpi.cpp
 
      echo "Compile it"
      make 
@@ -223,6 +244,9 @@ Runing issue.
      cp -f ../src/miniXyce/* miniXyce/miniXyce_ref/
      cd miniXyce/miniXyce_ref/
 
+     echo "Test if all the MPI used functions are implemented on SMPI"
+     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - SIMGRID_FOLDER/src/smpi/bindings/smpi_mpi.cpp
+
      echo "Compile it"
      make
      make
@@ -251,8 +275,12 @@ The HACC I/O benchmark capture the I/O patterns of the HACC simulation code.
  
      echo "Install the modified sources"
      cp -f ../src/HACC_IO/* HACC_IO/
-     cd HACC_IO_KERNEL/
+     cd HACC_IO/
 
+
+     echo "Test if all the MPI used functions are implemented on SMPI"
+     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - SIMGRID_FOLDER/src/smpi/bindings/smpi_mpi.cpp
+     
      echo "Compile it"
      make
 
@@ -280,6 +308,9 @@ KMI_HASH evaluate the performance of the architecture integer operations, specif
      cp -f ../src/kmi_hash/src/* KMI_HASH/src/
      cp -f ../src/kmi_hash/tests/* KMI_HASH/tests/
      cd KMI_HASH/src/
+
+     echo "Test if all the MPI used functions are implemented on SMPI"
+     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - SIMGRID_FOLDER/src/smpi/bindings/smpi_mpi.cpp
 
      echo "Compile it"
      make
@@ -317,6 +348,9 @@ Smpi building issue.
      cd mpimemu-1.0-rc6July5/
      ./configure
 
+     echo "Test if all the MPI used functions are implemented on SMPI"
+     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - SIMGRID_FOLDER/src/smpi/bindings/smpi_mpi.cpp
+
      echo "Compile it"
      make 
      cd src/
@@ -345,9 +379,45 @@ SMPI building issue.
      echo "Install the modified sources"
      cp -f ../src/OMB_MPI/configure OMB_MPI/
      cp -f ../src/OMB_MPI/* OMB_MPI/mpi/pt2pt
+     
      cd OMB_MPI/
+     
+     echo "Test if all the MPI used functions are implemented on SMPI"
+     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - SIMGRID_FOLDER/src/smpi/bindings/smpi_mpi.cpp
+
      ./configure
  #+END_SRC
+
+ *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/minife/][MiniFE]]
+**** Brief description : 
+FE is a Finite Element mini-application which implements a couple of kernels representative of implicit finite-element applications. 
+It assembles a sparse linear-system from the steady-state conduction equation on a brick-shaped problem domain of linear 8-node hex elements.
+**** Build and run  
+   Building issue due to using smpicxx instead of mpicxx
+#+BEGIN_SRC sh
+     echo "Clean up the place" 
+     sh -xe
+     rm -rf Benchmarks/MiniFE
+     mkdir -p Benchmarks/
+     cd Benchmarks
+     echo "Download the source code"
+     test -e MiniFE-source.tar || curl -o MiniFE-source.tar -Lk http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/Feb22/MiniFE_ref_1.4b.tar
+          
+     echo "Unpack the code"
+     mkdir MiniFE && tar -xvf MiniFE-source.tar -C MiniFE --strip-components 1
+ 
+     echo "Install the modified sources"
+     cp -f ../src/MiniFE/* MiniFE/
+     cd MiniFE/
+
+     echo "Test if all the MPI used functions are implemented on SMPI"
+     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - SIMGRID_FOLDER/src/smpi/bindings/smpi_mpi.cpp
+     
+     echo "Compile it"
+     make
+
+     echo "Run it"
+#+END_SRC
 
 
 
