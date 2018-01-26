@@ -23,7 +23,7 @@ The execution should done with 2 proc.
      cp -f ../../src/mdtest/* ./
 
      echo "Test if all the MPI used functions are implemented on SMPI"
-     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - SIMGRID_FOLDER/src/smpi/bindings/smpi_mpi.cpp
+     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
      echo "Compile it"
      make
 
@@ -60,14 +60,14 @@ The code run but at some level it kills the simulation before reaching mpi_final
   cp ../../src/miniSMAC2D/* ./
 
      echo "Test if all the MPI used functions are implemented on SMPI"
-     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - SIMGRID_FOLDER/src/smpi/bindings/smpi_mpi.cpp
+     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
      
 
   echo "Compile it"
   make 
 
   echo "Run it"
-  smpirun -np 2 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./smac2d_mpi_and_threads_with_AVX
+  smpirun -np 2 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 ./smac2d_mpi_and_threads_with_AVX
   
 #   set +e # back to non-paranoid mode
 #+END_SRC
@@ -94,7 +94,7 @@ AMG is a parallel algebraic multigrid solver for linear systems arising from pro
      cd AMG2013/
 
      echo "Test if all the MPI used functions are implemented on SMPI"
-     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - SIMGRID_FOLDER/src/smpi/bindings/smpi_mpi.cpp
+     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
 
      echo "Compile it"
      make
@@ -125,7 +125,7 @@ Deadlock (Runing no stop).
      cp -f ../../src/psnap/* ./
 
      echo "Test if all the MPI used functions are implemented on SMPI"
-     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - SIMGRID_FOLDER/src/smpi/bindings/smpi_mpi.cpp
+     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
 
      echo "Compile it"
      make
@@ -160,7 +160,7 @@ Or Very slow (Runing no stop) if one use the standart runing command.
      cd smb/src/mpi_overhead/
 
      echo "Test if all the MPI used functions are implemented on SMPI"
-     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - SIMGRID_FOLDER/src/smpi/bindings/smpi_mpi.cpp
+     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
 
      echo "Compile it"
      make
@@ -187,7 +187,7 @@ Building issue.
      cp -f ../src/smb/msgrate/* smb/src/msgrate/
      cd smb/src/msgrate/
      echo "Test if all the MPI used functions are implemented on SMPI"
-     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - SIMGRID_FOLDER/src/smpi/bindings/smpi_mpi.cpp
+     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
 #+END_SRC
 
 *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/ziatest/][ziatest]]
@@ -214,7 +214,7 @@ It's required by MPI-2, this is currently not supported by SMPI.
      cp -f ../../src/ziatest/* ./
 
      echo "Test if all the MPI used functions are implemented on SMPI"
-     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - SIMGRID_FOLDER/src/smpi/bindings/smpi_mpi.cpp
+     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
 
      echo "Compile it"
      make 
@@ -245,7 +245,7 @@ Runing issue.
      cd miniXyce/miniXyce_ref/
 
      echo "Test if all the MPI used functions are implemented on SMPI"
-     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - SIMGRID_FOLDER/src/smpi/bindings/smpi_mpi.cpp
+     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
 
      echo "Compile it"
      make
@@ -279,7 +279,7 @@ The HACC I/O benchmark capture the I/O patterns of the HACC simulation code.
 
 
      echo "Test if all the MPI used functions are implemented on SMPI"
-     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - SIMGRID_FOLDER/src/smpi/bindings/smpi_mpi.cpp
+     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
      
      echo "Compile it"
      make
@@ -310,7 +310,7 @@ KMI_HASH evaluate the performance of the architecture integer operations, specif
      cd KMI_HASH/src/
 
      echo "Test if all the MPI used functions are implemented on SMPI"
-     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - SIMGRID_FOLDER/src/smpi/bindings/smpi_mpi.cpp
+     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
 
      echo "Compile it"
      make
@@ -349,7 +349,7 @@ Smpi building issue.
      ./configure
 
      echo "Test if all the MPI used functions are implemented on SMPI"
-     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - SIMGRID_FOLDER/src/smpi/bindings/smpi_mpi.cpp
+     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
 
      echo "Compile it"
      make 
@@ -383,7 +383,7 @@ SMPI building issue.
      cd OMB_MPI/
      
      echo "Test if all the MPI used functions are implemented on SMPI"
-     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - SIMGRID_FOLDER/src/smpi/bindings/smpi_mpi.cpp
+     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
 
      ./configure
  #+END_SRC
@@ -411,7 +411,7 @@ It assembles a sparse linear-system from the steady-state conduction equation on
      cd MiniFE/
 
      echo "Test if all the MPI used functions are implemented on SMPI"
-     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - SIMGRID_FOLDER/src/smpi/bindings/smpi_mpi.cpp
+     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
      
      echo "Compile it"
      make
