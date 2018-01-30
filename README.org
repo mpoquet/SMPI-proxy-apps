@@ -28,5 +28,5 @@ In this repository we gather the most use benchmark codes that could be used und
 * Notes about [[https://repository.prace-ri.eu/git/PRACE/CodeVault][CodeVault]] benchmak codes : 
 | Benchmark  | Reference | Lines of code | paral | Lang | Build with MPI | Run with MPI | on SMPI | about SMPI test |
 |------------+-----------+---------------+-------+------+----------------+--------------+---------+-----------------|
-| Unstructured_grids | NONE | unknown | MPI | C++ | :x: |  |  |  |
-| Parallel_io | NONE | unknown | MPI | C++ | :white_check_mark: | :white_check_mark: |  |  |
+| Unstructured_grids | NONE | unknown | MPI, PTHREAD | C++ | :x: | / | / | / |
+| Parallel_io | NONE | unknown | MPI | C++ | :white_check_mark: | :white_check_mark: | :x: | some features are currently unavailable in SMPI |

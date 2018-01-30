@@ -21,6 +21,7 @@ The execution should done with 2 proc.
      echo "Install the modified sources"
      cd mdtest
      cp -f ../../src/mdtest/* ./
+     cp -f ../../src/common/* ./
 
      echo "Test if all the MPI used functions are implemented on SMPI"
      egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
@@ -58,6 +59,7 @@ The code run but at some level it kills the simulation before reaching mpi_final
 
   echo "Install the modified sources"
   cp ../../src/miniSMAC2D/* ./
+  cp ../../src/common/* ./
 
      echo "Test if all the MPI used functions are implemented on SMPI"
      egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
@@ -89,7 +91,7 @@ AMG is a parallel algebraic multigrid solver for linear systems arising from pro
      mkdir AMG2013 && tar -xvf amg2013-source.tgz -C AMG2013 --strip-components 1
  
      echo "Install the modified sources"
-     cp -f ../src/AMG2013/*.txt ../src/AMG2013/*.xml AMG2013/test/
+     cp -f ../src/common/* AMG2013/test/
      cp -f ../src/AMG2013/*.include AMG2013/
      cd AMG2013/
 
@@ -123,6 +125,7 @@ Deadlock (Runing no stop).
      echo "Install the modified sources"
      cd psnap
      cp -f ../../src/psnap/* ./
+     cp -f ../../src/common/* ./
 
      echo "Test if all the MPI used functions are implemented on SMPI"
      egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
@@ -157,6 +160,7 @@ Or Very slow (Runing no stop) if one use the standart runing command.
 
      echo "Install the modified sources"
      cp -f ../src/smb/mpi_overhead/* smb/src/mpi_overhead/
+     cp -f ../src/common/* smb/src/mpi_overhead/
      cd smb/src/mpi_overhead/
 
      echo "Test if all the MPI used functions are implemented on SMPI"
@@ -185,6 +189,7 @@ Building issue.
 
      echo "Install the modified sources"
      cp -f ../src/smb/msgrate/* smb/src/msgrate/
+     cp -f ../src/common/* smb/src/msgrate/
      cd smb/src/msgrate/
      echo "Test if all the MPI used functions are implemented on SMPI"
      egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
@@ -212,6 +217,7 @@ It's required by MPI-2, this is currently not supported by SMPI.
 
      echo "Install the modified sources"
      cp -f ../../src/ziatest/* ./
+     cp -f ../../src/common/* ./
 
      echo "Test if all the MPI used functions are implemented on SMPI"
      egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
@@ -242,6 +248,7 @@ Runing issue.
  
      echo "Install the modified sources"
      cp -f ../src/miniXyce/* miniXyce/miniXyce_ref/
+     cp -f ../src/common/* miniXyce/miniXyce_ref/
      cd miniXyce/miniXyce_ref/
 
      echo "Test if all the MPI used functions are implemented on SMPI"
@@ -275,6 +282,7 @@ The HACC I/O benchmark capture the I/O patterns of the HACC simulation code.
  
      echo "Install the modified sources"
      cp -f ../src/HACC_IO/* HACC_IO/
+     cp -f ../src/common/* HACC_IO/
      cd HACC_IO/
 
 
@@ -307,6 +315,7 @@ KMI_HASH evaluate the performance of the architecture integer operations, specif
      echo "Install the modified sources"
      cp -f ../src/kmi_hash/src/* KMI_HASH/src/
      cp -f ../src/kmi_hash/tests/* KMI_HASH/tests/
+     cp -f ../src/common/* KMI_HASH/tests/
      cd KMI_HASH/src/
 
      echo "Test if all the MPI used functions are implemented on SMPI"
@@ -341,7 +350,7 @@ Smpi building issue.
 
      echo "Install the modified sources"
      cp -f ../src/mpimemu/configure mpimemu/
-     cp -f ../src/mpimemu/*.txt ../src/mpimemu/*.xml mpimemu/src/
+     cp -f ../src/common/* mpimemu/src/
 
 
      echo "Configure it"
@@ -379,6 +388,7 @@ SMPI building issue.
      echo "Install the modified sources"
      cp -f ../src/OMB_MPI/configure OMB_MPI/
      cp -f ../src/OMB_MPI/* OMB_MPI/mpi/pt2pt
+     cp -f ../src/common/* OMB_MPI/mpi/pt2pt
      
      cd OMB_MPI/
      
@@ -408,6 +418,7 @@ It assembles a sparse linear-system from the steady-state conduction equation on
  
      echo "Install the modified sources"
      cp -f ../src/MiniFE/* MiniFE/
+     cp -f ../src/common/* MiniFE/
      cd MiniFE/
 
      echo "Test if all the MPI used functions are implemented on SMPI"
@@ -419,6 +430,31 @@ It assembles a sparse linear-system from the steady-state conduction equation on
      echo "Run it"
 #+END_SRC
 
+ *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/minife/][Parallel_IO]]
+**** Brief description : 
+This code demonstrate the basic usage of MPI parallel I/O.
+**** Build and run  
+#+BEGIN_SRC sh
+     echo "Clean up the place" 
+     sh -xe
+     rm -rf Benchmarks/MiniFE
+     mkdir -p Benchmarks/
+     cd Benchmarks
+     echo "Download the source code"
+     git clone https://repository.prace-ri.eu/git/PRACE/CodeVault.git
+
+     echo "Install the modified sources"
+     cp ../src/paralle_io/* parallel_io/
+
+     echo "Compile it"
+     cd CodeVault/hpc_kernel_samples/
+     mkdir build
+     cd build/
+     cmake ..
+     make 
+
+     echo "Run it"
+#+END_SRC
 
 
 * Emacs settings
