@@ -398,7 +398,7 @@ SMPI building issue.
      ./configure
  #+END_SRC
 
- *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/minife/][MiniFE]]
+*** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/minife/][MiniFE]]
 **** Brief description : 
 FE is a Finite Element mini-application which implements a couple of kernels representative of implicit finite-element applications. 
 It assembles a sparse linear-system from the steady-state conduction equation on a brick-shaped problem domain of linear 8-node hex elements.
