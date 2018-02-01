@@ -1,10 +1,12 @@
 # SMPI-benchmarks
 In this repository we gather the most use benchmark codes that could be used under SMPI's API. 
 ** Legend 
-:white_check_mark: : pass
-:x: : Failed
-:partly_sunny: : Shows warnings
-:wrench: : Need some adjustments
+| Symbole  | Meaning |
+|----------+---------|
+| :white_check_mark: | pass |
+| :x: | Failed |
+| :partly_sunny: | Shows warnings | 
+| :wrench: | Need some adjustments | 
 
 * [[https://asc.llnl.gov/CORAL-benchmarks/][CORAL]] benchmak codes 
 | Benchmark  | Reference | Lines of code | paral | Lang | Build with MPI | Run with MPI | Build with SMPI | about SMPI test |
