@@ -18,8 +18,10 @@ In this repository we gather the most use benchmark codes that could be used und
 | [[https://github.com/Zitagcc/SMPI-benchmarks/blob/master/main.org#hacc_io][HACCIO]] | [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/HACC_IO_Summary_v1.0.pdf][:book:]] [[https://asc.llnl.gov/CORAL-benchmarks/Skeleton/HACC_IO.tar.gz][:package:]] | 2,000 | MPI | C++ | :white_check_mark: :partly_sunny: | :white_check_mark: | :x: | Building issue due to using smpicxx instead of mpicxx |
 | [[https://github.com/Zitagcc/SMPI-benchmarks/blob/master/main.org#kmi_hash][KMI_HASH]] | [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/KMI_Summary_v1.1.pdf][:book:]] [[https://asc.llnl.gov/CORAL-benchmarks/Datacentric/KMI_HASH_CORAL.tar.gz][:package:]]| unknown | MPI | C | :white_check_mark: :partly_sunny: | :white_check_mark: | :x: | Building issue |
 
-** Note valid benchmarks 
-For dependency : mcb, UMT2013, CAM-SE, LSMS.
+** Not valid benchmarks 
+- For dependency : LSMS, QBOX, Nekbone, CAM-SE, UMT2013, MCB, QMCPACK, NAMD, LULESH, integer_Sort, CLOMP, IOR, Hash.
+- Python : Pynmaic.
+- Doesn't depended to MPI : Graph500, SPECint2006"peak", Memory benchmarks, CLOMP, LCALS, FTQ, XSBench, NEKbonemk, HACCmk, UMTmk, AMGmk, MILCmk, GFMCmk.
 * [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/][Trinity-Nersc]] benchmark codes
 | Benchmark  | Ref | Lines of code | paral | Lang | Build with MPI | Run with MPI | Build with SMPI | about SMPI test |
 |------------+-----+---------------+-------+------+----------------+--------------+-----------------+-----------------|
@@ -32,9 +34,9 @@ For dependency : mcb, UMT2013, CAM-SE, LSMS.
 | [[https://github.com/Zitagcc/SMPI-benchmarks/blob/master/main.org#omb_mpi][OMB_MPI Tests]] | [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/omb-mpi-tests/][:book:]] [[http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/July12/osu-micro-benchmarks-3.8-July12.tar][:package:]] | unknown | MPI | C | :white_check_mark: | :white_check_mark: |  :x: | Building issue |
 | [[https://github.com/Zitagcc/SMPI-benchmarks/blob/master/main.org#minife][MiniFE]] | [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/minife/][:book:]] [[http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/Feb22/MiniFE_ref_1.4b.tar][:package:]] | unknown | MPI | C++ | :white_check_mark: | :white_check_mark: |  :x: | Building issue |
 
-** Note valid benchmarks
-For dependency : AMG, SNAP, GTC, MILC, MiniDFT, UPC-FC, Stream.
-Python : UMT.
+** Not valid benchmarks
+- For dependency : AMG, SNAP, GTC, MILC, MiniDFT, UPC-FC, Stream.
+- Python : UMT.
 
 * [[https://mantevo.org/download/][Mantevo]] benchmark codes
 | Benchmark  | Ref | Lines of code | paral | Lang | Build with MPI | Run with MPI | Build with SMPI | about SMPI test |
@@ -42,8 +44,8 @@ Python : UMT.
 | [[https://github.com/Zitagcc/SMPI-benchmarks/blob/master/main.org#minixcye][MiniXcye]]   | NONE [[http://mantevo.org/downloads/miniXyce_1.0.html][:package:]] | unknown       | MPI         | C++     | :white_check_mark: :partly_sunny:                                                                          | :white_check_mark: | :white_check_mark: | runing issue                    |
 | [[https://github.com/Zitagcc/SMPI-benchmarks/blob/master/main.org#minismac2d][MiniSMAC2D]] | NONE [[http://mantevo.org/downloads/miniSMAC2D_2.0.html][:package:]] | unknown       | MPI, OPENMP | F90 | :white_check_mark: :wrench: :partly_sunny: | :white_check_mark: | :white_check_mark:     | but it got "killing simulation" |
 
-** Note valid benchmarks
-For dependency : CloverLeaf, Clover3D, HPCCG.
+** Not valid benchmarks
+- For dependency : CloverLeaf, Clover3D, HPCCG.
 * [[https://repository.prace-ri.eu/git/PRACE/CodeVault][CodeVault]] benchmark codes 
 | Benchmark  | Ref | Lines of code | paral | Lang | Build with MPI | Run with MPI | Build with SMPI | about SMPI test |
 |------------+-----------+---------------+-------+------+----------------+--------------+---------+-----------------|
