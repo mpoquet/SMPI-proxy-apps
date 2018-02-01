@@ -35,7 +35,7 @@ In this repository we gather the most use benchmark codes that could be used und
 | [[https://github.com/Zitagcc/SMPI-benchmarks/blob/master/main.org#minife][MiniFE]] | [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/minife/][:book:]] [[http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/Feb22/MiniFE_ref_1.4b.tar][:package:]] | unknown | MPI | C++ | :white_check_mark: | :white_check_mark: |  :x: | Building issue |
 
 ** Not valid benchmarks
-- For dependency : AMG, SNAP, GTC, MILC, MiniDFT, UPC-FC, Stream.
+- For dependency : MiniGhost, AMG, GTC, SNAP, MILC, MiniDFT, UPC-FC, Stream.
 - Python : UMT.
 
 * [[https://mantevo.org/download/][Mantevo]] benchmark codes
