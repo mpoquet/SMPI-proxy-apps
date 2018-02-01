@@ -27,7 +27,6 @@ CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
 set(CXX11 ${COMPILER_SUPPORTS_CXX11})
 set(CXX11_FLAGS -std=c++11)
 
-#find_package(SMPI)
 set(CMAKE_INCLUDE_PATH ~/simgrid/src/smpi/)
 
 if (NOT CXX11)

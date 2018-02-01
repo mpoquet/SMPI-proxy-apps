@@ -1,14 +1,19 @@
 # SMPI-benchmarks
 In this repository we gather the most use benchmark codes that could be used under SMPI's API. 
-* Notes about [[https://asc.llnl.gov/CORAL-benchmarks/][CORAL]] benchmak codes : 
-| Benchmark  | Reference | Lines of code | paral | Lang | Build with MPI | Run with MPI | on SMPI | about SMPI test |
+** Legend 
+:white_check_mark: : pass
+:x: : Failed
+:partly_sunny: : Shows warnings
+:wrench: : Need some adjustments
+* [[https://asc.llnl.gov/CORAL-benchmarks/][CORAL]] benchmak codes 
+| Benchmark  | Reference | Lines of code | paral | Lang | Build with MPI | Run with MPI | Build with SMPI | about SMPI test |
 |------------+-----------+---------------+-------+------+----------------+--------------+---------+-----------------|
 | [[https://asc.llnl.gov/CORAL-benchmarks/Throughput/amg20130624.tgz][amg2013]] | [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/AMG2013_Summary_v2.3.pdf][ref]] | 75,000 | MPI-OPENMP | C | :white_check_mark: :wrench: | :white_check_mark: | :white_check_mark: | deadlock |
 | [[https://asc.llnl.gov/CORAL-benchmarks/Skeleton/HACC_IO.tar.gz][HACCIO]] | [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/HACC_IO_Summary_v1.0.pdf][ref]] | 2,000 | MPI | C++ | :white_check_mark: :partly_sunny: | :white_check_mark: | :x: | Building issue due to using smpicxx instead of mpicxx |
 | [[https://asc.llnl.gov/CORAL-benchmarks/Datacentric/KMI_HASH_CORAL.tar.gz][KMI_HASH]] | [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/KMI_Summary_v1.1.pdf][ref]] | / | MPI | C | :white_check_mark: :partly_sunny: | :white_check_mark: | :x: | Building issue |
 
-* Notes about [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/][Trinity-Nersc]] benchmak codes : 
-| Benchmark  | Reference | Lines of code | paral | Lang | Build with MPI | Run with MPI | on SMPI | about SMPI test |
+* [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/][Trinity-Nersc]] benchmak codes
+| Benchmark  | Reference | Lines of code | paral | Lang | Build with MPI | Run with MPI | Build with SMPI | about SMPI test |
 |------------+-----------+---------------+-------+------+----------------+--------------+---------+-----------------|
 | [[http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/Jan9/smb1.0-1.tar][SMB - mpiheader]] | [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/smb/][ref]] | unknown | MPI | C |  :white_check_mark: :sunny: | :white_check_mark: | :white_check_mark: | slow |
 | SMB - msgrate | [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/smb/][ref]] | unknown | MPI | C | :white_check_mark: | :x: | :x: | Building issue |
@@ -19,14 +24,14 @@ In this repository we gather the most use benchmark codes that could be used und
 | [[http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/July12/osu-micro-benchmarks-3.8-July12.tar][OMB_MPI Tests]] | [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/omb-mpi-tests/][ref]] | unknown | MPI | C | :white_check_mark: | :white_check_mark: |  :x: | Building issue |
 | [[http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/Feb22/MiniFE_ref_1.4b.tar][MiniFE]] | [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/minife/][ref]] | unknown | MPI | C++ | :white_check_mark: | :white_check_mark: |  :x: | Building issue |
 
-* Notes about [[https://mantevo.org/download/][Mantevo]] benchmak codes : 
-| Benchmark  | Reference | Lines of code | paral | Lang | Build with MPI | Run with MPI | on SMPI | about SMPI test |
+* [[https://mantevo.org/download/][Mantevo]] benchmak codes
+| Benchmark  | Reference | Lines of code | paral | Lang | Build with MPI | Run with MPI | Build with SMPI | about SMPI test |
 |------------+-----------+---------------+-------+------+----------------+--------------+---------+-----------------|
 | [[http://mantevo.org/downloads/miniXyce_1.0.html][MiniXcye]]   | NONE      | unknown       | MPI         | C++     | :white_check_mark: :partly_sunny:                                                                          | :white_check_mark: | :white_check_mark: | runing issue                    |
 | [[http://mantevo.org/downloads/miniSMAC2D_2.0.html][MiniSMAC2D]] | NONE      | unknown       | MPI, OPENMP | F90 | :white_check_mark: :wrench: :partly_sunny: | :white_check_mark: | :white_check_mark:     | but it got "killing simulation" |
 
-* Notes about [[https://repository.prace-ri.eu/git/PRACE/CodeVault][CodeVault]] benchmak codes : 
-| Benchmark  | Reference | Lines of code | paral | Lang | Build with MPI | Run with MPI | on SMPI | about SMPI test |
+* [[https://repository.prace-ri.eu/git/PRACE/CodeVault][CodeVault]] benchmak codes 
+| Benchmark  | Reference | Lines of code | paral | Lang | Build with MPI | Run with MPI | Build with SMPI | about SMPI test |
 |------------+-----------+---------------+-------+------+----------------+--------------+---------+-----------------|
 | Unstructured_grids | NONE | unknown | MPI, PTHREAD | C++ | :x: | / | / | / |
-| Parallel_io | NONE | unknown | MPI | C++ | :white_check_mark: | :white_check_mark: | :x: | some features are currently unavailable in SMPI |
+| Parallel_io | NONE | unknown | MPI | C++ | :white_check_mark: | :white_check_mark: | :x: | some features are currently unavailable with SMPI |

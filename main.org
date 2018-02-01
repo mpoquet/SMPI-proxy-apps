@@ -1,6 +1,6 @@
 * Benchmarks in details
 ** Working benchmarks :
-*** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/mdtest/][mdtest]]
+*** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/mdtest/][MDTest]]
 **** Brief description : 
 mdtest is a program that measures performance of various metadata operations. It uses MPI to coordinate the operations and to collect the results.   
 The code is composed of one C file, mdtest.c. 
@@ -33,7 +33,7 @@ The execution should done with 2 proc.
  #+END_SRC
 
 ** Running issues :  
-*** [[http://mantevo.org/downloads/miniSMAC2D_2.0.html][miniSMAC2D]]
+*** [[http://mantevo.org/downloads/miniSMAC2D_2.0.html][MiniSMAC2D]]
 **** Brief description : 
 The code is incompressible Navier-Stokes flow solver.
 **** Build and run  
@@ -106,7 +106,7 @@ AMG is a parallel algebraic multigrid solver for linear systems arising from pro
      smpirun -np 8 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./amg2013 -pooldist 1 -r 12 12 12
 #+END_SRC
 
-*** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/psnap/][psnap]]
+*** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/psnap/][PSNAP]]
 **** Brief description : 
 PSNAP (PAL System Noise Activity Program) consists of a spin loop that is calibrated to take a given amount of time (typically 1 ms). This loop is repeated for a number of iterations.
 **** Build and run  
@@ -195,7 +195,7 @@ Building issue.
      egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
 #+END_SRC
 
-*** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/ziatest/][ziatest]]
+*** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/ziatest/][ZiaTest]]
 **** Brief description : 
 It executes a new proposed standard benchmark method for MPI startup that is intended to provide a realistic assessment of
 both launch and wireup requirements. Accordingly, it exercises both the launch system of the environment and the interconnect subsystem in a specified pattern.
@@ -330,7 +330,7 @@ KMI_HASH evaluate the performance of the architecture integer operations, specif
      smpirun -np 2 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./kmi_hash 
 #+END_SRC
 
-*** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/mpimemu/][mpimemu]]
+*** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/mpimemu/][MPIMemu]]
 **** Brief description : 
 The code is a simple tool that helps approximate MPI library memory usage as a function of scale.  It takes samples of /proc/meminfo (node level)
  and /proc/self/status (process level) and outputs the min, max and avg values for a specified period of time.
@@ -440,6 +440,7 @@ This code demonstrate the basic usage of MPI parallel I/O.
      rm -rf Benchmarks/MiniFE
      mkdir -p Benchmarks/
      cd Benchmarks
+
      echo "Download the source code"
      git clone https://repository.prace-ri.eu/git/PRACE/CodeVault.git
 
