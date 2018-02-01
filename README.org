@@ -13,14 +13,16 @@ In this repository we gather the most use benchmark codes that could be used und
 
 * [[https://asc.llnl.gov/CORAL-benchmarks/][CORAL]] benchmark codes 
 | Benchmark  | Ref | Lines of code | paral | Lang | Build with MPI | Run with MPI | Build with SMPI | about SMPI test |
-|------------+-----------+---------------+-------+------+----------------+--------------+---------+-----------------|
+|------------+-----+---------------+-------+------+----------------+--------------+-----------------+-----------------|
 | [[https://github.com/Zitagcc/SMPI-benchmarks/blob/master/main.org#amg2013][amg2013]] | [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/AMG2013_Summary_v2.3.pdf][:book:]] [[https://asc.llnl.gov/CORAL-benchmarks/Throughput/amg20130624.tgz][:package:]] | 75,000 | MPI-OPENMP | C | :white_check_mark: :wrench: | :white_check_mark: | :white_check_mark: | deadlock |
 | [[https://github.com/Zitagcc/SMPI-benchmarks/blob/master/main.org#hacc_io][HACCIO]] | [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/HACC_IO_Summary_v1.0.pdf][:book:]] [[https://asc.llnl.gov/CORAL-benchmarks/Skeleton/HACC_IO.tar.gz][:package:]] | 2,000 | MPI | C++ | :white_check_mark: :partly_sunny: | :white_check_mark: | :x: | Building issue due to using smpicxx instead of mpicxx |
 | [[https://github.com/Zitagcc/SMPI-benchmarks/blob/master/main.org#kmi_hash][KMI_HASH]] | [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/KMI_Summary_v1.1.pdf][:book:]] [[https://asc.llnl.gov/CORAL-benchmarks/Datacentric/KMI_HASH_CORAL.tar.gz][:package:]]| unknown | MPI | C | :white_check_mark: :partly_sunny: | :white_check_mark: | :x: | Building issue |
 
+** Note valid benchmarks 
+For dependency : mcb, UMT2013, CAM-SE, LSMS.
 * [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/][Trinity-Nersc]] benchmark codes
 | Benchmark  | Ref | Lines of code | paral | Lang | Build with MPI | Run with MPI | Build with SMPI | about SMPI test |
-|------------+-----------+---------------+-------+------+----------------+--------------+---------+-----------------|
+|------------+-----+---------------+-------+------+----------------+--------------+-----------------+-----------------|
 | [[https://github.com/Zitagcc/SMPI-benchmarks/blob/master/main.org#smb][SMB - mpiheader]] | [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/smb/][:book:]] [[http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/Jan9/smb1.0-1.tar][:package:]] | unknown | MPI | C |  :white_check_mark: :sunny: | :white_check_mark: | :white_check_mark: | slow |
 | SMB - msgrate | [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/smb/][:book:]] | unknown | MPI | C | :white_check_mark: | :x: | :x: | Building issue |
 | [[https://github.com/Zitagcc/SMPI-benchmarks/blob/master/main.org#psnap][psnap]] | [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/psnap/][:book:]] [[http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/June28/psnap-1.2June28.tar][:package:]] | unknown | MPI | C |  :white_check_mark: :sunny: | :white_check_mark: | :white_check_mark: | deadlock |
@@ -30,12 +32,18 @@ In this repository we gather the most use benchmark codes that could be used und
 | [[https://github.com/Zitagcc/SMPI-benchmarks/blob/master/main.org#omb_mpi][OMB_MPI Tests]] | [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/omb-mpi-tests/][:book:]] [[http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/July12/osu-micro-benchmarks-3.8-July12.tar][:package:]] | unknown | MPI | C | :white_check_mark: | :white_check_mark: |  :x: | Building issue |
 | [[https://github.com/Zitagcc/SMPI-benchmarks/blob/master/main.org#minife][MiniFE]] | [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/minife/][:book:]] [[http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/Feb22/MiniFE_ref_1.4b.tar][:package:]] | unknown | MPI | C++ | :white_check_mark: | :white_check_mark: |  :x: | Building issue |
 
+** Note valid benchmarks
+For dependency : AMG, SNAP, GTC, MILC, MiniDFT, UPC-FC, Stream.
+Python : UMT.
+
 * [[https://mantevo.org/download/][Mantevo]] benchmark codes
 | Benchmark  | Ref | Lines of code | paral | Lang | Build with MPI | Run with MPI | Build with SMPI | about SMPI test |
-|------------+-----------+---------------+-------+------+----------------+--------------+---------+-----------------|
+|------------+-----+---------------+-------+------+----------------+--------------+-----------------+-----------------|
 | [[https://github.com/Zitagcc/SMPI-benchmarks/blob/master/main.org#minixcye][MiniXcye]]   | NONE [[http://mantevo.org/downloads/miniXyce_1.0.html][:package:]] | unknown       | MPI         | C++     | :white_check_mark: :partly_sunny:                                                                          | :white_check_mark: | :white_check_mark: | runing issue                    |
 | [[https://github.com/Zitagcc/SMPI-benchmarks/blob/master/main.org#minismac2d][MiniSMAC2D]] | NONE [[http://mantevo.org/downloads/miniSMAC2D_2.0.html][:package:]] | unknown       | MPI, OPENMP | F90 | :white_check_mark: :wrench: :partly_sunny: | :white_check_mark: | :white_check_mark:     | but it got "killing simulation" |
 
+** Note valid benchmarks
+For dependency : CloverLeaf, Clover3D, HPCCG.
 * [[https://repository.prace-ri.eu/git/PRACE/CodeVault][CodeVault]] benchmark codes 
 | Benchmark  | Ref | Lines of code | paral | Lang | Build with MPI | Run with MPI | Build with SMPI | about SMPI test |
 |------------+-----------+---------------+-------+------+----------------+--------------+---------+-----------------|
