@@ -6,11 +6,15 @@ mdtest is a program that measures performance of various metadata operations. It
 The code is composed of one C file, mdtest.c. 
 **** Build and run :   
 The execution should done with 2 proc.
-#+BEGIN_SRC sh
+#+BEGIN_SRC sh :tangle bin/MDTest.sh
+     export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
+     export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
+     export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
+
      echo "Clean up the place" 
-     sh -xe
+     set -exu
      rm -rf Benchmarks/mdtest
-     mkdir Benchmarks/
+     mkdir Benchmarks || true
      cd Benchmarks
      echo "Download the source"
      test -e mdtest-source.tgz || curl -o mdtest-source.tgz -Lk http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/Mar29/mdtest-1.8.4.tar
@@ -23,8 +27,6 @@ The execution should done with 2 proc.
      cp -f ../../src/mdtest/* ./
      cp -f ../../src/common/* ./
 
-     echo "Test if all the MPI used functions are implemented on SMPI"
-     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
      echo "Compile it"
      make
 
