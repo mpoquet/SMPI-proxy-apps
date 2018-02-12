@@ -19,9 +19,25 @@ In this repository we gather the most use benchmark codes that could be used und
 | [[https://github.com/Zitagcc/SMPI-benchmarks/blob/master/main.org#kmi_hash][KMI_HASH]] | [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/KMI_Summary_v1.1.pdf][:book:]] [[https://asc.llnl.gov/CORAL-benchmarks/Datacentric/KMI_HASH_CORAL.tar.gz][:package:]]| unknown | MPI | C | :white_check_mark: :partly_sunny: | :white_check_mark: | :x: | Building issue |
 
 ** Not valid benchmarks 
-- For dependency : LSMS, QBOX, Nekbone, CAM-SE, UMT2013, MCB, QMCPACK, NAMD, LULESH, integer_Sort, CLOMP, IOR, Hash.
-- Python : Pynmaic.
-- Doesn't depended to MPI : Graph500, SPECint2006"peak", Memory benchmarks, CLOMP, LCALS, FTQ, XSBench, NEKbonemk, HACCmk, UMTmk, AMGmk, MILCmk, GFMCmk.
+*** For dependency 
+| Benchmark | Ref | Lines of code | Dependency |  
+|-----------|-----|---------------|------------|
+| LSMS | [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/LSMS_Summary_v1.1.pdf][:book:]][[https://asc.llnl.gov/CORAL-benchmarks/Science/LSMS_3_rev237.tar.bz2][:package:]] | 200,000 | |
+| QBOX | [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/QBox_Summary_v1.2.pdf][:book:]][[https://asc.llnl.gov/CORAL-benchmarks/Science/qball_r140b.tgz][:package:]] | 47,000 |OPENMP, Blas, LAPACK | 
+| Nekbone | [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/Nekbone_Summary_v2.3.4.1.pdf][:book:]][[https://asc.llnl.gov/CORAL-benchmarks/Science/nekbone-2.3.4.tar.gz][:package:]] | 48,000 | OPENMP |
+| CAM-SE | [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/CAMSE_Summary_v1.1.pdf][:book:]][[https://asc.llnl.gov/CORAL-benchmarks/Throughput/homme1_3_6_mira_2.tgz][:package:]] | 150,000 | NETCDF, lapack, cblas |
+| UMT2013 | [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/UMT2013_Summary_v1.2.pdf][:book:]][[https://asc.llnl.gov/CORAL-benchmarks/Throughput/UMT2013-20140204.tar.gz][:package:]] | 75,000 | OpenMP |
+| MCB | [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/MCB_Summary_v1.1.pdf][:book:]][[https://asc.llnl.gov/CORAL-benchmarks/Throughput/mcb-20130723.tar.gz][:package:]] | 13,000 | OPENMP |
+| QMCPACK | [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/QMCPACK_Summary_v1.2.pdf][:book:]] | [[https://asc.llnl.gov/CORAL-benchmarks/Throughput/qmcpack-coral20131203.tar.gz][:package:]] | OPENMP |
+| NAMD | [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/NAMD_Summary_v1.0.pdf][:book:]][[https://asc.llnl.gov/CORAL-benchmarks/Throughput/namd-src.tar.gz][:package:]] | 180,000 | mpixlc |
+| LULESH | [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/LULESH_Summary_v1.pdf][:book:]][[https://asc.llnl.gov/CORAL-benchmarks/Throughput/lulesh2.0.3.tgz][:package:]] | 5,000 | OPENMP |
+| integer_sort | [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/BigSort_Summary_v1.1.pdf][:book:]][[https://asc.llnl.gov/CORAL-benchmarks/Datacentric/BigSort-20130808.tar.bz2][:pachage:]] | 2,000 | OPENMP | 
+| CLOMP | [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/CLOMP_Summary_v1.2.pdf][:book:]][[https://asc.llnl.gov/CORAL-benchmarks/Skeleton/clomp_v1.2.tar.gz][:package:]] | unknown | OPENMP |
+| IOR | [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/IOR_Summary_v1.0.pdf][:book:]][[https://asc.llnl.gov/CORAL-benchmarks/Skeleton/IOR.CORAL.1.tar.gz][:package:]] | 4,000 | MPIICC |
+*** For programming language 
+- Python : Pynmaic
+*** For Independency to MPI : 
+Graph500, SPECint2006"peak", Memory benchmarks, CLOMP, LCALS, FTQ, XSBench, NEKbonemk, HACCmk, UMTmk, AMGmk, MILCmk, GFMCmk.
 * [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/][Trinity-Nersc]] benchmark codes
 | Benchmark  | Ref | Lines of code | paral | Lang | Build with MPI | Run with MPI | Build with SMPI | about SMPI test |
 |------------+-----+---------------+-------+------+----------------+--------------+-----------------+-----------------|
