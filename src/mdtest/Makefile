@@ -20,7 +20,7 @@
 #\*****************************************************************************/
 
 # CC.AIX = mpcc_r -bmaxdata:0x80000000
-CC.Linux = smpicc -Wall # cc -Wall
+CC.Linux = smpicc -Wall -I${SIMGRID_PATH}/include/smpi -I${SIMGRID_PATH}/include -L${SIMGRID_PATH}/lib# cc -Wall
 # CC.Darwin = mpicc -Wall
 
 # Requires GNU Make
