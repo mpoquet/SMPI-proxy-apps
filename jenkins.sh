@@ -1,6 +1,6 @@
 #! /bin/sh
 
-export SIMGRID_PATH=/builds/workspace/SimGrid-Multi/build_mode/Debug/node/simgrid-fedora-rawhide-64/build/SimGrid-3.19
+export SIMGRID_PATH=/builds/simgrid_install
 
 set -exu
 mkdir -p bin
