@@ -8,5 +8,11 @@ emacs --batch --eval "(require 'org)" --eval '(org-babel-tangle-file "main.org")
 chmod +x bin/*.sh
 
 cmake .
-ctest
+
+ctest -T test --output-on-failure --no-compress-output || true
+if [ -f Testing/TAG ] ; then
+   xsltproc $WORKSPACE/src/ctest2junit.xsl Testing/$( head -n 1 < Testing/TAG )/Test.xml > CTestResults.xml
+   mv CTestResults.xml $WORKSPACE
+fi
+
 
