@@ -42,6 +42,10 @@ The code is incompressible Navier-Stokes flow solver.
 The localization of input file should be changed.
 The code run but at some level it kills the simulation before reaching mpi_finalize.
 #+BEGIN_SRC shell :tangle bin/MiniSMAC2D.sh
+  export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
+  export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
+  export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
+
   echo "Clean up the place" 
   sh -xe
   rm -rf Benchmarks/miniSMAC2D
@@ -63,10 +67,6 @@ The code run but at some level it kills the simulation before reaching mpi_final
   cp ../../src/miniSMAC2D/* ./
   cp ../../src/common/* ./
 
-     echo "Test if all the MPI used functions are implemented on SMPI"
-     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
-     
-
   echo "Compile it"
   make 
 
@@ -82,23 +82,25 @@ AMG is a parallel algebraic multigrid solver for linear systems arising from pro
 **** Build and run  
    The code has a deadlock or maybe it's not perfectly clean.
 #+BEGIN_SRC sh :tangle bin/AMG2013.sh
+  export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
+  export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
+  export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
+
      echo "Clean up the place" 
      sh -xe
-     rm -rf Benchmarks/mdtest
+     rm -rf Benchmarks/AMG2013
+     mkdir -p Benchmarks/AMG2013
      cd Benchmarks
      echo "Download the source code"
      test -e amg2013-source.tgz || curl -o amg2013-source.tgz -Lk https://asc.llnl.gov/CORAL-benchmarks/Throughput/amg20130624.tgz
 
      echo "Unpack the code"
-     mkdir AMG2013 && tar -xvf amg2013-source.tgz -C AMG2013 --strip-components 1
+     tar -xvf amg2013-source.tgz -C AMG2013 --strip-components 1
  
      echo "Install the modified sources"
      cp -f ../src/common/* AMG2013/test/
      cp -f ../src/AMG2013/*.include AMG2013/
      cd AMG2013/
-
-     echo "Test if all the MPI used functions are implemented on SMPI"
-     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
 
      echo "Compile it"
      make
