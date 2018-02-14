@@ -34,6 +34,38 @@ The execution should done with 2 proc.
      smpirun -np 2 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./mdtest --cfg=smpi/host-speed:100 --cfg=smpi/privatization:yes
  #+END_SRC
 
+*** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/stream/][stream]]
+**** Brief description : 
+STREAM is a simple, synthetic benchmark designed to measure sustainable memory bandwidth (in MB/s) and a corresponding computation rate for four simple vector kernels.
+**** Build and run :   
+#+BEGIN_SRC sh :tangle bin/stream.sh
+     export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
+     export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
+     export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
+
+     echo "Clean up the place" 
+     set -exu
+     rm -rf Benchmarks/mdtest
+     mkdir Benchmarks || true
+     cd Benchmarks
+     echo "Download the source"
+     test -e stream-source.tgz || curl -o stream-source.tgz -Lk http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/Jan9/stream.tar
+
+     echo "Unpack the code"
+     mkdir stream && tar -xvf stream-source.tgz -C stream --strip-components 1
+ 
+     echo "Install the modified sources"
+     cd stream
+     cp -f ../../src/stream/* ./
+     cp -f ../../src/common/* ./
+
+     echo "Compile it"
+     make
+
+     echo "Run it"
+     smpirun -np 4 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./stream_c.exe
+ #+END_SRC
+ 
 ** Running issues :  
 *** [[http://mantevo.org/downloads/miniSMAC2D_2.0.html][MiniSMAC2D]]
 **** Brief description : 
@@ -459,6 +491,33 @@ This code demonstrate the basic usage of MPI parallel I/O.
      echo "Run it"
 #+END_SRC
 
+ *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/gtc/][GTC]]
+**** Brief description : 
+GTC is used for Gyrokinetic Particle Simulation of Turbulent Transport in Burning Plasmas.
+**** Build and run  
+#+BEGIN_SRC sh
+     echo "Clean up the place" 
+     sh -xe
+     rm -rf Benchmarks/GTC
+     mkdir -p Benchmarks/
+     cd Benchmarks
+
+     echo "Download the source code"
+     test -e GTC-source.tar || curl -o GTC-source.tar -Lk http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/May31/TrN8GTCMay30.tar
+
+     echo "Unpack the code"
+     mkdir GTC && tar -xvf GTC-source.tar -C GTC --strip-components 1
+
+     echo "Install the modified sources"
+     cp ../src/GTC/* GTC/source/
+     cp -f ../src/common/* GTC/source/
+
+     echo "Compile it"
+     cd GTC/source/
+     make 
+
+     echo "Run it"
+#+END_SRC
 
 * Emacs settings
 # Local Variables:
