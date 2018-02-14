@@ -34,7 +34,7 @@ The execution should done with 2 proc.
      smpirun -np 2 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./mdtest --cfg=smpi/host-speed:100 --cfg=smpi/privatization:yes
  #+END_SRC
 
-*** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/stream/][stream]]
+*** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/stream/][Stream]]
 **** Brief description : 
 STREAM is a simple, synthetic benchmark designed to measure sustainable memory bandwidth (in MB/s) and a corresponding computation rate for four simple vector kernels.
 **** Build and run :   
@@ -45,19 +45,20 @@ STREAM is a simple, synthetic benchmark designed to measure sustainable memory b
 
      echo "Clean up the place" 
      set -exu
-     rm -rf Benchmarks/mdtest
-     mkdir Benchmarks || true
+     rm -rf Benchmarks/steam
+     mkdir -p Benchmarks/stream || true
      cd Benchmarks
      echo "Download the source"
      test -e stream-source.tgz || curl -o stream-source.tgz -Lk http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/Jan9/stream.tar
 
      echo "Unpack the code"
-     mkdir stream && tar -xvf stream-source.tgz -C stream --strip-components 1
+     tar -xvf stream-source.tgz -C stream
  
      echo "Install the modified sources"
+     pwd
+     cp -f ../src/stream/* stream/
+     cp -f ../src/common/* stream/
      cd stream
-     cp -f ../../src/stream/* ./
-     cp -f ../../src/common/* ./
 
      echo "Compile it"
      make
