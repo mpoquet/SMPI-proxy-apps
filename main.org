@@ -299,6 +299,38 @@ Runing issue.
      smpirun -np 3 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 ./miniXyce.x --circuit tests/cir1.net --t_start 1e-6 --pf params.txt
  #+END_SRC
 
+*** HPCCG
+**** Brief description 
+HPCCG is a simple conjugate gradient benchmark code for a 3D chimney domain on an arbitrary number of processors.
+**** Build and run  
+Runing issue.
+#+BEGIN_SRC sh
+     echo "Clean up the place" 
+     sh -xe
+     rm -rf Benchmarks/HPCCG
+     mkdir -p Benchmarks/
+     cd Benchmarks
+     echo "Download the source code"
+     test -e hpccg-source.tar.gz || curl -o hpccg-source.tar.gz -Lk http://mantevo.org/downloads/HPCCG-1.0.html
+
+     echo "Unpack the code"
+     mkdir HPCCG && tar -xvf HPCCG-source.tar.gz -C HPCCG --strip-components 1
+ 
+     echo "Install the modified sources"
+     cp -f ../src/HPCCG/* HPCCG/
+     cp -f ../src/common/* HPCCG/
+     cd hpccg/
+
+     echo "Test if all the MPI used functions are implemented on SMPI"
+     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
+
+     echo "Compile it"
+     make
+
+     echo "Run it"
+     smpirun -np 4 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 ./test_HPCCG 3 5 2
+ #+END_SRC
+
 ** Building issues :
 *** [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/HACC_IO_Summary_v1.0.pdf][HACC_IO]]
 **** Brief description : 
