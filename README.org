@@ -3,10 +3,10 @@ In this repository we gather the most use benchmark codes that could be used und
 ** Legend 
 | Symbole  | Meaning | Symbole | Meaning |
 |----------+---------+---------+---------|
-| :white_check_mark: | pass | :wrench: | Need some adjustments |
+| :white_check_mark: | Pass | :wrench: | Need some adjustments |
 | :x: | Failed | :warning: | Issue has came during the process |
 | :sunny: | Doesn't shows any issues | :book: | Compilation instructions | 
-| :partly_sunny: | Shows warnings | :package: | source code | 
+| :partly_sunny: | Shows warnings | :package: | Source code | 
 | :loop: | deadlock |  |  | 
 
 * [[https://asc.llnl.gov/CORAL-benchmarks/][CORAL]] benchmark codes 
@@ -38,7 +38,7 @@ In this repository we gather the most use benchmark codes that could be used und
 | [[https://github.com/Zitagcc/SMPI-benchmarks/blob/master/main.org#minixcye][MiniXcye]]   | NONE [[http://mantevo.org/downloads/miniXyce_1.0.html][:package:]] | unknown       | MPI         | C++     | :white_check_mark: :partly_sunny: | :white_check_mark: | :white_check_mark: | :x: |
 | [[https://github.com/Zitagcc/SMPI-benchmarks/blob/master/main.org#hpccg][HPCCG]]   | NONE [[http://mantevo.org/downloads/releaseTarballs/miniapps/HPCCG/HPCCG-1.0.tar.gz][:package:]] | unknown | MPI, OpenMP | C++ | :white_check_mark: :partly_sunny: | :white_check_mark: | :white_check_mark: | :x: |
 | [[https://github.com/Zitagcc/SMPI-benchmarks/blob/master/main.org#miniamr][MiniAMR]]   | NONE [[https://mantevo.org/downloads/releaseTarballs/miniapps/MiniAMR/miniAMR_1.0_ref.tgz][:package:]] | unknown | MPI | C | :white_check_mark: :wrench: | :white_check_mark: | :white_check_mark: | to check deeper |
-| [[https://github.com/Zitagcc/SMPI-benchmarks/blob/master/main.org#minief][MiniFE]]   | NONE [[https://mantevo.org/downloads/releaseTarballs/miniapps/MiniFE/miniFE_ref_1.5.tar.gz][:package:]] | unknown | MPI | C | :white_check_mark: :wrench: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| [[https://github.com/Zitagcc/SMPI-benchmarks/blob/master/main.org#minief][MiniFE]]   | NONE [[https://mantevo.org/downloads/releaseTarballs/miniapps/MiniFE/miniFE_ref_1.5.tar.gz][:package:]] | unknown | MPI | C | :white_check_mark:| :white_check_mark: | :white_check_mark: | :white_check_mark: |
 
 * [[https://repository.prace-ri.eu/git/PRACE/CodeVault][CodeVault]] benchmark codes 
 | Benchmark  | Ref | Lines of code | paral | Lang | Build with MPI | Run with MPI | Build with SMPI | Run with SMPI |
@@ -87,7 +87,7 @@ MiniGhost : issues with MG_CONSTANTS.F
 | Clover3D | [[http://uk-mac.github.io/CloverLeaf3D/][:book:]][[http://mantevo.org/downloads/CloverLeaf3D-1.0.html][:package:]] | unknown | OpenMP |
 | Miniaero | [[http://mantevo.org/downloads/miniAero_1.0.html][:package:]] | unknown | Trilinos Kokkos, PTHREAD |
 *** For Independency to MPI 
-MiniFE, MiniMD.
+MiniMD.
 ** Not available 
 CoMD.
 ** CodeVault
