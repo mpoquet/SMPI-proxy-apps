@@ -182,7 +182,10 @@ AMG is a parallel algebraic multigrid solver for linear systems arising from pro
 PSNAP (PAL System Noise Activity Program) consists of a spin loop that is calibrated to take a given amount of time (typically 1 ms). This loop is repeated for a number of iterations.
 **** Build and run  
 Deadlock (Runing no stop).
-#+BEGIN_SRC sh
+#+BEGIN_SRC sh :tangle bin/PSNAP.sh
+  export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
+  export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
+  export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
      echo "Clean up the place" 
      sh -xe
      rm -rf Benchmarks/mdtest
@@ -198,14 +201,11 @@ Deadlock (Runing no stop).
      cp -f ../../src/psnap/* ./
      cp -f ../../src/common/* ./
 
-     echo "Test if all the MPI used functions are implemented on SMPI"
-     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
-
      echo "Compile it"
      make
 
      echo "Run it"
-    #  smpirun -np 4 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 ./psnap
+     smpirun -np 4 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 ./psnap
 #+END_SRC
 
 *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/smb/][SMB]]
@@ -217,7 +217,10 @@ It include two benchmarks :
 - mpi_overhead : 
 hostfile note found if one use ./run_script.
 Or Very slow (Runing no stop) if one use the standart runing command. 
-#+BEGIN_SRC sh
+#+BEGIN_SRC sh :tangle bin/SMB.sh
+  export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
+  export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
+  export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
      echo "Clean up the place" 
      sh -xe
      rm -rf Benchmarks/smb
@@ -234,8 +237,6 @@ Or Very slow (Runing no stop) if one use the standart runing command.
      cp -f ../src/common/* smb/src/mpi_overhead/
      cd smb/src/mpi_overhead/
 
-     echo "Test if all the MPI used functions are implemented on SMPI"
-     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
 
      echo "Compile it"
      make
@@ -246,7 +247,6 @@ Or Very slow (Runing no stop) if one use the standart runing command.
 
 - msg_rate :
 Building issue.
-#+BEGIN_SRC sh
      echo "Clean up the place" 
      sh -xe
      rm -rf Benchmarks/smb
@@ -262,8 +262,6 @@ Building issue.
      cp -f ../src/smb/msgrate/* smb/src/msgrate/
      cp -f ../src/common/* smb/src/msgrate/
      cd smb/src/msgrate/
-     echo "Test if all the MPI used functions are implemented on SMPI"
-     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
 #+END_SRC
 
 *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/ziatest/][ZiaTest]]
@@ -273,7 +271,10 @@ both launch and wireup requirements. Accordingly, it exercises both the launch s
 **** Build and run : 
 To run the code one has to give 3 args as inputs.
 It's required by MPI-2, this is currently not supported by SMPI.
-#+BEGIN_SRC sh
+#+BEGIN_SRC sh :tangle bin/ZiaTest.sh
+  export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
+  export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
+  export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
      echo "Clean up the place" 
      sh -xe
      rm -rf Benchmarks/ziatest
@@ -290,9 +291,6 @@ It's required by MPI-2, this is currently not supported by SMPI.
      cp -f ../../src/ziatest/* ./
      cp -f ../../src/common/* ./
 
-     echo "Test if all the MPI used functions are implemented on SMPI"
-     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
-
      echo "Compile it"
      make 
 
@@ -305,7 +303,10 @@ It's required by MPI-2, this is currently not supported by SMPI.
 This code is a simple linear circuit simulator with a basic parser that performs transient analysis. 
 **** Build and run  
 Runing issue.
-#+BEGIN_SRC sh
+#+BEGIN_SRC sh :tangle bin/MiniXcye.sh
+  export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
+  export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
+  export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
      echo "Clean up the place" 
      sh -xe
      rm -rf Benchmarks/miniXyce
@@ -322,9 +323,6 @@ Runing issue.
      cp -f ../src/common/* miniXyce/miniXyce_ref/
      cd miniXyce/miniXyce_ref/
 
-     echo "Test if all the MPI used functions are implemented on SMPI"
-     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
-
      echo "Compile it"
      make
      make
@@ -338,7 +336,10 @@ Runing issue.
 HPCCG is a simple conjugate gradient benchmark code for a 3D chimney domain on an arbitrary number of processors.
 **** Build and run  
 Runing issue.
-#+BEGIN_SRC sh
+#+BEGIN_SRC sh :tangle bin/HPCCG.sh
+  export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
+  export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
+  export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
      echo "Clean up the place" 
      sh -xe
      rm -rf Benchmarks/HPCCG
@@ -355,9 +356,6 @@ Runing issue.
      cp -f ../src/common/* HPCCG/
      cd HPCCG/
 
-     echo "Test if all the MPI used functions are implemented on SMPI"
-     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
-
      echo "Compile it"
      make
 
@@ -370,7 +368,10 @@ Runing issue.
 HPCCG is a simple conjugate gradient benchmark code for a 3D chimney domain on an arbitrary number of processors.
 **** Build and run  
 Runing issue.
-#+BEGIN_SRC sh
+#+BEGIN_SRC sh :tangle bin/MiniAMR.sh
+  export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
+  export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
+  export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
      echo "Clean up the place" 
      sh -xe
      rm -rf Benchmarks/MiniAMR
@@ -386,9 +387,6 @@ Runing issue.
      cp -f ../src/MiniAMR/* MiniAMR/
      cp -f ../src/common/* MiniAMR/
      cd MiniAMR/
-
-     echo "Test if all the MPI used functions are implemented on SMPI"
-     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
 
      echo "Compile it"
      make
@@ -419,10 +417,6 @@ The HACC I/O benchmark capture the I/O patterns of the HACC simulation code.
      cp -f ../src/HACC_IO/* HACC_IO/
      cp -f ../src/common/* HACC_IO/
      cd HACC_IO/
-
-
-     echo "Test if all the MPI used functions are implemented on SMPI"
-     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
      
      echo "Compile it"
      make
@@ -452,9 +446,6 @@ KMI_HASH evaluate the performance of the architecture integer operations, specif
      cp -f ../src/kmi_hash/tests/* KMI_HASH/tests/
      cp -f ../src/common/* KMI_HASH/tests/
      cd KMI_HASH/src/
-
-     echo "Test if all the MPI used functions are implemented on SMPI"
-     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
 
      echo "Compile it"
      make
@@ -487,13 +478,9 @@ Smpi building issue.
      cp -f ../src/mpimemu/configure mpimemu/
      cp -f ../src/common/* mpimemu/src/
 
-
      echo "Configure it"
      cd mpimemu-1.0-rc6July5/
      ./configure
-
-     echo "Test if all the MPI used functions are implemented on SMPI"
-     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
 
      echo "Compile it"
      make 
@@ -526,9 +513,6 @@ SMPI building issue.
      cp -f ../src/common/* OMB_MPI/mpi/pt2pt
      
      cd OMB_MPI/
-     
-     echo "Test if all the MPI used functions are implemented on SMPI"
-     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
 
      ./configure
  #+END_SRC
@@ -556,9 +540,6 @@ It assembles a sparse linear-system from the steady-state conduction equation on
      cp -f ../src/common/* MiniFE/
      cd MiniFE/
 
-     echo "Test if all the MPI used functions are implemented on SMPI"
-     egrep -hor '\<MPI_[A-Za-z0-9_]*\(' ./ | sed 's/.$/,/' | sort --unique | grep -if - ~/simgrid/src/smpi/bindings/smpi_mpi.cpp
-     
      echo "Compile it"
      make
 
