@@ -25,7 +25,7 @@ set(DWARF_PREFIX 7_montecarlo) # The prefix of the name of the binaries produced
 # add_subdirectory(pi)
 # add_subdirectory(prng)
 add_subdirectory(integral_basic)
-# add_subdirectory(prime)
+add_subdirectory(prime)
 
 # ==================================================================================================
 

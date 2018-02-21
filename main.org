@@ -101,9 +101,9 @@ miniFE is a Finite Element mini-application which implements a couple of kernels
      smpirun -np 6 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./miniFE.x
  #+END_SRC
 
-*** Montecarlo
+*** Monte-carlo
 **** Brief description : 
-**** Build and run :   
+**** Integral-basic :   
 #+BEGIN_SRC sh :tangle bin/Integral_basic.sh
      export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
      export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
@@ -135,6 +135,39 @@ miniFE is a Finite Element mini-application which implements a couple of kernels
      smpirun -np 6 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./7_montecarlo_integral1d_serial 100
 
  #+END_SRC
+**** Prime :   
+#+BEGIN_SRC sh :tangle bin/Prime.sh
+     export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
+     export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
+     export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
+
+     echo "Clean up the place" 
+     set -exu
+     rm -rf Benchmarks/CodeVault
+     mkdir -p Benchmarks/ || true
+     cd Benchmarks
+     echo "Download the source"
+     git clone https://repository.prace-ri.eu/git/PRACE/CodeVault.git
+
+     echo "Install the modified sources"
+     cp ../src/CodeVault/monte_carlo_methods/prime/* CodeVault/hpc_kernel_samples/monte_carlo_methods/prime/
+     cp ../src/CodeVault/monte_carlo_methods/CMakeLists.txt CodeVault/hpc_kernel_samples/monte_carlo_methods/
+
+     echo "Compile it"
+     cd CodeVault/hpc_kernel_samples/monte_carlo_methods/
+     mkdir build
+     cd build/
+     cmake -Denable_smpi=ON ..
+     make 
+
+     cp ../../../../../src/common/* ./prime
+
+     echo "Run it"
+     smpirun -np 6 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./7_montecarlo_prime 100 
+
+ #+END_SRC
+
+ #+RESULTS:
 
 ** Running issues :  
 *** [[http://mantevo.org/downloads/miniSMAC2D_2.0.html][MiniSMAC2D]]
