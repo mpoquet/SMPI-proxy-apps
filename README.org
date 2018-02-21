@@ -45,7 +45,7 @@ In this repository we gather the most use benchmark codes that could be used und
 |------------+-----+---------------+-------+------+----------------+--------------+-----------------+-----------------|
 | Unstructured_grids | NONE | unknown | MPI, PTHREAD | C++ | :x: | / | / | / |
 | Parallel_io | NONE | unknown | MPI | C++ | :white_check_mark: | :white_check_mark: | :x: | some features are currently unavailable with SMPI |
-| Monte_carlo_methods (prime) | NONE | unknown | MPI | C++ | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| [[https://github.com/Zitagcc/SMPI-benchmarks/blob/master/main.org#montecarlo][Monte_carlo_methods (integral_basic)]] | NONE | unknown | MPI, OpenMP | C++ | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: :partly_sunny: |
 
 * Not valid benchmarks 
 ** CORAL 
