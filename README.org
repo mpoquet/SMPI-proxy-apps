@@ -45,7 +45,7 @@ In this repository we gather the most use benchmark codes that could be used und
 |------------+-----+---------------+-------+------+----------------+--------------+-----------------+-----------------|
 | Unstructured_grids | NONE | unknown | MPI, PTHREAD | C++ | :x: | / | / | / |
 | Parallel_io | NONE | unknown | MPI | C++ | :white_check_mark: | :white_check_mark: | :x: | some features are currently unavailable with SMPI |
-| Monte_carlo_methods (prime) | NONE | unknown | MPI | C++ | :white_check_mark: | :white_check_mark: | |  |
+| Monte_carlo_methods (prime) | NONE | unknown | MPI | C++ | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 
 * Not valid benchmarks 
 ** CORAL 

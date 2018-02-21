@@ -101,6 +101,36 @@ miniFE is a Finite Element mini-application which implements a couple of kernels
      smpirun -np 6 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./miniFE.x
  #+END_SRC
 
+*** Montecarlo
+**** Brief description : 
+**** Build and run :   
+#+BEGIN_SRC sh :tangle bin/Prime.sh
+     export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
+     export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
+     export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
+
+     echo "Clean up the place" 
+     set -exu
+     rm -rf Benchmarks/CodeVault
+     mkdir -p Benchmarks/ || true
+     cd Benchmarks
+     echo "Download the source"
+     git clone https://repository.prace-ri.eu/git/PRACE/CodeVault.git
+
+     echo "Install the modified sources"
+     cp ../src/CodeVault/prime/* CodeVault/hpc_kernel_samples/monte_carlo_methods/prime/
+     cp ../src/common/* CodeVault/hpc_kernel_samples/monte_carlo_methods/prime/
+
+     echo "Compile it"
+     cd CodeVault/hpc_kernel_samples/monte_carlo_methods/
+     mkdir build
+     cd build/
+     cmake -Denable smpi=on ..
+     make 
+
+     echo "Run it"
+     smpirun -np 6 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./7_montecarlo_prime 100
+ #+END_SRC
 ** Running issues :  
 *** [[http://mantevo.org/downloads/miniSMAC2D_2.0.html][MiniSMAC2D]]
 **** Brief description : 
@@ -181,7 +211,7 @@ AMG is a parallel algebraic multigrid solver for linear systems arising from pro
 **** Brief description : 
 PSNAP (PAL System Noise Activity Program) consists of a spin loop that is calibrated to take a given amount of time (typically 1 ms). This loop is repeated for a number of iterations.
 **** Build and run  
-Deadlock (Runing no stop).
+Deadlock (Running no stop).
 #+BEGIN_SRC sh :tangle bin/PSNAP.sh
   export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
   export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
@@ -216,7 +246,7 @@ It include two benchmarks :
 **** Build and run  
 - mpi_overhead : 
 hostfile note found if one use ./run_script.
-Or Very slow (Runing no stop) if one use the standart runing command. 
+Or Very slow (Running no stop) if one use the standart runing command. 
 #+BEGIN_SRC sh :tangle bin/SMB.sh
   export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
   export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
@@ -302,7 +332,7 @@ It's required by MPI-2, this is currently not supported by SMPI.
 **** Brief description 
 This code is a simple linear circuit simulator with a basic parser that performs transient analysis. 
 **** Build and run  
-Runing issue.
+Running issue.
 #+BEGIN_SRC sh :tangle bin/MiniXcye.sh
   export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
   export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
@@ -335,7 +365,7 @@ Runing issue.
 **** Brief description 
 HPCCG is a simple conjugate gradient benchmark code for a 3D chimney domain on an arbitrary number of processors.
 **** Build and run  
-Runing issue.
+Running issue.
 #+BEGIN_SRC sh :tangle bin/HPCCG.sh
   export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
   export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
@@ -367,7 +397,7 @@ Runing issue.
 **** Brief description 
 HPCCG is a simple conjugate gradient benchmark code for a 3D chimney domain on an arbitrary number of processors.
 **** Build and run  
-Runing issue.
+Running issue.
 #+BEGIN_SRC sh :tangle bin/MiniAMR.sh
   export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
   export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
