@@ -15,7 +15,7 @@ ADD_TEST(SMB    bin/SMB.sh)
 ADD_TEST(ZiaTest    bin/ZiaTest.sh)
 ADD_TEST(MiniXyce    bin/MiniXyce.sh)
 ADD_TEST(HPCCG    bin/HPCCG.sh)
-ADD_TEST(MiniAMR    bin/MiniAMR.sh)
+# ADD_TEST(MiniAMR    bin/MiniAMR.sh)
 ADD_TEST(Integral_basic  bin/Integral_basic.sh)
 ADD_TEST(Integral_basic  bin/Prime.sh)
 

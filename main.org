@@ -131,8 +131,8 @@ miniFE is a Finite Element mini-application which implements a couple of kernels
      cp ../../../../../src/common/* ./integral_basic
 
      echo "Run it"
-     smpirun -np 6 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 ./7_montecarlo_integral1d_mpi 100 
-     smpirun -np 6 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./7_montecarlo_integral1d_serial 100
+#     smpirun -np 6 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 ./7_montecarlo_integral1d_mpi 100 
+#     smpirun -np 6 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./7_montecarlo_integral1d_serial 100
 
  #+END_SRC
 **** Prime :   
@@ -163,7 +163,7 @@ miniFE is a Finite Element mini-application which implements a couple of kernels
      cp ../../../../../src/common/* ./prime
 
      echo "Run it"
-     smpirun -np 6 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./7_montecarlo_prime 100 
+#     smpirun -np 6 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./7_montecarlo_prime 100 
 
  #+END_SRC
 

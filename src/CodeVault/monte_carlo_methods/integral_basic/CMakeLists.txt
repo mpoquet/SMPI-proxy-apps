@@ -2,7 +2,6 @@
 cmake_minimum_required(VERSION 2.8.10 FATAL_ERROR)
 
 # find_package(OpenMP)   # Built-in in CMake
-# find_package(MPI)      # Built-in in CMake
 
 set (CMAKE_MODULE_PATH ~/simgrid/src/smpi/)
 
@@ -35,11 +34,10 @@ option(enable_smpi "Enable SMPI")
 # endif()
 
 if (enable_smpi)
-    set(CMAKE_C_COMPILER "/usr/local/bin/smpicc")
+    set(CMAKE_C_COMPILER "~/simgrid/build/smpi_script/bin/smpicc")
     include_directories(BEFORE "~/simgrid/include/smpi")
     cmake_policy(SET CMP0003 OLD)
     set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
-    # include_directories(${MPI_INCLUDE_PATH})
     add_executable(${NAME_MPI} integral1d_mpi.c)
     target_link_libraries(${NAME_MPI} m ${MPI_LIBRARIES} stdc++)
     install(TARGETS ${NAME_MPI} DESTINATION bin)
