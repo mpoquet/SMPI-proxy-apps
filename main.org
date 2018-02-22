@@ -200,7 +200,40 @@ miniFE is a Finite Element mini-application which implements a couple of kernels
 
  #+END_SRC
 
+**** Prng :   
+#+BEGIN_SRC sh :tangle bin/Prng.sh
+     export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
+     export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
+     export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
+
+     echo "Clean up the place" 
+     set -exu
+     rm -rf Benchmarks/CodeVault
+     mkdir -p Benchmarks/ || true
+     cd Benchmarks
+     echo "Download the source"
+     git clone https://repository.prace-ri.eu/git/PRACE/CodeVault.git
+
+     echo "Install the modified sources"
+     cp ../src/CodeVault/monte_carlo_methods/prng/* CodeVault/hpc_kernel_samples/monte_carlo_methods/prng/
+     cp ../src/CodeVault/monte_carlo_methods/CMakeLists.txt CodeVault/hpc_kernel_samples/monte_carlo_methods/
+
+     echo "Compile it"
+     cd CodeVault/hpc_kernel_samples/monte_carlo_methods/
+     mkdir build
+     cd build/
+     cmake -Denable_smpi=ON ..
+     make 
+
+     cp ../../../../../src/common/* ./prng
+
+     echo "Run it"
+     smpirun -np 4 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./7_montecarlo_prng_mpi 10 100 --cfg=smpi/host-speed:10
+
+ #+END_SRC
+
  #+RESULTS:
+
 
 ** Running issues :  
 *** [[http://mantevo.org/downloads/miniSMAC2D_2.0.html][MiniSMAC2D]]
