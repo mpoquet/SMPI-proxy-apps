@@ -18,4 +18,5 @@ ADD_TEST(HPCCG    bin/HPCCG.sh)
 # ADD_TEST(MiniAMR    bin/MiniAMR.sh)
 ADD_TEST(Integral_basic  bin/Integral_basic.sh)
 ADD_TEST(Integral_basic  bin/Prime.sh)
+ADD_TEST(Integral_basic  bin/Pi.sh)
 
