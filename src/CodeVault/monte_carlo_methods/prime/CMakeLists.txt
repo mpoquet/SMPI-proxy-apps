@@ -1,10 +1,7 @@
 # Packages are optional: if they are not present, certain code samples are not compiled
 cmake_minimum_required(VERSION 2.8.10 FATAL_ERROR)
 
-# find_package(MPI)      # Built-in in CMake
-# find_package(SMPI)
 set (CMAKE_MODULE_PATH ~/simgrid/src/smpi/)
-
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/common.cmake)
 # ==================================================================================================
@@ -22,8 +19,7 @@ set(NAME ${DWARF_PREFIX}_prime)
 option(enable_smpi "Enable SMPI")
 
 if(enable_smpi)
-    # include_directories(BEFORE "${CMAKE_HOME_DIRECTORY}/../../simgrid/include/smpi")
-    set(CMAKE_C_COMPILER "/usr/local/bin/smpicc")
+    set(CMAKE_C_COMPILER "~/simgrid/build/smpi_script/bin/smpicc")
     include_directories(BEFORE "~/simgrid/include/smpi")
     cmake_policy(SET CMP0003 OLD)
     include_directories(${MPI_INCLUDE_PATH})
@@ -35,8 +31,6 @@ if(enable_smpi)
      message("## Skipping '${NAME}': no SMPI support found")
 #    dummy_install(${NAME} "MPI")
  endif()
-
-# set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${C_FLAGS}")
 
 unset(NAME)
 # ==================================================================================================
