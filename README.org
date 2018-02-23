@@ -98,6 +98,13 @@ CoMD.
 ** For dependency 
 | Benchmark | Ref | Lines of code | Dependency |  
 |-----------|-----|---------------|------------|
-| sparse_linear_algebra | / | unknown | PETSc |
+| Sparse_linear_algebra | / | unknown | PETSc |
 | Dense_linear_algebra | / | unknown | OpenMP |
- n-body_methods, spectral_methods, structured_grids.
+| N-body_methods (bhtree) | / | unknown | OpenMP |
+| N-body_methods (hermite4) | / | unknown | OpenMP |
+| N-body_methods (naive) | / | unknown | OpenMP |
+| spectral_methods | / | unknown | OpenMP, CUDA, OpenCL, FFTW |
+| structured_grids | / | unknown | OpenMP |
+
+ *** For issues : 
+n-body_methods (bhtree_mpi) : issue with Body.cpp
