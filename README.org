@@ -17,7 +17,7 @@ target platform.
 
 This repository gathers several collections of proxy apps, and reports
 their support by the SMPI implementation. This is tested nightly on a
-[dedicated jenkins server](https://ci.inria.fr/simgrid/job/SMPI-proxy-apps/).
+[[https://ci.inria.fr/simgrid/job/SMPI-proxy-apps/][dedicated jenkins server]].
 
 ** Legend 
 | Symbol  | Meaning | Symbol | Meaning |
