@@ -1,7 +1,26 @@
 # SMPI-benchmarks
-In this repository we gather the most use benchmark codes that could be used under SMPI's API. 
+
+Proxy apps are scale models of real, massive HPC applications: each of
+them exhibits the same communication and computation patterns than the
+massive application that it stands for. But they last only a few
+thousands lines of code instead of some millions of lines. These proxy
+apps are usually provided for educational purpose, and also to ensure
+that the represented large HPC applications will correctly work with
+the next generation of runtimes and hardware.
+
+SMPI is an implementation of MPI executing the application on top of
+the SimGrid simulator. This allows to study the application behavior
+in many details that would be hard to observe if not in a simulator,
+or on platforms that do not exist yet. The predictive power of SMPI
+was shown to be very good, provided that you correctly model the
+target platform.
+
+This repository gathers several collections of proxy apps, and reports
+their support by the SMPI implementation. This is tested nightly on a
+[dedicated jenkins server](https://ci.inria.fr/simgrid/job/SMPI-proxy-apps/).
+
 ** Legend 
-| Symbole  | Meaning | Symbole | Meaning |
+| Symbol  | Meaning | Symbol | Meaning |
 |----------+---------+---------+---------|
 | :white_check_mark: | Pass | :wrench: | Need some adjustments |
 | :x: | Failed | :warning: | Issue has came during the process |
