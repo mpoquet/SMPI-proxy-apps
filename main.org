@@ -232,7 +232,6 @@ libgmp-dev
 
      echo "Install the modified sources"
      cp ../src/CodeVault/monte_carlo_methods/prng/* CodeVault/hpc_kernel_samples/monte_carlo_methods/prng/
-     cp ../src/CodeVault/monte_carlo_methods/CMakeLists.txt CodeVault/hpc_kernel_samples/monte_carlo_methods/
 
      echo "Compile it"
      cd CodeVault/hpc_kernel_samples/monte_carlo_methods/prng 
