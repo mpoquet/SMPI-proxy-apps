@@ -2,7 +2,6 @@
 cmake_minimum_required(VERSION 2.8.10 FATAL_ERROR)
 
 # find_package(OpenMP)   # Built-in in CMake
-set (CMAKE_MODULE_PATH ~/simgrid/src/smpi/)
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/common.cmake)
 
@@ -31,8 +30,8 @@ set(NAME_SMPI ${DWARF_PREFIX}_prng_mpi)
 # endif()
 
 if(enable_smpi)
-    set(CMAKE_C_COMPILER "~/simgrid/build/smpi_script/bin/smpicc")
-    include_directories(BEFORE "~/simgrid/include/smpi")
+    set(CMAKE_C_COMPILER "$ENV{SIMGRID_PATH}/bin/smpicc")
+    include_directories(BEFORE "$ENV{SIMGRID_PATH}/include")
     cmake_policy(SET CMP0003 OLD)
     set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
     # include_directories(${MPI_INCLUDE_PATH})

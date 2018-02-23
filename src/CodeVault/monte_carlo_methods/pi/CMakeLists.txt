@@ -1,8 +1,6 @@
 # Packages are optional: if they are not present, certain code samples are not compiled
 cmake_minimum_required(VERSION 2.8.10 FATAL_ERROR)
 
-set (CMAKE_MODULE_PATH ~/simgrid/src/smpi/)
-
 include(${CMAKE_CURRENT_SOURCE_DIR}/../../cmake/common.cmake)
 
 # ==================================================================================================
@@ -29,8 +27,8 @@ set(NAME_SMPI ${DWARF_PREFIX}_pi_mpi)
 # endif()
 
 if(enable_smpi)
-    set(CMAKE_C_COMPILER "~/simgrid/build/bin/smpicc")
-    include_directories(BEFORE "~/simgrid/include/smpi")
+    set(CMAKE_C_COMPILER "$ENV{SIMGRID_PATH}/bin/smpicc")
+    include_directories(BEFORE "$ENV{SIMGRID_PATH}/include/")
     cmake_policy(SET CMP0003 OLD)
     set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
     add_executable(${NAME_SMPI} pi_mpi.c pi_shared.c)
