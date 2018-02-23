@@ -20,4 +20,5 @@ ADD_TEST(CodeVault_IntegralBasic  bin/Integral_basic.sh)
 ADD_TEST(CodeVault_Prime  bin/Prime.sh)
 ADD_TEST(CodeVault_Pi bin/Pi.sh)
 ADD_TEST(CodeVault_Prng  bin/Prng.sh)
+ADD_TEST(CodeVault_dyn-sparse  bin/Dyn-sparse.sh)
 
