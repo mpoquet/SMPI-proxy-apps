@@ -150,8 +150,12 @@ miniFE is a Finite Element mini-application which implements a couple of kernels
      rm -rf Benchmarks/CodeVault
      mkdir -p Benchmarks/ || true
      cd Benchmarks
-     echo "Download the source"
-     git clone --depth=1 https://repository.prace-ri.eu/git/PRACE/CodeVault.git
+     echo "Checkout or update the git containing the source code"
+     if [ -e CodeVault ] ; then
+        cd CodeVault ; git clean -dfx ; git pull ; cd ..
+     else
+        git clone --depth=1 https://repository.prace-ri.eu/git/PRACE/CodeVault.git
+     fi
 
      echo "Install the modified sources"
      cp ../src/CodeVault/monte_carlo_methods/prime/* CodeVault/hpc_kernel_samples/monte_carlo_methods/prime/
@@ -182,8 +186,12 @@ miniFE is a Finite Element mini-application which implements a couple of kernels
      rm -rf Benchmarks/CodeVault
      mkdir -p Benchmarks/ || true
      cd Benchmarks
-     echo "Download the source"
-     git clone --depth=1 https://repository.prace-ri.eu/git/PRACE/CodeVault.git
+     echo "Checkout or update the git containing the source code"
+     if [ -e CodeVault ] ; then
+        cd CodeVault ; git clean -dfx ; git pull ; cd ..
+     else
+        git clone --depth=1 https://repository.prace-ri.eu/git/PRACE/CodeVault.git
+     fi
 
      echo "Install the modified sources"
      cp ../src/CodeVault/monte_carlo_methods/pi/* CodeVault/hpc_kernel_samples/monte_carlo_methods/pi/
@@ -214,8 +222,12 @@ miniFE is a Finite Element mini-application which implements a couple of kernels
      rm -rf Benchmarks/CodeVault
      mkdir -p Benchmarks/ || true
      cd Benchmarks
-     echo "Download the source"
-     git clone --depth=1 https://repository.prace-ri.eu/git/PRACE/CodeVault.git
+     echo "Checkout or update the git containing the source code"
+     if [ -e CodeVault ] ; then
+        cd CodeVault ; git clean -dfx ; git pull ; cd ..
+     else
+        git clone --depth=1 https://repository.prace-ri.eu/git/PRACE/CodeVault.git
+     fi
 
      echo "Install the modified sources"
      cp ../src/CodeVault/monte_carlo_methods/prng/* CodeVault/hpc_kernel_samples/monte_carlo_methods/prng/
@@ -694,8 +706,12 @@ This code demonstrate the basic usage of MPI parallel I/O.
      mkdir -p Benchmarks/
      cd Benchmarks
 
-     echo "Download the source code"
-     git clone --depth=1 https://repository.prace-ri.eu/git/PRACE/CodeVault.git
+     echo "Checkout or update the git containing the source code"
+     if [ -e CodeVault ] ; then
+        cd CodeVault ; git clean -dfx ; git pull ; cd ..
+     else
+        git clone --depth=1 https://repository.prace-ri.eu/git/PRACE/CodeVault.git
+     fi
 
      echo "Install the modified sources"
      cp ../src/paralle_io/* parallel_io/
