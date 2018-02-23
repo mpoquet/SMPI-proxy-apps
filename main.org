@@ -125,6 +125,7 @@ libgmp-dev
      echo "Install the modified sources"
      for file in `find ../src/CodeVault/ -type f` ; do 
          dst=`echo $file|sed 's|../src/||'`
+         mkdir -p `dirname $dst`
          cp -v $file $dst 
      done
 
@@ -151,7 +152,6 @@ libgmp-dev
 
      echo "Clean up the place" 
      set -exu
-     rm -rf Benchmarks/CodeVault
      mkdir -p Benchmarks/ || true
      cd Benchmarks
      echo "Checkout or update the git containing the source code"
@@ -164,6 +164,7 @@ libgmp-dev
      echo "Install the modified sources"
      for file in `find ../src/CodeVault/ -type f` ; do 
          dst=`echo $file|sed 's|../src/||'`
+         mkdir -p `dirname $dst`
          cp -v $file $dst 
      done
 
@@ -191,7 +192,6 @@ libgmp-dev
 
      echo "Clean up the place" 
      set -exu
-     rm -rf Benchmarks/CodeVault
      mkdir -p Benchmarks/ || true
      cd Benchmarks
      echo "Checkout or update the git containing the source code"
@@ -204,6 +204,7 @@ libgmp-dev
      echo "Install the modified sources"
      for file in `find ../src/CodeVault/ -type f` ; do 
          dst=`echo $file|sed 's|../src/||'`
+         mkdir -p `dirname $dst`
          cp -v $file $dst 
      done
 
@@ -229,7 +230,6 @@ libgmp-dev
 
      echo "Clean up the place" 
      set -exu
-     rm -rf Benchmarks/CodeVault
      mkdir -p Benchmarks/ || true
      cd Benchmarks
      echo "Checkout or update the git containing the source code"
@@ -242,6 +242,7 @@ libgmp-dev
      echo "Install the modified sources"
      for file in `find ../src/CodeVault/ -type f` ; do 
          dst=`echo $file|sed 's|../src/||'`
+         mkdir -p `dirname $dst`
          cp -v $file $dst 
      done
 
@@ -281,6 +282,7 @@ libgmp-dev
      echo "Install the modified sources"
      for file in `find ../src/CodeVault/ -type f` ; do 
          dst=`echo $file|sed 's|../src/||'`
+         mkdir -p `dirname $dst`
          cp -v $file $dst 
      done
 
