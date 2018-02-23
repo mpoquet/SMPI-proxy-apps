@@ -123,7 +123,10 @@ libgmp-dev
      fi
 
      echo "Install the modified sources"
-     cp ../src/CodeVault/monte_carlo_methods/integral_basic/* CodeVault/hpc_kernel_samples/monte_carlo_methods/integral_basic/
+     for file in `find ../src/CodeVault/ -type f` ; do 
+         dst=`echo $file|sed 's|../src/||'`
+         cp -v $file $dst 
+     done
 
      echo "Compile it"
      cd CodeVault/hpc_kernel_samples/monte_carlo_methods/integral_basic/
@@ -159,7 +162,10 @@ libgmp-dev
      fi
 
      echo "Install the modified sources"
-     cp ../src/CodeVault/monte_carlo_methods/prime/* CodeVault/hpc_kernel_samples/monte_carlo_methods/prime/
+     for file in `find ../src/CodeVault/ -type f` ; do 
+         dst=`echo $file|sed 's|../src/||'`
+         cp -v $file $dst 
+     done
 
      echo "Compile it"
      cd CodeVault/hpc_kernel_samples/monte_carlo_methods/prime
@@ -196,7 +202,10 @@ libgmp-dev
      fi
 
      echo "Install the modified sources"
-     cp ../src/CodeVault/monte_carlo_methods/pi/* CodeVault/hpc_kernel_samples/monte_carlo_methods/pi/
+     for file in `find ../src/CodeVault/ -type f` ; do 
+         dst=`echo $file|sed 's|../src/||'`
+         cp -v $file $dst 
+     done
 
      echo "Compile it"
      cd CodeVault/hpc_kernel_samples/monte_carlo_methods/pi 
@@ -231,7 +240,10 @@ libgmp-dev
      fi
 
      echo "Install the modified sources"
-     cp ../src/CodeVault/monte_carlo_methods/prng/* CodeVault/hpc_kernel_samples/monte_carlo_methods/prng/
+     for file in `find ../src/CodeVault/ -type f` ; do 
+         dst=`echo $file|sed 's|../src/||'`
+         cp -v $file $dst 
+     done
 
      echo "Compile it"
      cd CodeVault/hpc_kernel_samples/monte_carlo_methods/prng 
@@ -267,7 +279,10 @@ libgmp-dev
      fi
 
      echo "Install the modified sources"
-     cp ../src/CodeVault/n-body_methods/dynamic_sparse_data_exchange/* CodeVault/hpc_kernel_samples/n-body_methods/dynamic_sparse_data_exchange/
+     for file in `find ../src/CodeVault/ -type f` ; do 
+         dst=`echo $file|sed 's|../src/||'`
+         cp -v $file $dst 
+     done
 
      echo "Compile it"
      cd CodeVault/hpc_kernel_samples/n-body_methods/dynamic_sparse_data_exchange/
