@@ -106,14 +106,14 @@ miniFE is a Finite Element mini-application which implements a couple of kernels
 **** Extra dependencies:
 libgmp-dev
 **** Integral-basic :   
-#+BEGIN_SRC sh :tangle bin/Integral_basic.sh
+#+BEGIN_SRC sh :tangle bin/CodeVault_IntegralBasic.sh
      export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
      export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
      export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
      
      echo "Clean up the place" 
      set -exu
-          mkdir -p Benchmarks/ || true
+     mkdir -p Benchmarks/ || true
      cd Benchmarks
      echo "Checkout or update the git containing the source code"
      if [ -e CodeVault ] ; then
@@ -141,7 +141,7 @@ libgmp-dev
  #+END_SRC
 
 **** Prime :   
-#+BEGIN_SRC sh :tangle bin/Prime.sh
+#+BEGIN_SRC sh :tangle bin/CodeVault_Prime.sh
      export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
      export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
      export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
@@ -178,7 +178,7 @@ libgmp-dev
  #+RESULTS:
 
 **** Pi :   
-#+BEGIN_SRC sh :tangle bin/Pi.sh
+#+BEGIN_SRC sh :tangle bin/CodeVault_Pi.sh
      export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
      export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
      export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
@@ -213,7 +213,7 @@ libgmp-dev
  #+END_SRC
 
 **** Prng :   
-#+BEGIN_SRC sh :tangle bin/Prng.sh
+#+BEGIN_SRC sh :tangle bin/CodeVault_Prng.sh
      export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
      export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
      export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
@@ -250,7 +250,7 @@ libgmp-dev
 *** N-Body methods  
 **** Brief description : 
 **** Dynamic sparse data exchange :   
-#+BEGIN_SRC sh :tangle bin/Dyn-sparse.sh
+#+BEGIN_SRC sh :tangle bin/CodeVault_DynSparse.sh
      export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
      export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
      export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
