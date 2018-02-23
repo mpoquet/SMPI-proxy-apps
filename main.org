@@ -103,6 +103,8 @@ miniFE is a Finite Element mini-application which implements a couple of kernels
 
 *** Monte-carlo
 **** Brief description : 
+**** Extra dependencies:
+libgmp-dev
 **** Integral-basic :   
 #+BEGIN_SRC sh :tangle bin/Integral_basic.sh
      export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
