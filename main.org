@@ -247,6 +247,42 @@ libgmp-dev
 
  #+END_SRC
 
+*** N-Body methods  
+**** Brief description : 
+**** Dynamic sparse data exchange :   
+#+BEGIN_SRC sh :tangle bin/Dyn-sparse.sh
+     export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
+     export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
+     export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
+     
+     echo "Clean up the place" 
+     set -exu
+          mkdir -p Benchmarks/ || true
+     cd Benchmarks
+     echo "Checkout or update the git containing the source code"
+     if [ -e CodeVault ] ; then
+        cd CodeVault ; git clean -dfx ; git pull ; cd ..
+     else
+        git clone --depth=1 https://repository.prace-ri.eu/git/PRACE/CodeVault.git
+     fi
+
+     echo "Install the modified sources"
+     cp ../src/CodeVault/n-body_methods/dynamic_sparse_data_exchange/* CodeVault/hpc_kernel_samples/n-body_methods/dynamic_sparse_data_exchange/
+
+     echo "Compile it"
+     cd CodeVault/hpc_kernel_samples/n-body_methods/dynamic_sparse_data_exchange/
+     mkdir build
+     cd build/
+     cmake -Denable_smpi=ON ..
+     make 
+     
+     cp ../../../../../../src/common/* ./
+
+     echo "Run it"
+     smpirun -np 6 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 ./4_nbody_dsde 
+
+ #+END_SRC
+
 ** Running issues :  
 *** [[http://mantevo.org/downloads/miniSMAC2D_2.0.html][MiniSMAC2D]]
 **** Brief description : 
