@@ -1,0 +1,108 @@
+* Apps
+** [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/AMG2013_Summary_v2.3.pdf][AMG2013]]
+*** Brief description 
+AMG is a parallel algebraic multigrid solver for linear systems arising from problems on unstructured grids.
+*** Build and run  
+#+BEGIN_SRC sh :tangle bin/AMG2013.sh
+  export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
+  export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
+  export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
+
+     echo "Clean up the place" 
+     sh -xe
+     rm -rf Benchmarks/AMG2013
+     mkdir -p Benchmarks/AMG2013
+     cd Benchmarks
+     echo "Download the source code"
+     test -e amg2013-source.tgz || curl -o amg2013-source.tgz -Lk https://asc.llnl.gov/CORAL-benchmarks/Throughput/amg20130624.tgz
+
+     echo "Unpack the code"
+     tar -xvf amg2013-source.tgz -C AMG2013 --strip-components 1
+ 
+     echo "Install the modified sources"
+     cp -f ../src/common/* AMG2013/test/
+     cp -f ../src/AMG2013/*.include AMG2013/
+     cd AMG2013/
+
+     echo "Compile it"
+     make
+     cd test/
+
+     echo "Run it"
+     smpirun -np 8 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./amg2013 -pooldist 1 -r 12 12 12
+#+END_SRC
+
+** [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/HACC_IO_Summary_v1.0.pdf][HACC_IO]]
+*** Brief description  
+The HACC I/O benchmark capture the I/O patterns of the HACC simulation code.
+*** Build and run  
+#+BEGIN_SRC sh
+     echo "Clean up the place" 
+     sh -xe
+     rm -rf Benchmarks/HACC_IO
+     mkdir -p Benchmarks/
+     cd Benchmarks
+     echo "Download the source code"
+     test -e HACC_IO-source.tar.gz || curl -o HACC_IO-source.tar.gz -Lk https://asc.llnl.gov/CORAL-benchmarks/Skeleton/HACC_IO.tar.gz
+          
+     echo "Unpack the code"
+     mkdir HACC_IO && tar -xvf HACC_IO-source.tar.gz -C HACC_IO --strip-components 1
+ 
+     echo "Install the modified sources"
+     cp -f ../src/HACC_IO/* HACC_IO/
+     cp -f ../src/common/* HACC_IO/
+     cd HACC_IO/
+     
+     echo "Compile it"
+     make
+
+     echo "Run it"
+     smpirun -np 8 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./HACC_IO 
+#+END_SRC
+
+** [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/KMI_Summary_v1.1.pdf][KMI_HASH]]
+*** Brief description 
+KMI_HASH evaluate the performance of the architecture integer operations, specifically for hashing, and for memory-intensive genomics applications. 
+*** Build and run  
+#+BEGIN_SRC sh
+     echo "Clean up the place" 
+     sh -xe
+     rm -rf Benchmarks/KMI_HASH
+     mkdir -p Benchmarks/
+     cd Benchmarks
+     echo "Download the source code"
+     test -e KMI_HASH-source.tar.gz || curl -o KMI_HASH-source.tar.gz -Lk https://asc.llnl.gov/CORAL-benchmarks/Datacentric/KMI_HASH_CORAL.tar.gz
+
+     echo "Unpack the code"
+     mkdir KMI_HASH && tar -xvf KMI_HASH-source.tar.gz -C KMI_HASH --strip-components 1
+ 
+     echo "Install the modified sources"
+     cp -f ../src/kmi_hash/src/* KMI_HASH/src/
+     cp -f ../src/kmi_hash/tests/* KMI_HASH/tests/
+     cp -f ../src/common/* KMI_HASH/tests/
+     cd KMI_HASH/src/
+
+     echo "Compile it"
+     make
+     cd ../tests/
+     make
+
+     echo "Run it"
+     smpirun -np 2 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./kmi_hash 
+#+END_SRC
+
+* Emacs settings
+# Local Variables:
+# eval:    (org-babel-do-load-languages 'org-babel-load-languages '( (shell . t) (R . t) (perl . t) (ditaa . t) ))
+# eval:    (setq org-confirm-babel-evaluate nil)
+# eval:    (setq org-alphabetical-lists t)
+# eval:    (setq org-src-fontify-natively t)
+# eval:    (add-hook 'org-babel-after-execute-hook 'org-display-inline-images) 
+# eval:    (add-hook 'org-mode-hook 'org-display-inline-images)
+# eval:    (add-hook 'org-mode-hook 'org-babel-result-hide-all)
+# eval:    (setq org-babel-default-header-args:R '((:session . "org-R")))
+# eval:    (setq org-export-babel-evaluate nil)
+# eval:    (setq ispell-local-dictionary "american")
+# eval:    (setq org-export-latex-table-caption-above nil)
+# eval:    (eval (flyspell-mode t))
+# End:
