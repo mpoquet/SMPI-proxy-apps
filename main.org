@@ -1,10 +1,10 @@
 * Benchmarks in details
 ** Working benchmarks :
 *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/mdtest/][MDTest]]
-**** Brief description : 
+**** Brief description 
 mdtest is a program that measures performance of various metadata operations. It uses MPI to coordinate the operations and to collect the results.   
 The code is composed of one C file, mdtest.c. 
-**** Build and run :   
+**** Build and run    
 The execution should done with 2 proc.
 #+BEGIN_SRC sh :tangle bin/MDTest.sh
      export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
@@ -35,9 +35,9 @@ The execution should done with 2 proc.
  #+END_SRC
 
 *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/stream/][Stream]]
-**** Brief description : 
+**** Brief description 
 STREAM is a simple, synthetic benchmark designed to measure sustainable memory bandwidth (in MB/s) and a corresponding computation rate for four simple vector kernels.
-**** Build and run :   
+**** Build and run 
 #+BEGIN_SRC sh :tangle bin/stream.sh
      export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
      export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
@@ -68,9 +68,9 @@ STREAM is a simple, synthetic benchmark designed to measure sustainable memory b
  #+END_SRC
  
 *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/stream/][MiniEF]]
-**** Brief description : 
+**** Brief description  
 miniFE is a Finite Element mini-application which implements a couple of kernels representative of implicit finite-element applications.
-**** Build and run :   
+**** Build and run    
 #+BEGIN_SRC sh :tangle bin/MiniEF.sh
      export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
      export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
@@ -102,10 +102,10 @@ miniFE is a Finite Element mini-application which implements a couple of kernels
  #+END_SRC
 
 *** Monte-carlo
-**** Brief description : 
-**** Extra dependencies:
+**** Brief description  
+**** Extra dependencies
 libgmp-dev
-**** Integral-basic :   
+**** Integral-basic   
 #+BEGIN_SRC sh :tangle bin/CodeVault_IntegralBasic.sh
      export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
      export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
@@ -144,7 +144,7 @@ libgmp-dev
 
  #+END_SRC
 
-**** Prime :   
+**** Prime   
 #+BEGIN_SRC sh :tangle bin/CodeVault_Prime.sh
      export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
      export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
@@ -178,13 +178,11 @@ libgmp-dev
      cp ../../../../../../src/common/* ./
 
      echo "Run it"
-#     smpirun -np 6 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./7_montecarlo_prime 100 
+     smpirun -np 6 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./7_montecarlo_prime 100 
 
  #+END_SRC
 
- #+RESULTS:
-
-**** Pi :   
+**** Pi   
 #+BEGIN_SRC sh :tangle bin/CodeVault_Pi.sh
      export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
      export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
@@ -222,7 +220,7 @@ libgmp-dev
 
  #+END_SRC
 
-**** Prng :   
+**** Prng   
 #+BEGIN_SRC sh :tangle bin/CodeVault_Prng.sh
      export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
      export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
@@ -261,8 +259,8 @@ libgmp-dev
  #+END_SRC
 
 *** N-Body methods  
-**** Brief description : 
-**** Dynamic sparse data exchange :   
+**** Brief description 
+**** Dynamic sparse data exchange    
 #+BEGIN_SRC sh :tangle bin/CodeVault_DynSparse.sh
      export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
      export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
@@ -300,9 +298,9 @@ libgmp-dev
 
  #+END_SRC
 
-** Running issues :  
+** Running issues 
 *** [[http://mantevo.org/downloads/miniSMAC2D_2.0.html][MiniSMAC2D]]
-**** Brief description : 
+**** Brief description 
 The code is incompressible Navier-Stokes flow solver.
 **** Build and run  
 The localization of input file should be changed.
@@ -343,7 +341,7 @@ The code run but at some level it kills the simulation before reaching mpi_final
 #+END_SRC
 
 *** [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/AMG2013_Summary_v2.3.pdf][AMG2013]]
-**** Brief description : 
+**** Brief description 
 AMG is a parallel algebraic multigrid solver for linear systems arising from problems on unstructured grids.
 **** Build and run  
    The code has a deadlock or maybe it's not perfectly clean.
@@ -377,7 +375,7 @@ AMG is a parallel algebraic multigrid solver for linear systems arising from pro
 #+END_SRC
 
 *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/psnap/][PSNAP]]
-**** Brief description : 
+**** Brief description 
 PSNAP (PAL System Noise Activity Program) consists of a spin loop that is calibrated to take a given amount of time (typically 1 ms). This loop is repeated for a number of iterations.
 **** Build and run  
 Deadlock (Running no stop).
@@ -408,7 +406,7 @@ Deadlock (Running no stop).
 #+END_SRC
 
 *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/smb/][SMB]]
-**** Brief description : 
+**** Brief description  
 It include two benchmarks :  
 - The msg_rate test measures the sustained MPI message rate using a communication pattern found in many real applications.
 - The mpi_overhead test uses a post-work-wait method using MPI non-blocking send and receive calls to measure the user level overhead of the respective MPI calls.
@@ -464,10 +462,10 @@ Building issue.
 #+END_SRC
 
 *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/ziatest/][ZiaTest]]
-**** Brief description : 
+**** Brief description 
 It executes a new proposed standard benchmark method for MPI startup that is intended to provide a realistic assessment of
 both launch and wireup requirements. Accordingly, it exercises both the launch system of the environment and the interconnect subsystem in a specified pattern.
-**** Build and run : 
+**** Build and run 
 To run the code one has to give 3 args as inputs.
 It's required by MPI-2, this is currently not supported by SMPI.
 #+BEGIN_SRC sh :tangle bin/ZiaTest.sh
@@ -594,9 +592,9 @@ Running issue.
      smpirun -np 16 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./miniAMR.x --num_refine 4 --max_blocks 4000 --init_x 1 --init_y 1 --init_z 1 --npx 4 --npy 2 --npz 2 --nx 8 --ny 8 --nz 8 --num_objects 2 --object 2 0 -1.10 -1.10 -1.10 0.030 0.030 0.030 1.5 1.5 1.5 0.0 0.0 0.0 --object 2 0 0.5 0.5 1.76 0.0 0.0 -0.025 0.75 0.75 0.75 0.0 0.0 0.0 --num_tsteps 100 --checksum_freq 4 --stages_per_ts 16
  #+END_SRC
 
-** Building issues :
+** Building issues 
 *** [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/HACC_IO_Summary_v1.0.pdf][HACC_IO]]
-**** Brief description : 
+**** Brief description  
 The HACC I/O benchmark capture the I/O patterns of the HACC simulation code.
 **** Build and run  
    Building issue due to using smpicxx instead of mpicxx
@@ -625,7 +623,7 @@ The HACC I/O benchmark capture the I/O patterns of the HACC simulation code.
 #+END_SRC
 
 *** [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/KMI_Summary_v1.1.pdf][KMI_HASH]]
-**** Brief description : 
+**** Brief description 
 KMI_HASH evaluate the performance of the architecture integer operations, specifically for hashing, and for memory-intensive genomics applications. 
 **** Build and run  
 #+BEGIN_SRC sh
@@ -656,7 +654,7 @@ KMI_HASH evaluate the performance of the architecture integer operations, specif
 #+END_SRC
 
 *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/mpimemu/][MPIMemu]]
-**** Brief description : 
+**** Brief description  
 The code is a simple tool that helps approximate MPI library memory usage as a function of scale.  It takes samples of /proc/meminfo (node level)
  and /proc/self/status (process level) and outputs the min, max and avg values for a specified period of time.
 **** Build and run  
@@ -689,7 +687,7 @@ Smpi building issue.
  #+END_SRC
 
 *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/omb-mpi-tests/][OMB_MPI]]
-**** Brief description : 
+**** Brief description 
 The Ohio MicroBenchmark suite is a collection of independent MPI message passing performance microbenchmarks developed and written at The Ohio State University.
   It includes traditional benchmarks and performance measures such as latency, bandwidth and host overhead and can be used for both traditional and GPU-enhanced nodes.
 **** Build and run  
@@ -717,7 +715,7 @@ SMPI building issue.
  #+END_SRC
 
 *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/minife/][MiniFE]]
-**** Brief description : 
+**** Brief description  
 FE is a Finite Element mini-application which implements a couple of kernels representative of implicit finite-element applications. 
 It assembles a sparse linear-system from the steady-state conduction equation on a brick-shaped problem domain of linear 8-node hex elements.
 **** Build and run  
@@ -746,7 +744,7 @@ It assembles a sparse linear-system from the steady-state conduction equation on
 #+END_SRC
 
  *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/minife/][Parallel_IO]]
-**** Brief description : 
+**** Brief description  
 This code demonstrate the basic usage of MPI parallel I/O.
 **** Build and run  
 #+BEGIN_SRC sh
@@ -777,7 +775,7 @@ This code demonstrate the basic usage of MPI parallel I/O.
 #+END_SRC
 
  *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/gtc/][GTC]]
-**** Brief description : 
+**** Brief description  
 GTC is used for Gyrokinetic Particle Simulation of Turbulent Transport in Burning Plasmas.
 **** Build and run  
 #+BEGIN_SRC sh
@@ -803,6 +801,46 @@ GTC is used for Gyrokinetic Particle Simulation of Turbulent Transport in Burnin
 
      echo "Run it"
 #+END_SRC
+
+*** Unstructured_grids
+**** Brief description 
+**** Halo exchange   
+#+BEGIN_SRC sh :tangle bin/CodeVault_UnstructedGrid.sh
+     export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
+     export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
+     export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
+     
+     echo "Clean up the place" 
+     set -exu
+          mkdir -p Benchmarks/ || true
+     cd Benchmarks
+     echo "Checkout or update the git containing the source code"
+     if [ -e CodeVault ] ; then
+        cd CodeVault ; git clean -dfx ; git pull ; cd ..
+     else
+        git clone --depth=1 https://repository.prace-ri.eu/git/PRACE/CodeVault.git
+     fi
+
+     echo "Install the modified sources"
+     for file in `find ../src/CodeVault/ -type f` ; do 
+         dst=`echo $file|sed 's|../src/||'`
+         mkdir -p `dirname $dst`
+         cp -v $file $dst 
+     done
+
+     echo "Compile it"
+     cd CodeVault/hpc_kernel_samples/unstructured_grids/halo_exchange/
+     mkdir build
+     cd build/
+     cmake ..
+     make 
+     
+    #  cp ../../../../../../src/common/* ./
+
+    #  echo "Run it"
+#     smpirun -np 6 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 ./8_ 
+
+ #+END_SRC
 
 * Emacs settings
 # Local Variables:

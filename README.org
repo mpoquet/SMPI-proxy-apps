@@ -26,7 +26,7 @@ their support by the SMPI implementation. This is tested nightly on a
 | :x: | Failed | :warning: | Issue has came during the process |
 | :sunny: | Doesn't shows any issues | :book: | Compilation instructions | 
 | :partly_sunny: | Shows warnings | :package: | Source code | 
-| :loop: | Deadlock |  |  | 
+| :loop: | Deadlock | SMPI missing feature | :construction: | 
 
 * [[https://asc.llnl.gov/CORAL-benchmarks/][CORAL]] benchmark codes 
 | Benchmark  | Ref | Lines of code | paral | Lang | Build with MPI | Run with MPI | Build with SMPI | Run with SMPI |
@@ -62,7 +62,7 @@ their support by the SMPI implementation. This is tested nightly on a
 * [[https://repository.prace-ri.eu/git/PRACE/CodeVault][CodeVault]] benchmark codes 
 | Benchmark  | Ref | Lines of code | paral | Lang | Build with MPI | Run with MPI | Build with SMPI | Run with SMPI |
 |------------+-----+---------------+-------+------+----------------+--------------+-----------------+-----------------|
-| Unstructured_grids | NONE | unknown | MPI, PTHREAD | C++ | :x: | / | / | / |
+| [[https://github.com/Zitagcc/SMPI-benchmarks/blob/master/main.org#unstructured_grids][Unstructured_grids (halo exchange)]] | NONE | unknown | MPI, PTHREAD | C++ | :white_check_mark: :wrench: | :white_check_mark: | :x: :construction: | / |
 | Parallel_io | NONE | unknown | MPI | C++ | :white_check_mark: | :white_check_mark: | :x: | some features are currently unavailable with SMPI |
 | [[https://github.com/Zitagcc/SMPI-benchmarks/blob/master/main.org#integral-basic][Monte_carlo_methods (integral_basic)]] | NONE | unknown | MPI, OpenMP | C++ | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | [[https://github.com/Zitagcc/SMPI-benchmarks/blob/master/main.org#prime][Monte_carlo_methods (prime)]] | NONE | unknown | MPI, OpenMP | C++ | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
@@ -115,7 +115,7 @@ MiniGhost : issues with MG_CONSTANTS.F
 CoMD.
 ** CodeVault
 ** For dependency 
-| Benchmark | Ref | Lines of code | Dependency |  
+| Benchmark | Ref | Lines of code | Dependency |
 |-----------|-----|---------------|------------|
 | Sparse_linear_algebra | / | unknown | PETSc |
 | Dense_linear_algebra | / | unknown | OpenMP |
@@ -125,5 +125,5 @@ CoMD.
 | spectral_methods | / | unknown | OpenMP, CUDA, OpenCL, FFTW |
 | structured_grids | / | unknown | OpenMP |
 
- *** For issues : 
+*** For issues : 
 n-body_methods (bhtree_mpi) : issue with Body.cpp
