@@ -159,7 +159,7 @@ miniFE is a Finite Element mini-application which implements a couple of kernels
      tar -xvf miniFE-2.0_ref.tgz && mv miniFE-2.0_ref  MiniEF-evo
  
      echo "Install the modified sources"
-     cp -f ../src/MiniEF-evo/* MiniEF-evo/src/
+     cp -f ../src/Mantevo/MiniEF-evo/* MiniEF-evo/src/
      cp -f ../src/common/* MiniEF-evo/src/
      cd MiniEF-evo/src
 
