@@ -19,7 +19,7 @@ Running issue.
      mkdir miniXyce && tar -xvf miniXyce-source.tar.gz -C miniXyce --strip-components 1
  
      echo "Install the modified sources"
-     cp -f ../src/miniXyce/* miniXyce/miniXyce_ref/
+     cp -f ../src/Mantevo/miniXyce/* miniXyce/miniXyce_ref/
      cp -f ../src/common/* miniXyce/miniXyce_ref/
      cd miniXyce/miniXyce_ref/
 
@@ -52,7 +52,7 @@ Running issue.
      mkdir HPCCG && tar -xvf HPCCG-source.tgz -C HPCCG --strip-components 1
  
      echo "Install the modified sources"
-     cp -f ../src/HPCCG/* HPCCG/
+     cp -f ../src/Mantevo/HPCCG/* HPCCG/
      cp -f ../src/common/* HPCCG/
      cd HPCCG/
 
@@ -84,7 +84,7 @@ Running issue.
      tar -xvf MiniAMR-source.tgz && mv miniAMR_ref MiniAMR
  
      echo "Install the modified sources"
-     cp -f ../src/MiniAMR/* MiniAMR/
+     cp -f ../src/Mantevo/MiniAMR/* MiniAMR/
      cp -f ../src/common/* MiniAMR/
      cd MiniAMR/
 
@@ -124,7 +124,7 @@ The code run but at some level it kills the simulation before reaching mpi_final
   cd ..
 
   echo "Install the modified sources"
-  cp ../../src/miniSMAC2D/* ./
+  cp ../../src/Mantevo/miniSMAC2D/* ./
   cp ../../src/common/* ./
 
   echo "Compile it"

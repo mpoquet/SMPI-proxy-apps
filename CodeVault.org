@@ -170,10 +170,14 @@ This code demonstrate the basic usage of MPI parallel I/O.
 **** Build and run  
 #+BEGIN_SRC sh
      echo "Install the modified sources"
-     cp ../src/paralle_io/* parallel_io/
+     for file in `find ../src/CodeVault/ -type f` ; do 
+         dst=`echo $file|sed 's|../src/||'`
+         mkdir -p `dirname $dst`
+         cp -v $file $dst 
+     done
 
      echo "Compile it"
-     cd CodeVault/hpc_kernel_samples/
+     cd CodeVault/hpc_kernel_samples/parallel_io/
      mkdir build
      cd build/
      cmake ..
