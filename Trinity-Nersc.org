@@ -211,7 +211,7 @@ The code is a simple tool that helps approximate MPI library memory usage as a f
      cp -f ../src/common/* mpimemu/src/
 
      echo "Configure it"
-     cd mpimemu-1.0-rc6July5/
+     cd mpimemu-1.0/
      SMPI_PRETEND_CC=1 ./configure
 
      echo "Compile it"
@@ -248,6 +248,7 @@ It includes traditional benchmarks and performance measures such as latency, ban
      SMPI_PRETEND_CC=1 ./configure
      make 
 
+     cd mpi/pt2pt
      echo "Run osu_bibw"
      smpirun -np 2 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 --cfg=smpi/privatization:yes ./osu_bibw
      
