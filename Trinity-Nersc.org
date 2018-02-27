@@ -117,7 +117,7 @@ It's required by MPI-2, this is currently not supported by SMPI.
      make 
 
      echo "Run it"
-     smpirun -np 8 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml "--cfg=smpi/host-speed:100 ./ziaprobe 4 4 2 
+     smpirun -np 8 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 ./ziaprobe 4 4 2 
  #+END_SRC
 
  #+RESULTS:
@@ -212,7 +212,7 @@ The code is a simple tool that helps approximate MPI library memory usage as a f
 
      echo "Configure it"
      cd mpimemu-1.0-rc6July5/
-     ./configure
+     SMPI_PRETEND_CC=1 ./configure
 
      echo "Compile it"
      make 
@@ -245,7 +245,7 @@ It includes traditional benchmarks and performance measures such as latency, ban
      cp -f ../../src/common/* ./mpi/pt2pt
      
      echo "Compile it"
-     ./configure
+     SMPI_PRETEND_CC=1 ./configure
      make 
 
      echo "Run osu_bibw"
