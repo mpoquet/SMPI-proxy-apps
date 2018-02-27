@@ -1,34 +1,3 @@
-*** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/psnap/][PSNAP]]
-**** Brief description 
-PSNAP (PAL System Noise Activity Program) consists of a spin loop that is calibrated to take a given amount of time (typically 1 ms). This loop is repeated for a number of iterations.
-**** Build and run  
-Deadlock (Running no stop).
-#+BEGIN_SRC sh :tangle bin/PSNAP.sh
-  export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
-  export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
-  export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
-     echo "Clean up the place" 
-     sh -xe
-     rm -rf Benchmarks/mdtest
-     cd Benchmarks
-     echo "Download the source code"
-     test -e psnap-source.tgz || curl -o psnap-source.tgz -Lk http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/June28/psnap-1.2June28.tar
-
-     echo "Unpack the code"
-     mkdir psnap && tar -xvf psnap-source.tgz -C psnap --strip-components 1
- 
-     echo "Install the modified sources"
-     cd psnap
-     cp -f ../../src/psnap/* ./
-     cp -f ../../src/common/* ./
-
-     echo "Compile it"
-     make
-
-     echo "Run it"
-     smpirun -np 4 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 ./psnap
-#+END_SRC
-
 *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/smb/][SMB]]
 **** Brief description  
 It include two benchmarks :  
@@ -85,6 +54,37 @@ Building issue.
      cd smb/src/msgrate/
 #+END_SRC
 
+*** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/psnap/][PSNAP]]
+**** Brief description 
+PSNAP (PAL System Noise Activity Program) consists of a spin loop that is calibrated to take a given amount of time (typically 1 ms). This loop is repeated for a number of iterations.
+**** Build and run  
+#+BEGIN_SRC sh :tangle bin/PSNAP.sh
+  export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
+  export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
+  export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
+     echo "Clean up the place" 
+     sh -xe
+     rm -rf Benchmarks/mdtest
+     mkdir -p Benchmarks/
+     cd Benchmarks
+     echo "Download the source code"
+     test -e psnap-source.tgz || curl -o psnap-source.tgz -Lk http://www.nersc.gov/assets/Trinity--NERSC-8-RFP/Benchmarks/June28/psnap-1.2June28.tar
+
+     echo "Unpack the code"
+     mkdir psnap && tar -xvf psnap-source.tgz -C psnap
+ 
+     echo "Install the modified sources"
+     cd psnap
+     cp -f ../../src/Trinity-Nersc/psnap/* ./
+     cp -f ../../src/common/* ./
+
+     echo "Compile it"
+     make
+
+     echo "Run it"
+     smpirun -np 4 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 ./psnap
+#+END_SRC
+
 *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/ziatest/][ZiaTest]]
 **** Brief description 
 It executes a new proposed standard benchmark method for MPI startup that is intended to provide a realistic assessment of
@@ -109,17 +109,19 @@ It's required by MPI-2, this is currently not supported by SMPI.
      tar -xvf ../ziatest-source.tgz
 
      echo "Install the modified sources"
-     cp -f ../../src/ziatest/* ./
+     cp -f ../../src/Trinity-Nersc/ziatest/* ./
      cp -f ../../src/common/* ./
 
      echo "Compile it"
      make 
 
      echo "Run it"
-     smpirun -np 8 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./ziaprobe 4 4 2
+     smpirun -np 8 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml "--cfg=smpi/host-speed:100 ./ziaprobe 4 4 2 
  #+END_SRC
 
- *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/mdtest/][MDTest]]
+ #+RESULTS:
+
+*** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/mdtest/][MDTest]]
 **** Brief description 
 mdtest is a program that measures performance of various metadata operations. It uses MPI to coordinate the operations and to collect the results.   
 The code is composed of one C file, mdtest.c. 
@@ -143,7 +145,7 @@ The execution should done with 2 proc.
  
      echo "Install the modified sources"
      cd mdtest
-     cp -f ../../src/mdtest/* ./
+     cp -f ../../src/Trinity-Nersc/mdtest/* ./
      cp -f ../../src/common/* ./
 
      echo "Compile it"
@@ -153,7 +155,7 @@ The execution should done with 2 proc.
      smpirun -np 2 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./mdtest --cfg=smpi/host-speed:100 --cfg=smpi/privatization:yes
  #+END_SRC
 
- *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/stream/][Stream]]
+*** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/stream/][Stream]]
 **** Brief description 
 STREAM is a simple, synthetic benchmark designed to measure sustainable memory bandwidth (in MB/s) and a corresponding computation rate for four simple vector kernels.
 **** Build and run 
@@ -175,7 +177,7 @@ STREAM is a simple, synthetic benchmark designed to measure sustainable memory b
  
      echo "Install the modified sources"
      pwd
-     cp -f ../src/stream/* stream/
+     cp -f ../src/Trinity-Nersc/stream/* stream/
      cp -f ../src/common/* stream/
      cd stream
 
@@ -186,41 +188,7 @@ STREAM is a simple, synthetic benchmark designed to measure sustainable memory b
      smpirun -np 4 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./stream_c.exe
  #+END_SRC
 
- *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/minife/][MiniEF]]
-**** Brief description  
-miniFE is a Finite Element mini-application which implements a couple of kernels representative of implicit finite-element applications.
-**** Build and run    
-#+BEGIN_SRC sh :tangle bin/MiniEF.sh
-     export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
-     export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
-     export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
-
-     echo "Clean up the place" 
-     set -exu
-     rm -rf Benchmarks/MiniEF-evo
-     mkdir -p Benchmarks/ || true
-     cd Benchmarks
-     echo "Download the source"
-     test -e MiniEF-source.tgz || curl -o MiniEF-source.tgz -Lk https://mantevo.org/downloads/releaseTarballs/miniapps/MiniFE/miniFE_ref-2.0.tgz
-
-     echo "Unpack the code"
-     tar -xvf MiniEF-source.tgz
-     rm -rf miniFE-2.0_openmp_ref.tgz
-     tar -xvf miniFE-2.0_ref.tgz && mv miniFE-2.0_ref  MiniEF-evo
- 
-     echo "Install the modified sources"
-     cp -f ../src/MiniEF-evo/* MiniEF-evo/src/
-     cp -f ../src/common/* MiniEF-evo/src/
-     cd MiniEF-evo/src
-
-     echo "Compile it"
-     make
-
-     echo "Run it"
-     smpirun -np 6 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./miniFE.x
- #+END_SRC
-
- *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/mpimemu/][MPIMemu]]
+*** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/mpimemu/][MPIMemu]]
 **** Brief description  
 The code is a simple tool that helps approximate MPI library memory usage as a function of scale.  It takes samples of /proc/meminfo (node level)
  and /proc/self/status (process level) and outputs the min, max and avg values for a specified period of time.
@@ -252,7 +220,7 @@ The code is a simple tool that helps approximate MPI library memory usage as a f
      echo "Run it"
  #+END_SRC
 
- *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/omb-mpi-tests/][OMB_MPI]]
+*** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/omb-mpi-tests/][OMB_MPI]]
 **** Brief description 
 The Ohio MicroBenchmark suite is a collection of independent MPI message passing performance microbenchmarks developed and written at The Ohio State University.
 It includes traditional benchmarks and performance measures such as latency, bandwidth and host overhead and can be used for both traditional and GPU-enhanced nodes.
@@ -269,14 +237,30 @@ It includes traditional benchmarks and performance measures such as latency, ban
      echo "Unpack the code"
      mkdir OMB_MPI && tar -xvf OMB_MPI-source.tar.gz -C OMB_MPI --strip-components 1
 
-     echo "Install the modified sources"
-     cp -f ../src/OMB_MPI/configure OMB_MPI/
-     cp -f ../src/OMB_MPI/* OMB_MPI/mpi/pt2pt
-     cp -f ../src/common/* OMB_MPI/mpi/pt2pt
-     
      cd OMB_MPI/
-
      ./configure
+
+     echo "Install the modified sources"
+     cp -f ../../src/Trinity-Nersc/OMB_MPI/mpi/pt2pt/* ./mpi/pt2pt
+     cp -f ../../src/common/* ./mpi/pt2pt
+     
+     echo "Compile it"
+     make 
+
+     echo "Run osu_bibw"
+     smpirun -np 2 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 --cfg=smpi/privatization:yes ./osu_bibw
+     
+     echo "Run osu_bw"
+     smpirun -np 2 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 --cfg=smpi/privatization:yes ./osu_bw
+     
+     echo "Run osu_mbw_mr"
+     smpirun -np 2 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 --cfg=smpi/privatization:yes ./osu_mbw_mr
+     
+     echo "Run osu_multi_lat"
+     smpirun -np 2 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 --cfg=smpi/privatization:yes ./osu_multi_lat
+    
+     echo "Run osu_latency"
+     smpirun -np 2 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 --cfg=smpi/privatization:yes ./osu_latency
  #+END_SRC
 
 *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/gtc/][GTC]]
@@ -311,7 +295,7 @@ GTC is used for Gyrokinetic Particle Simulation of Turbulent Transport in Burnin
 **** Brief description  
 FE is a Finite Element mini-application which implements a couple of kernels representative of implicit finite-element applications. 
 It assembles a sparse linear-system from the steady-state conduction equation on a brick-shaped problem domain of linear 8-node hex elements.
-**** Build and run
+**** Build and run  
 #+BEGIN_SRC sh
      echo "Clean up the place" 
      sh -xe

@@ -95,7 +95,7 @@ Running issue.
      smpirun -np 16 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./miniAMR.x --num_refine 4 --max_blocks 4000 --init_x 1 --init_y 1 --init_z 1 --npx 4 --npy 2 --npz 2 --nx 8 --ny 8 --nz 8 --num_objects 2 --object 2 0 -1.10 -1.10 -1.10 0.030 0.030 0.030 1.5 1.5 1.5 0.0 0.0 0.0 --object 2 0 0.5 0.5 1.76 0.0 0.0 -0.025 0.75 0.75 0.75 0.0 0.0 0.0 --num_tsteps 100 --checksum_freq 4 --stages_per_ts 16
  #+END_SRC
 
- *** [[http://mantevo.org/downloads/miniSMAC2D_2.0.html][MiniSMAC2D]]
+*** [[http://mantevo.org/downloads/miniSMAC2D_2.0.html][MiniSMAC2D]]
 **** Brief description 
 The code is incompressible Navier-Stokes flow solver.
 **** Build and run  
@@ -136,6 +136,40 @@ The code run but at some level it kills the simulation before reaching mpi_final
 #   set +e # back to non-paranoid mode
 #+END_SRC
 
+*** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/stream/][MiniEF]]
+**** Brief description  
+miniFE is a Finite Element mini-application which implements a couple of kernels representative of implicit finite-element applications.
+**** Build and run    
+#+BEGIN_SRC sh :tangle bin/MiniEF.sh
+     export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
+     export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
+     export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
+
+     echo "Clean up the place" 
+     set -exu
+     rm -rf Benchmarks/MiniEF-evo
+     mkdir -p Benchmarks/ || true
+     cd Benchmarks
+     echo "Download the source"
+     test -e MiniEF-source.tgz || curl -o MiniEF-source.tgz -Lk https://mantevo.org/downloads/releaseTarballs/miniapps/MiniFE/miniFE_ref-2.0.tgz
+
+     echo "Unpack the code"
+     tar -xvf MiniEF-source.tgz
+     rm -rf miniFE-2.0_openmp_ref.tgz
+     tar -xvf miniFE-2.0_ref.tgz && mv miniFE-2.0_ref  MiniEF-evo
+ 
+     echo "Install the modified sources"
+     cp -f ../src/MiniEF-evo/* MiniEF-evo/src/
+     cp -f ../src/common/* MiniEF-evo/src/
+     cd MiniEF-evo/src
+
+     echo "Compile it"
+     make
+
+     echo "Run it"
+     smpirun -np 6 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./miniFE.x
+ #+END_SRC
+ 
 * Emacs settings
 # Local Variables:
 # eval:    (org-babel-do-load-languages 'org-babel-load-languages '( (shell . t) (R . t) (perl . t) (ditaa . t) ))
