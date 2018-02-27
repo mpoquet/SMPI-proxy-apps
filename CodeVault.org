@@ -6,7 +6,7 @@
      
      echo "Clean up the place" 
      set -exu
-     mkdir -p Benchmarks/ || true
+     mkdir -p Benchmarks/ 
      cd Benchmarks
      echo "Checkout or update the git containing the source code"
      if [ -e CodeVault ] ; then

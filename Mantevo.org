@@ -8,7 +8,7 @@ Running issue.
   export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
   export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
      echo "Clean up the place" 
-     sh -xe
+     set -xeu
      rm -rf Benchmarks/miniXyce
      mkdir -p Benchmarks/
      cd Benchmarks
@@ -41,7 +41,7 @@ Running issue.
   export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
   export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
      echo "Clean up the place" 
-     sh -xe
+     set -xeu
      rm -rf Benchmarks/HPCCG
      mkdir -p Benchmarks/
      cd Benchmarks
@@ -73,7 +73,7 @@ Running issue.
   export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
   export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
      echo "Clean up the place" 
-     sh -xe
+     set -xeu
      rm -rf Benchmarks/MiniAMR
      mkdir -p Benchmarks/
      cd Benchmarks

@@ -11,8 +11,9 @@ Or Very slow (Running no stop) if one use the standart runing command.
   export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
   export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
   export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
+
      echo "Clean up the place" 
-     sh -xe
+     set -xeu
      rm -rf Benchmarks/smb
      mkdir -p Benchmarks
      cd Benchmarks
@@ -38,7 +39,7 @@ Or Very slow (Running no stop) if one use the standart runing command.
 - msg_rate :
 Building issue.
      echo "Clean up the place" 
-     sh -xe
+     set -xeu
      rm -rf Benchmarks/smb
      mkdir -p Benchmarks
      cd Benchmarks
@@ -63,7 +64,7 @@ PSNAP (PAL System Noise Activity Program) consists of a spin loop that is calibr
   export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
   export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
      echo "Clean up the place" 
-     sh -xe
+     set -xeu
      rm -rf Benchmarks/mdtest
      mkdir -p Benchmarks/
      cd Benchmarks
@@ -97,7 +98,7 @@ It's required by MPI-2, this is currently not supported by SMPI.
   export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
   export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
      echo "Clean up the place" 
-     sh -xe
+     set -xeu
      rm -rf Benchmarks/ziatest
      mkdir -p Benchmarks/ziatest
      cd Benchmarks
@@ -195,7 +196,7 @@ The code is a simple tool that helps approximate MPI library memory usage as a f
 **** Build and run
 #+BEGIN_SRC sh sh :tangle bin/Trinity_MPIMemu.sh
      echo "Clean up the place" 
-     sh -xe
+     set -xeu
      rm -rf Benchmarks/mpimemu
      mkdir -p Benchmarks/
      cd Benchmarks
@@ -227,7 +228,7 @@ It includes traditional benchmarks and performance measures such as latency, ban
 **** Build and run  
 #+BEGIN_SRC sh  sh :tangle bin/Trinity_OMB_MPI.sh
      echo "Clean up the place" 
-     sh -xe
+     set -xeu
      rm -rf Benchmarks/OMB_MPI
      mkdir -p Benchmarks/
      cd Benchmarks
@@ -238,13 +239,13 @@ It includes traditional benchmarks and performance measures such as latency, ban
      mkdir OMB_MPI && tar -xvf OMB_MPI-source.tar.gz -C OMB_MPI --strip-components 1
 
      cd OMB_MPI/
-     ./configure
 
      echo "Install the modified sources"
      cp -f ../../src/Trinity-Nersc/OMB_MPI/mpi/pt2pt/* ./mpi/pt2pt
      cp -f ../../src/common/* ./mpi/pt2pt
      
      echo "Compile it"
+     ./configure
      make 
 
      echo "Run osu_bibw"
@@ -269,7 +270,7 @@ GTC is used for Gyrokinetic Particle Simulation of Turbulent Transport in Burnin
 **** Build and run  
 #+BEGIN_SRC sh  sh :tangle bin/Trinity_GTC.sh
      echo "Clean up the place" 
-     sh -xe
+     set -xeu
      rm -rf Benchmarks/GTC
      mkdir -p Benchmarks/
      cd Benchmarks
@@ -298,7 +299,7 @@ It assembles a sparse linear-system from the steady-state conduction equation on
 **** Build and run  
 #+BEGIN_SRC sh  sh :tangle bin/Trinity_MiniFE.sh
      echo "Clean up the place" 
-     sh -xe
+     set -xeu
      rm -rf Benchmarks/MiniFE
      mkdir -p Benchmarks/
      cd Benchmarks

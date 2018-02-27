@@ -9,7 +9,7 @@ AMG is a parallel algebraic multigrid solver for linear systems arising from pro
   export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
 
      echo "Clean up the place" 
-     sh -xe
+     set -xeu
      rm -rf Benchmarks/AMG2013
      mkdir -p Benchmarks/AMG2013
      cd Benchmarks
