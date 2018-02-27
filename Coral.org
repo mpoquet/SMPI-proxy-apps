@@ -3,7 +3,7 @@
 *** Brief description 
 AMG is a parallel algebraic multigrid solver for linear systems arising from problems on unstructured grids.
 *** Build and run  
-#+BEGIN_SRC sh :tangle bin/AMG2013.sh
+#+BEGIN_SRC sh :tangle bin/Coral_AMG2013.sh
   export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
   export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
   export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
@@ -36,7 +36,7 @@ AMG is a parallel algebraic multigrid solver for linear systems arising from pro
 *** Brief description  
 The HACC I/O benchmark capture the I/O patterns of the HACC simulation code.
 *** Build and run  
-#+BEGIN_SRC sh
+#+BEGIN_SRC sh :tangle bin/Coral_HACC_IO.sh
      echo "Clean up the place" 
      sh -xe
      rm -rf Benchmarks/HACC_IO
