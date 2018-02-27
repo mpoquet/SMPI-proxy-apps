@@ -34,8 +34,8 @@ LDFLAGS=-O3
 
 INCDIR=./include
 
-# for linux machines
-MPIDIR=-I/home/projects/openmpi/1.7.3/gnu/4.7.2/include
+# for SimGrid install
+MPIDIR=-I/${SIMGRID_PATH}/include
 # for Mac OSX
 #MPIDIR=-I/Users/dwbarne/local/packages/OpenMPI-1.7.2/include
 # for redsky

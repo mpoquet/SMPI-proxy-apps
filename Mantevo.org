@@ -107,7 +107,7 @@ The code run but at some level it kills the simulation before reaching mpi_final
   export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
 
   echo "Clean up the place" 
-  sh -xe
+  set -xe
   rm -rf Benchmarks/miniSMAC2D
   mkdir -p Benchmarks/miniSMAC2D
   cd Benchmarks
