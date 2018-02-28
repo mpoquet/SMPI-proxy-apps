@@ -238,13 +238,13 @@ It includes traditional benchmarks and performance measures such as latency, ban
 
      cd OMB_MPI/
 
-     echo "Configure it"
-     SMPI_PRETEND_CC=1 ./configure
-
      echo "Install the modified sources"
      cp -f ../../src/Trinity-Nersc/OMB_MPI/mpi/pt2pt/* ./mpi/pt2pt
      cp -f ../../src/common/* ./mpi/pt2pt
      
+     echo "Configure it"
+     SMPI_PRETEND_CC=1 ./configure
+
      echo "Compile it"
      make 
 
