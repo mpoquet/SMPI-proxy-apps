@@ -64,7 +64,7 @@ PSNAP (PAL System Noise Activity Program) consists of a spin loop that is calibr
   export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
      echo "Clean up the place" 
      set -xeu
-     rm -rf Benchmarks/mdtest
+     rm -rf Benchmarks/psnap
      mkdir -p Benchmarks/
      cd Benchmarks
      echo "Download the source code"
@@ -82,7 +82,7 @@ PSNAP (PAL System Noise Activity Program) consists of a spin loop that is calibr
      make
 
      echo "Run it"
-     smpirun -np 4 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 ./psnap
+     smpirun -np 4 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 ./psnap -n 100 -w 1
 #+END_SRC
 
 *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/ziatest/][ZiaTest]]
