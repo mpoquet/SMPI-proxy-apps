@@ -203,19 +203,17 @@ The code is a simple tool that helps approximate MPI library memory usage as a f
      echo "Unpack the code"
      mkdir mpimemu && tar -xvf mpimemu-source.tar.gz -C mpimemu --strip-components 1
 
-     echo "Configure it"
-     cd mpimemu/
-     ./configure
-
      echo "Install the modified sources"
-     cp -f ../../src/Trinity-Nersc/mpimemu/* ./src/
-     cp -f ../../src/common/* ./src/
- 
-     #SMPI_PRETEND_CC=1 ./configure
+     cd mpimemu/
+     cp -f ../../src/Trinity-Nersc/mpimemu/* src/
+     cp -f ../../src/common/* src/
+
+     echo "Configure it"
+     SMPI_PRETEND_CC=1 ./configure
 
      echo "Compile it"
-     #cd src/
-     #make 
+     cd src/
+     make 
 
      echo "Run it"
      
