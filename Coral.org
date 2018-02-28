@@ -3,13 +3,13 @@
 *** Brief description 
 AMG is a parallel algebraic multigrid solver for linear systems arising from problems on unstructured grids.
 *** Build and run  
-#+BEGIN_SRC sh :tangle bin/AMG2013.sh
+#+BEGIN_SRC sh :tangle bin/Coral_AMG2013.sh
   export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
   export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
   export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
 
      echo "Clean up the place" 
-     sh -xe
+     set -xeu
      rm -rf Benchmarks/AMG2013
      mkdir -p Benchmarks/AMG2013
      cd Benchmarks
@@ -36,9 +36,13 @@ AMG is a parallel algebraic multigrid solver for linear systems arising from pro
 *** Brief description  
 The HACC I/O benchmark capture the I/O patterns of the HACC simulation code.
 *** Build and run  
-#+BEGIN_SRC sh
+#+BEGIN_SRC sh :tangle bin/Coral_HACC_IO.sh
+  export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
+  export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
+  export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
+
      echo "Clean up the place" 
-     sh -xe
+     set -xeu
      rm -rf Benchmarks/HACC_IO
      mkdir -p Benchmarks/
      cd Benchmarks
@@ -46,7 +50,7 @@ The HACC I/O benchmark capture the I/O patterns of the HACC simulation code.
      test -e HACC_IO-source.tar.gz || curl -o HACC_IO-source.tar.gz -Lk https://asc.llnl.gov/CORAL-benchmarks/Skeleton/HACC_IO.tar.gz
           
      echo "Unpack the code"
-     mkdir HACC_IO && tar -xvf HACC_IO-source.tar.gz -C HACC_IO --strip-components 1
+     tar -xvf HACC_IO-source.tar.gz -C HACC_IO --strip-components 1
  
      echo "Install the modified sources"
      cp -f ../src/Coral/HACC_IO/* HACC_IO/
@@ -64,9 +68,13 @@ The HACC I/O benchmark capture the I/O patterns of the HACC simulation code.
 *** Brief description 
 KMI_HASH evaluate the performance of the architecture integer operations, specifically for hashing, and for memory-intensive genomics applications. 
 *** Build and run  
-#+BEGIN_SRC sh
+#+BEGIN_SRC sh :tangle bin/Coral_KMI_HASH.sh
+  export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
+  export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
+  export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
+
      echo "Clean up the place" 
-     sh -xe
+     set -xeu
      rm -rf Benchmarks/KMI_HASH
      mkdir -p Benchmarks/
      cd Benchmarks
@@ -74,7 +82,7 @@ KMI_HASH evaluate the performance of the architecture integer operations, specif
      test -e KMI_HASH-source.tar.gz || curl -o KMI_HASH-source.tar.gz -Lk https://asc.llnl.gov/CORAL-benchmarks/Datacentric/KMI_HASH_CORAL.tar.gz
 
      echo "Unpack the code"
-     mkdir KMI_HASH && tar -xvf KMI_HASH-source.tar.gz -C KMI_HASH --strip-components 1
+     tar -xvf KMI_HASH-source.tar.gz -C KMI_HASH --strip-components 1
  
      echo "Install the modified sources"
      cp -f ../src/Coral/kmi_hash/src/* KMI_HASH/src/

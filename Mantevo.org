@@ -3,12 +3,12 @@
 This code is a simple linear circuit simulator with a basic parser that performs transient analysis. 
 **** Build and run  
 Running issue.
-#+BEGIN_SRC sh :tangle bin/MiniXcye.sh
+#+BEGIN_SRC sh :tangle bin/Mantevo_MiniXcye.sh
   export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
   export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
   export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
      echo "Clean up the place" 
-     sh -xe
+     set -xeu
      rm -rf Benchmarks/miniXyce
      mkdir -p Benchmarks/
      cd Benchmarks
@@ -36,12 +36,12 @@ Running issue.
 HPCCG is a simple conjugate gradient benchmark code for a 3D chimney domain on an arbitrary number of processors.
 **** Build and run  
 Running issue.
-#+BEGIN_SRC sh :tangle bin/HPCCG.sh
+#+BEGIN_SRC sh :tangle bin/Mantevo_HPCCG.sh
   export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
   export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
   export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
      echo "Clean up the place" 
-     sh -xe
+     set -xeu
      rm -rf Benchmarks/HPCCG
      mkdir -p Benchmarks/
      cd Benchmarks
@@ -68,12 +68,12 @@ Running issue.
 HPCCG is a simple conjugate gradient benchmark code for a 3D chimney domain on an arbitrary number of processors.
 **** Build and run  
 Running issue.
-#+BEGIN_SRC sh :tangle bin/MiniAMR.sh
+#+BEGIN_SRC sh :tangle bin/Mantevo_MiniAMR.sh
   export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
   export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
   export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
      echo "Clean up the place" 
-     sh -xe
+     set -xeu
      rm -rf Benchmarks/MiniAMR
      mkdir -p Benchmarks/
      cd Benchmarks
@@ -101,13 +101,13 @@ The code is incompressible Navier-Stokes flow solver.
 **** Build and run  
 The localization of input file should be changed.
 The code run but at some level it kills the simulation before reaching mpi_finalize.
-#+BEGIN_SRC shell :tangle bin/MiniSMAC2D.sh
+#+BEGIN_SRC shell :tangle bin/Mantevo_MiniSMAC2D.sh
   export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
   export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
   export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
 
   echo "Clean up the place" 
-  sh -xe
+  set -xe
   rm -rf Benchmarks/miniSMAC2D
   mkdir -p Benchmarks/miniSMAC2D
   cd Benchmarks
@@ -140,7 +140,7 @@ The code run but at some level it kills the simulation before reaching mpi_final
 **** Brief description  
 miniFE is a Finite Element mini-application which implements a couple of kernels representative of implicit finite-element applications.
 **** Build and run    
-#+BEGIN_SRC sh :tangle bin/MiniEF.sh
+#+BEGIN_SRC sh :tangle bin/Mantevo_MiniEF.sh
      export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
      export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
      export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
@@ -159,7 +159,7 @@ miniFE is a Finite Element mini-application which implements a couple of kernels
      tar -xvf miniFE-2.0_ref.tgz && mv miniFE-2.0_ref  MiniEF-evo
  
      echo "Install the modified sources"
-     cp -f ../src/MiniEF-evo/* MiniEF-evo/src/
+     cp -f ../src/Mantevo/MiniEF-evo/* MiniEF-evo/src/
      cp -f ../src/common/* MiniEF-evo/src/
      cd MiniEF-evo/src
 

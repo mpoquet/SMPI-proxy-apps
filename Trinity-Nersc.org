@@ -7,12 +7,13 @@ It include two benchmarks :
 - mpi_overhead : 
 hostfile note found if one use ./run_script.
 Or Very slow (Running no stop) if one use the standart runing command. 
-#+BEGIN_SRC sh :tangle bin/SMB.sh
+#+BEGIN_SRC sh :tangle bin/Trinity_SMB.sh
   export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
   export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
   export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
+
      echo "Clean up the place" 
-     sh -xe
+     set -xeu
      rm -rf Benchmarks/smb
      mkdir -p Benchmarks
      cd Benchmarks
@@ -37,7 +38,7 @@ Or Very slow (Running no stop) if one use the standart runing command.
 - msg_rate :
 Building issue.
      echo "Clean up the place" 
-     sh -xe
+     set -xeu
      rm -rf Benchmarks/smb
      mkdir -p Benchmarks
      cd Benchmarks
@@ -57,12 +58,12 @@ Building issue.
 **** Brief description 
 PSNAP (PAL System Noise Activity Program) consists of a spin loop that is calibrated to take a given amount of time (typically 1 ms). This loop is repeated for a number of iterations.
 **** Build and run  
-#+BEGIN_SRC sh :tangle bin/PSNAP.sh
+#+BEGIN_SRC sh :tangle bin/Trinity_PSNAP.sh
   export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
   export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
   export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
      echo "Clean up the place" 
-     sh -xe
+     set -xeu
      rm -rf Benchmarks/mdtest
      mkdir -p Benchmarks/
      cd Benchmarks
@@ -91,12 +92,12 @@ both launch and wireup requirements. Accordingly, it exercises both the launch s
 **** Build and run 
 To run the code one has to give 3 args as inputs.
 It's required by MPI-2, this is currently not supported by SMPI.
-#+BEGIN_SRC sh :tangle bin/ZiaTest.sh
+#+BEGIN_SRC sh :tangle bin/Trinity_ZiaTest.sh
   export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
   export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
   export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
      echo "Clean up the place" 
-     sh -xe
+     set -xeu
      rm -rf Benchmarks/ziatest
      mkdir -p Benchmarks/ziatest
      cd Benchmarks
@@ -115,7 +116,7 @@ It's required by MPI-2, this is currently not supported by SMPI.
      make 
 
      echo "Run it"
-     smpirun -np 8 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml "--cfg=smpi/host-speed:100 ./ziaprobe 4 4 2 
+     smpirun -np 8 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 ./ziaprobe 4 4 2 
  #+END_SRC
 
  #+RESULTS:
@@ -126,7 +127,7 @@ mdtest is a program that measures performance of various metadata operations. It
 The code is composed of one C file, mdtest.c. 
 **** Build and run    
 The execution should done with 2 proc.
-#+BEGIN_SRC sh :tangle bin/MDTest.sh
+#+BEGIN_SRC sh :tangle bin/Trinity_MDTest.sh
      export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
      export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
      export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
@@ -158,7 +159,7 @@ The execution should done with 2 proc.
 **** Brief description 
 STREAM is a simple, synthetic benchmark designed to measure sustainable memory bandwidth (in MB/s) and a corresponding computation rate for four simple vector kernels.
 **** Build and run 
-#+BEGIN_SRC sh :tangle bin/stream.sh
+#+BEGIN_SRC sh :tangle bin/Trinity_stream.sh
      export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
      export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
      export PATH=$SIMGRID_PATH/build/bin:$SIMGRID_PATH/bin:$PATH
@@ -192,9 +193,9 @@ STREAM is a simple, synthetic benchmark designed to measure sustainable memory b
 The code is a simple tool that helps approximate MPI library memory usage as a function of scale.  It takes samples of /proc/meminfo (node level)
  and /proc/self/status (process level) and outputs the min, max and avg values for a specified period of time.
 **** Build and run
-#+BEGIN_SRC sh
+#+BEGIN_SRC sh sh :tangle bin/Trinity_MPIMemu.sh
      echo "Clean up the place" 
-     sh -xe
+     set -xeu
      rm -rf Benchmarks/mpimemu
      mkdir -p Benchmarks/
      cd Benchmarks
@@ -209,8 +210,8 @@ The code is a simple tool that helps approximate MPI library memory usage as a f
      cp -f ../src/common/* mpimemu/src/
 
      echo "Configure it"
-     cd mpimemu-1.0-rc6July5/
-     ./configure
+     cd mpimemu-1.0/
+     SMPI_PRETEND_CC=1 ./configure
 
      echo "Compile it"
      make 
@@ -224,9 +225,9 @@ The code is a simple tool that helps approximate MPI library memory usage as a f
 The Ohio MicroBenchmark suite is a collection of independent MPI message passing performance microbenchmarks developed and written at The Ohio State University.
 It includes traditional benchmarks and performance measures such as latency, bandwidth and host overhead and can be used for both traditional and GPU-enhanced nodes.
 **** Build and run  
-#+BEGIN_SRC sh
+#+BEGIN_SRC sh  sh :tangle bin/Trinity_OMB_MPI.sh
      echo "Clean up the place" 
-     sh -xe
+     set -xeu
      rm -rf Benchmarks/OMB_MPI
      mkdir -p Benchmarks/
      cd Benchmarks
@@ -237,15 +238,16 @@ It includes traditional benchmarks and performance measures such as latency, ban
      mkdir OMB_MPI && tar -xvf OMB_MPI-source.tar.gz -C OMB_MPI --strip-components 1
 
      cd OMB_MPI/
-     ./configure
 
      echo "Install the modified sources"
      cp -f ../../src/Trinity-Nersc/OMB_MPI/mpi/pt2pt/* ./mpi/pt2pt
      cp -f ../../src/common/* ./mpi/pt2pt
      
      echo "Compile it"
+     SMPI_PRETEND_CC=1 ./configure
      make 
 
+     cd mpi/pt2pt
      echo "Run osu_bibw"
      smpirun -np 2 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 --cfg=smpi/privatization:yes ./osu_bibw
      
@@ -266,9 +268,9 @@ It includes traditional benchmarks and performance measures such as latency, ban
 **** Brief description  
 GTC is used for Gyrokinetic Particle Simulation of Turbulent Transport in Burning Plasmas.
 **** Build and run  
-#+BEGIN_SRC sh
+#+BEGIN_SRC sh  sh :tangle bin/Trinity_GTC.sh
      echo "Clean up the place" 
-     sh -xe
+     set -xeu
      rm -rf Benchmarks/GTC
      mkdir -p Benchmarks/
      cd Benchmarks
@@ -295,9 +297,9 @@ GTC is used for Gyrokinetic Particle Simulation of Turbulent Transport in Burnin
 FE is a Finite Element mini-application which implements a couple of kernels representative of implicit finite-element applications. 
 It assembles a sparse linear-system from the steady-state conduction equation on a brick-shaped problem domain of linear 8-node hex elements.
 **** Build and run  
-#+BEGIN_SRC sh
+#+BEGIN_SRC sh  sh :tangle bin/Trinity_MiniFE.sh
      echo "Clean up the place" 
-     sh -xe
+     set -xeu
      rm -rf Benchmarks/MiniFE
      mkdir -p Benchmarks/
      cd Benchmarks
