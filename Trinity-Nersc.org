@@ -23,10 +23,9 @@ Or Very slow (Running no stop) if one use the standart runing command.
      mkdir smb && tar -xvf smb-source.tgz -C smb --strip-components 1
 
      echo "Install the modified sources"
-     cp -f ../src/smb/mpi_overhead/* smb/src/mpi_overhead/
+     cp -f ../src/Trinity-Nersc/smb/mpi_overhead/* smb/src/mpi_overhead/
      cp -f ../src/common/* smb/src/mpi_overhead/
      cd smb/src/mpi_overhead/
-
 
      echo "Compile it"
      make
