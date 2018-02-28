@@ -119,8 +119,6 @@ It's required by MPI-2, this is currently not supported by SMPI.
      smpirun -np 8 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 ./ziaprobe 4 4 2 
  #+END_SRC
 
- #+RESULTS:
-
 *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/mdtest/][MDTest]]
 **** Brief description 
 mdtest is a program that measures performance of various metadata operations. It uses MPI to coordinate the operations and to collect the results.   
@@ -205,19 +203,22 @@ The code is a simple tool that helps approximate MPI library memory usage as a f
      echo "Unpack the code"
      mkdir mpimemu && tar -xvf mpimemu-source.tar.gz -C mpimemu --strip-components 1
 
-     echo "Install the modified sources"
-     cp -f ../src/mpimemu/configure mpimemu/
-     cp -f ../src/common/* mpimemu/src/
-
      echo "Configure it"
-     cd mpimemu-1.0/
-     SMPI_PRETEND_CC=1 ./configure
+     cd mpimemu/
+     ./configure
+
+     echo "Install the modified sources"
+     cp -f ../../src/Trinity-Nersc/mpimemu/* ./src/
+     cp -f ../../src/common/* ./src/
+ 
+     #SMPI_PRETEND_CC=1 ./configure
 
      echo "Compile it"
-     make 
-     cd src/
+     #cd src/
+     #make 
 
      echo "Run it"
+     
  #+END_SRC
 
 *** [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/omb-mpi-tests/][OMB_MPI]]
@@ -239,12 +240,14 @@ It includes traditional benchmarks and performance measures such as latency, ban
 
      cd OMB_MPI/
 
+     echo "Configure it"
+     SMPI_PRETEND_CC=1 ./configure
+
      echo "Install the modified sources"
      cp -f ../../src/Trinity-Nersc/OMB_MPI/mpi/pt2pt/* ./mpi/pt2pt
      cp -f ../../src/common/* ./mpi/pt2pt
      
      echo "Compile it"
-     SMPI_PRETEND_CC=1 ./configure
      make 
 
      cd mpi/pt2pt
@@ -282,7 +285,7 @@ GTC is used for Gyrokinetic Particle Simulation of Turbulent Transport in Burnin
      mkdir GTC && tar -xvf GTC-source.tar -C GTC --strip-components 1
 
      echo "Install the modified sources"
-     cp ../src/GTC/* GTC/source/
+     cp ../src/Trinity-Nersc/GTC/* GTC/source/
      cp -f ../src/common/* GTC/source/
 
      echo "Compile it"
@@ -310,7 +313,7 @@ It assembles a sparse linear-system from the steady-state conduction equation on
      mkdir MiniFE && tar -xvf MiniFE-source.tar -C MiniFE --strip-components 1
  
      echo "Install the modified sources"
-     cp -f ../src/MiniFE/* MiniFE/
+     cp -f ../src/Trinity-Nersc/MiniFE/* MiniFE/
      cp -f ../src/common/* MiniFE/
      cd MiniFE/
 
