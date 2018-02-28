@@ -64,27 +64,6 @@ The HACC I/O benchmark capture the I/O patterns of the HACC simulation code.
      smpirun -np 8 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./HACC_IO 2 3 
 #+END_SRC
 
-#+RESULTS:
-| Clean                                    | up  | the      | place   |
-| Download                                 | the | source   | code    |
-| Unpack                                   | the | code     |         |
-| HACC_IO_KERNEL/GLEAN_Util_Printmessage.h |     |          |         |
-| HACC_IO_KERNEL/LICENSE                   |     |          |         |
-| HACC_IO_KERNEL/Makefile                  |     |          |         |
-| HACC_IO_KERNEL/._RestartIO_GLEAN.cxx     |     |          |         |
-| HACC_IO_KERNEL/RestartIO_GLEAN.cxx       |     |          |         |
-| HACC_IO_KERNEL/._RestartIO_GLEAN.h       |     |          |         |
-| HACC_IO_KERNEL/RestartIO_GLEAN.h         |     |          |         |
-| HACC_IO_KERNEL/._testHACC_IO.cxx         |     |          |         |
-| HACC_IO_KERNEL/testHACC_IO.cxx           |     |          |         |
-| HACC_IO_KERNEL/._testHACC_OPEN_CLOSE.cxx |     |          |         |
-| HACC_IO_KERNEL/testHACC_OPEN_CLOSE.cxx   |     |          |         |
-| HACC_IO_KERNEL/._testHACC_PrintInfo.cxx  |     |          |         |
-| HACC_IO_KERNEL/testHACC_PrintInfo.cxx    |     |          |         |
-| Install                                  | the | modified | sources |
-| Compile                                  | it  |          |         |
-| Run                                      | it  |          |         |
-
 ** [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/KMI_Summary_v1.1.pdf][KMI_HASH]]
 *** Brief description 
 KMI_HASH evaluate the performance of the architecture integer operations, specifically for hashing, and for memory-intensive genomics applications. 

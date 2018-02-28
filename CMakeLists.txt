@@ -28,6 +28,7 @@ ADD_TEST(Mantevo_HPCCG      bin/Mantevo_HPCCG.sh)
 ADD_TEST(Mantevo_MiniAMR    bin/Mantevo_MiniAMR.sh)
 
 # CodeVault benchmarks
+ADD_TEST(CodeVault_IntegralBasic  bin/CodeVault_PreExec.sh)
 ADD_TEST(CodeVault_IntegralBasic  bin/CodeVault_IntegralBasic.sh)
 ADD_TEST(CodeVault_Prime          bin/CodeVault_Prime.sh)
 ADD_TEST(CodeVault_Pi             bin/CodeVault_Pi.sh)
