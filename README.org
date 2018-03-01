@@ -23,7 +23,7 @@ their support by the SMPI implementation. This is tested nightly on a
 | Symbol  | Meaning | Symbol | Meaning |
 |----------+---------+---------+---------|
 | :white_check_mark: | Pass | :wrench: | Need some adjustments |
-| :x: | Failed | :warning: | Issue has came during the process |
+| :x: | Failed | :warning: | Issue has come during the process |
 | :sunny: | Doesn't shows any issues | :book: | Compilation instructions | 
 | :partly_sunny: | Shows warnings | :package: | Source code | 
 | :loop: | Deadlock | SMPI missing feature | :construction: | 
@@ -33,7 +33,7 @@ their support by the SMPI implementation. This is tested nightly on a
 |------------+-----+---------------+-------+------+----------------+--------------+-----------------+-----------------|
 | [[https://github.com/simgrid/SMPI-proxy-apps/blob/master/Coral.org#amg2013][amg2013]] | [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/AMG2013_Summary_v2.3.pdf][:book:]] [[https://asc.llnl.gov/CORAL-benchmarks/Throughput/amg20130624.tgz][:package:]] | 75,000 | MPI-OPENMP | C | :white_check_mark: :wrench: | :white_check_mark: | :white_check_mark: | :loop: |
 | [[https://github.com/simgrid/SMPI-proxy-apps/blob/master/Coral.org#hacc_io][HACCIO]] | [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/HACC_IO_Summary_v1.0.pdf][:book:]] [[https://asc.llnl.gov/CORAL-benchmarks/Skeleton/HACC_IO.tar.gz][:package:]] | 2,000 | MPI | C++ | :white_check_mark: :partly_sunny: | :white_check_mark: | :x: :construction: | / |
-| [[https://github.com/simgrid/SMPI-proxy-apps/blob/master/Coral.org#kmi_hash][KMI_HASH]] | [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/KMI_Summary_v1.1.pdf][:book:]] [[https://asc.llnl.gov/CORAL-benchmarks/Datacentric/KMI_HASH_CORAL.tar.gz][:package:]]| unknown | MPI | C | :white_check_mark: :partly_sunny: | :white_check_mark: | :x: | / |
+| [[https://github.com/simgrid/SMPI-proxy-apps/blob/master/Coral.org#kmi_hash][KMI_HASH]] | [[https://asc.llnl.gov/CORAL-benchmarks/Summaries/KMI_Summary_v1.1.pdf][:book:]] [[https://asc.llnl.gov/CORAL-benchmarks/Datacentric/KMI_HASH_CORAL.tar.gz][:package:]]| unknown | MPI | C | :white_check_mark: :partly_sunny: | :white_check_mark: | :white_check_mark: | :white_check_mark: :warning: |
 
 * [[http://www.nersc.gov/users/computational-systems/cori/nersc-8-procurement/trinity-nersc-8-rfp/nersc-8-trinity-benchmarks/][Trinity-Nersc]] benchmark codes
 | Benchmark  | Ref | Lines of code | paral | Lang | Build with MPI | Run with MPI | Build with SMPI | Run with SMPI |

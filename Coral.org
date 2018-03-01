@@ -82,7 +82,7 @@ KMI_HASH evaluate the performance of the architecture integer operations, specif
      test -e KMI_HASH-source.tar.gz || curl -o KMI_HASH-source.tar.gz -Lk https://asc.llnl.gov/CORAL-benchmarks/Datacentric/KMI_HASH_CORAL.tar.gz
 
      echo "Unpack the code"
-     tar -xvf KMI_HASH-source.tar.gz -C KMI_HASH --strip-components 1
+     mkdir KMI_HASH &&  tar -xvf KMI_HASH-source.tar.gz -C KMI_HASH --strip-components 1
  
      echo "Install the modified sources"
      cp -f ../src/Coral/kmi_hash/src/* KMI_HASH/src/
@@ -96,7 +96,7 @@ KMI_HASH evaluate the performance of the architecture integer operations, specif
      make
 
      echo "Run it"
-     smpirun -np 2 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./kmi_hash 
+     smpirun -np 4 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 ./BENCH_QUERY
 #+END_SRC
 
 * Emacs settings

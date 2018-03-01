@@ -67,7 +67,6 @@ Running issue.
 **** Brief description 
 HPCCG is a simple conjugate gradient benchmark code for a 3D chimney domain on an arbitrary number of processors.
 **** Build and run  
-Running issue.
 #+BEGIN_SRC sh :tangle bin/Mantevo_MiniAMR.sh
   export SIMGRID_PATH="${SIMGRID_PATH:=~/simgrid}"
   export LD_LIBRARY_PATH=$SIMGRID_PATH/build/lib:$SIMGRID_PATH/lib:$LD_LIBRARY_PATH
@@ -92,7 +91,7 @@ Running issue.
      make
 
      echo "Run it"
-     smpirun -np 16 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml ./miniAMR.x --num_refine 4 --max_blocks 4000 --init_x 1 --init_y 1 --init_z 1 --npx 4 --npy 2 --npz 2 --nx 8 --ny 8 --nz 8 --num_objects 2 --object 2 0 -1.10 -1.10 -1.10 0.030 0.030 0.030 1.5 1.5 1.5 0.0 0.0 0.0 --object 2 0 0.5 0.5 1.76 0.0 0.0 -0.025 0.75 0.75 0.75 0.0 0.0 0.0 --num_tsteps 100 --checksum_freq 4 --stages_per_ts 16
+     smpirun -np 16 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 ./miniAMR.x --num_refine 4 --max_blocks 4000 --init_x 1 --init_y 1 --init_z 1 --npx 4 --npy 2 --npz 2 --nx 8 --ny 8 --nz 8 --num_objects 2 --object 2 0 -1.10 -1.10 -1.10 0.030 0.030 0.030 1.5 1.5 1.5 0.0 0.0 0.0 --object 2 0 0.5 0.5 1.76 0.0 0.0 -0.025 0.75 0.75 0.75 0.0 0.0 0.0 --num_tsteps 100 --checksum_freq 4 --stages_per_ts 16
  #+END_SRC
 
 *** [[http://mantevo.org/downloads/miniSMAC2D_2.0.html][MiniSMAC2D]]
