@@ -14,15 +14,6 @@
      else
         git clone --depth=1 https://repository.prace-ri.eu/git/PRACE/CodeVault.git
      fi
- #+END_SRC
-
-* Apps 
-** Monte-carlo
-*** Brief description  
-*** Extra dependencies
-libgmp-dev
-*** Integral-basic   
-#+BEGIN_SRC sh :tangle bin/CodeVault_IntegralBasic.sh
      echo "Install the modified sources"
      for file in `find ../src/CodeVault/ -type f` ; do 
          dst=`echo $file|sed 's|../src/||'`
@@ -30,13 +21,21 @@ libgmp-dev
          cp -v $file $dst 
      done
 
+ #+END_SRC
+ 
+* Apps
+** Monte-carlo
+*** Brief description  
+*** Extra dependencies
+libgmp-dev
+*** Integral-basic
+#+BEGIN_SRC sh :tangle bin/CodeVault_IntegralBasic.sh
      echo "Compile it"
-     cd CodeVault/hpc_kernel_samples/monte_carlo_methods/integral_basic/
+     cd Benchmarks/CodeVault/hpc_kernel_samples/monte_carlo_methods/integral_basic/
      mkdir build
      cd build/
      cmake -Denable_smpi=ON ..
      make 
-     
      cp ../../../../../../src/common/* ./
 
      echo "Run it"
@@ -45,17 +44,10 @@ libgmp-dev
 
  #+END_SRC
 
-*** Prime   
+*** Prime
 #+BEGIN_SRC sh :tangle bin/CodeVault_Prime.sh
-     echo "Install the modified sources"
-     for file in `find ../src/CodeVault/ -type f` ; do 
-         dst=`echo $file|sed 's|../src/||'`
-         mkdir -p `dirname $dst`
-         cp -v $file $dst 
-     done
-
      echo "Compile it"
-     cd CodeVault/hpc_kernel_samples/monte_carlo_methods/prime
+     cd Benchmarks/CodeVault/hpc_kernel_samples/monte_carlo_methods/prime
      mkdir build
      cd build/
      cmake -Denable_smpi=ON ..
@@ -68,17 +60,10 @@ libgmp-dev
 
  #+END_SRC
 
-*** Pi   
+*** Pi
 #+BEGIN_SRC sh :tangle bin/CodeVault_Pi.sh
-     echo "Install the modified sources"
-     for file in `find ../src/CodeVault/ -type f` ; do 
-         dst=`echo $file|sed 's|../src/||'`
-         mkdir -p `dirname $dst`
-         cp -v $file $dst 
-     done
-
      echo "Compile it"
-     cd CodeVault/hpc_kernel_samples/monte_carlo_methods/pi 
+     cd Benchmarks/CodeVault/hpc_kernel_samples/monte_carlo_methods/pi 
      mkdir build
      cd build/
      cmake -Denable_smpi=ON ..
@@ -91,17 +76,10 @@ libgmp-dev
 
  #+END_SRC
 
-*** Prng   
+*** Prng
 #+BEGIN_SRC sh :tangle bin/CodeVault_Prng.sh
-     echo "Install the modified sources"
-     for file in `find ../src/CodeVault/ -type f` ; do 
-         dst=`echo $file|sed 's|../src/||'`
-         mkdir -p `dirname $dst`
-         cp -v $file $dst 
-     done
-
      echo "Compile it"
-     cd CodeVault/hpc_kernel_samples/monte_carlo_methods/prng 
+     cd Benchmarks/CodeVault/hpc_kernel_samples/monte_carlo_methods/prng 
      mkdir build
      cd build/
      cmake -Denable_smpi=ON ..
@@ -114,19 +92,12 @@ libgmp-dev
 
  #+END_SRC
 
-** N-Body methods  
+** N-Body methods
 *** Brief description 
-*** Dynamic sparse data exchange    
+*** Dynamic sparse data exchange
 #+BEGIN_SRC sh :tangle bin/CodeVault_DynSparse.sh
-     echo "Install the modified sources"
-     for file in `find ../src/CodeVault/ -type f` ; do 
-         dst=`echo $file|sed 's|../src/||'`
-         mkdir -p `dirname $dst`
-         cp -v $file $dst 
-     done
-
      echo "Compile it"
-     cd CodeVault/hpc_kernel_samples/n-body_methods/dynamic_sparse_data_exchange/
+     cd Benchmarks/CodeVault/hpc_kernel_samples/n-body_methods/dynamic_sparse_data_exchange/
      mkdir build
      cd build/
      cmake -Denable_smpi=ON ..
@@ -141,41 +112,27 @@ libgmp-dev
  
 ** Unstructured_grids
 *** Brief description 
-*** Halo exchange   
+*** Halo exchange
 #+BEGIN_SRC sh :tangle bin/CodeVault_UnstructedGrid.sh
-     echo "Install the modified sources"
-     for file in `find ../src/CodeVault/ -type f` ; do 
-         dst=`echo $file|sed 's|../src/||'`
-         mkdir -p `dirname $dst`
-         cp -v $file $dst 
-     done
-
      echo "Compile it"
-     cd CodeVault/hpc_kernel_samples/unstructured_grids/halo_exchange/
+     cd Benchmarks/CodeVault/hpc_kernel_samples/unstructured_grids/halo_exchange/
      mkdir build
      cd build/
      cmake ..
      make 
      
-    #  cp ../../../../../../src/common/* ./
+#      cp ../../../../../../src/common/* ./
 
-    #  echo "Run it"
+      echo "Run it"
 #     smpirun -np 6 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 ./8_ 
 
  #+END_SRC
 
- *** Parallel_IO
+** Parallel_IO
 **** Brief description  
 This code demonstrate the basic usage of MPI parallel I/O.
 **** Build and run  
 #+BEGIN_SRC sh
-     echo "Install the modified sources"
-     for file in `find ../src/CodeVault/ -type f` ; do 
-         dst=`echo $file|sed 's|../src/||'`
-         mkdir -p `dirname $dst`
-         cp -v $file $dst 
-     done
-
      echo "Compile it"
      cd CodeVault/hpc_kernel_samples/parallel_io/
      mkdir build
@@ -186,32 +143,7 @@ This code demonstrate the basic usage of MPI parallel I/O.
      echo "Run it"
 #+END_SRC
 
-*** Unstructured_grids
-**** Brief description 
-**** Halo exchange   
-#+BEGIN_SRC sh :tangle bin/CodeVault_UnstructedGrid.sh
-     echo "Install the modified sources"
-     for file in `find ../src/CodeVault/ -type f` ; do 
-         dst=`echo $file|sed 's|../src/||'`
-         mkdir -p `dirname $dst`
-         cp -v $file $dst 
-     done
-
-     echo "Compile it"
-     cd CodeVault/hpc_kernel_samples/unstructured_grids/halo_exchange/
-     mkdir build
-     cd build/
-     cmake ..
-     make 
-     
-    #  cp ../../../../../../src/common/* ./
-
-    #  echo "Run it"
-#     smpirun -np 6 -hostfile ./cluster_hostfile.txt -platform ./cluster_crossbar.xml --cfg=smpi/host-speed:100 ./8_ 
-
- #+END_SRC
-
- * Emacs settings
+* Emacs settings
 # Local Variables:
 # eval:    (org-babel-do-load-languages 'org-babel-load-languages '( (shell . t) (R . t) (perl . t) (ditaa . t) ))
 # eval:    (setq org-confirm-babel-evaluate nil)
